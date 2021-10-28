@@ -1,0 +1,234 @@
+// nav
+
+.nav-bar{
+    display: flex; flex-flow: row-reverse wrap;
+    @include tablet{
+        flex-direction: row;
+    }
+}
+nav#menu{
+    //display: none;
+    height: 0;
+    transition: all .2s;
+
+    order: 100;
+    position: absolute;
+    background-color:$onyx;
+    top: 75px; left: 0;
+    z-index: 100;
+    width: 100%;
+    box-sizing: border-box;
+
+    @include desktop{
+        order: 1;
+        position: initial;
+        height: max-content;
+        background-color: initial;
+        display: block;
+        flex-direction: row;
+        width: inherit;
+    }
+
+    ul{
+        display: none;
+        @include desktop{
+            display: flex;
+            flex-flow: row wrap;
+        }
+    }
+    svg{
+        display: none;
+        width: rem(16); height: rem(16);
+        cursor: pointer;
+        position: absolute;
+        top: em(20); right: em(20);
+        color: $blanc;
+        
+        &.active{
+            display: block;
+        }
+    }
+    a{
+        font-size: rem(16);
+        color: $onyx;
+        text-decoration: none;
+        box-sizing:border-box;
+        padding: em(7.5) 0;
+        display: block;
+        width: max-content;
+
+        @include desktop{
+            margin: 0 em(10);
+            padding: em(5) 0;
+        }
+
+        &.a:hover{
+            color: $noir;
+        }
+
+        &.active{
+            color: $noir;
+            border-bottom: 2px solid $noir;
+        }
+    }
+    
+    
+    // menu mobile
+    &.active{
+        display: block;
+        height: em(200);
+        padding: em(20);
+        
+        ul{
+            flex-flow: column wrap;
+            display: block;
+        }
+        a{color: $blanc;}
+
+    }
+}
+
+nav.mobile{
+    display: flex;
+    color: $onyx;
+    box-sizing:border-box;
+    padding: em(7) 0 em(5) em(10);
+    margin: 0;
+    
+    
+    svg{
+        width: rem(16); height: rem(16);
+        cursor: pointer;
+
+        &:hover{color: $noir;}
+    }
+
+    @include desktop{
+        display: none;
+    }
+}
+
+
+
+nav.log{
+    display: flex;
+
+    @include desktop{
+        order: 2;
+    }
+    
+    a{
+        height: max-content;
+        margin: 0 0 0 em(10);
+        box-sizing: border-box;
+        padding: em(5) 0;
+        color: $onyx;
+        text-decoration: none;
+
+        @include desktop{
+            
+            
+        }
+
+        .connection &{
+            // border-bottom: 4px solid currentColor;
+            color: $noir;
+        }
+        
+    }
+
+    svg{
+        width: rem(16); height: rem(16);
+    }
+    .nom-log{
+        display: none;
+        @include tablet{
+            display: inline-block;
+        }
+    }
+}
+
+
+// menu nav admin
+
+nav.admin-nav{
+    ul{
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+
+        @include desktop{
+            flex-flow: column wrap;
+        }
+    }
+    li{
+        width: 32%;
+        text-align: center;
+        background-color: rgba($color: $shadow, $alpha: 1);
+        padding: em(8);
+
+        @include desktop{
+            width: 100%;
+            text-align: left;
+            background-color:inherit;
+            border-bottom: 1px solid $onyx;
+            padding: em(8) 0;
+
+            &:first-child{ border-top: 1px solid $onyx;}
+
+        }
+        
+    
+        a{
+            display: block;
+            width: 100%;
+            color: $blanc;
+            text-decoration: none;
+            margin-bottom: em(-8);
+            transition: .2s;
+
+            span{
+                display: none;
+
+                @include desktop{
+                    display: inline-block;
+                    margin-left: em(8);
+                }
+            }
+            svg{
+                width: em(50);height: em(50);
+
+                @include desktop{
+                    width: em(20); height: em(20);
+                }
+            }
+
+            @include desktop{
+                color: $onyx;
+                margin-bottom: inherit;
+                &:hover{color: $blanc;}
+
+                display: flex;
+                align-items: center;
+            }
+        }
+
+        &.active{
+            background-color: $blanc;
+
+            svg{
+                color: $shadow;
+                @include desktop{color: inherit;}
+            }
+            
+            @include desktop{
+                background-color: inherit;
+            }
+        }
+    }
+
+    @include desktop{
+        width: 70%;
+        margin: em(59) 0;
+    }    
+}

@@ -1,0 +1,61 @@
+// FOOTER
+
+
+footer{
+    margin-top: auto;
+    .fond-footer{
+        .accueil &{
+            background-color: $shadow;
+        }
+    }
+    .footer-content{
+        display: flex;
+        flex-flow: column wrap;
+        align-items: center;
+        padding: rem(20);
+
+        border-top: 1px solid $shadow;
+        .accueil &{
+            border-top: 1px solid #fff;
+        }
+
+        font-family: $roboto;
+        font-weight: 400;
+        font-size: rem(16);
+        color: $shadow;
+        .accueil &{
+            color: rgba($color: $blanc, $alpha: .5);
+        }
+
+
+        @include tablet{
+            flex-flow: row wrap;
+            justify-content: space-between;
+
+            ul{
+                display: flex;
+                flex-flow: row wrap;
+            }
+            li{
+                margin-right: rem(20);
+            }
+        }
+    }
+    li{
+        text-align: center;
+        a{
+            color: $shadow;
+            transition: .2s;
+            .accueil &{
+                color: rgba($color: $blanc, $alpha: .5);
+            }
+            text-decoration: none;
+            &:hover{
+                color: $blanc;
+                .accueil &{
+                    color: rgba($color: $blanc, $alpha: 1);
+                }
+            }
+        }
+    }
+}

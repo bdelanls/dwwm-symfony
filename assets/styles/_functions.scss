@@ -1,0 +1,72 @@
+// mixin et functions
+
+// Large Desktop: @media (min-width: 1200px)
+// Desktop & Tablet: @media (min-width: 768px) and (max-width: 979px)
+// Tablet & Phone: @media (max-width: 767px)
+// Phone: @media (max-width: 480px)
+
+
+@mixin phone() {
+	@media only screen and (max-width: 480px){
+		@content;
+	}
+}
+@mixin tablet() {
+	@media only screen and (min-width: 480px) {
+		@content;
+	}
+}
+@mixin tablet-only() {
+	@media only screen and (min-width: 480px) and (max-width: 800px){
+		@content;
+	}
+}
+@mixin desktop() {
+	@media only screen and (min-width: 800px){
+		@content;
+	}
+}
+
+
+// Conversion px en em ou rem
+@function em($size, $base: 16) {
+	@return 0em + $size / $base;
+}
+@function rem($size, $base: 16) {
+	@return 0rem + $size / $base;
+}
+
+// calcul pourcentage
+// @function pourcentage($size, $largeur: 1200) {
+// 	@return 0% + ($size * 100 / $largeur);
+// }
+
+
+// calcul colonne
+@function col($num, $gout: 0){
+	$size: ($num * 68) + (($num - 1 + $gout) * 31);
+	@return 0% + ($size * 100 / 1160);
+}
+
+
+// bouton
+@mixin button($coul: $marron, $fond: $beige){
+	display: block;
+	width: max-content;
+    border: 2px solid $coul;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: rem(14);
+    letter-spacing: .1em;
+    color: $coul;
+    padding: em(8) em(12);
+    border-radius: em(10);
+    background-color: $fond;
+	filter: brightness(90%);
+
+    &:hover{
+        filter: brightness(110%);
+    }
+
+}

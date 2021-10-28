@@ -1,0 +1,75 @@
+
+// font-family: 'Anton', sans-serif;
+// font-family: 'Roboto', sans-serif;
+
+/* ANTON */
+// Anton Regular 400
+@font-face {
+  font-family: "Anton";
+  font-weight: 400;
+  src: url("webfonts/anton/anton-regular-webfont.woff2") format("woff2"),
+       url("webfonts/anton/anton-regular-webfont.woff") format("woff");
+ }
+
+// Roboto Light 300
+@font-face {
+  font-family: "Roboto";
+  font-weight: 300;
+  src: url("webfonts/roboto/roboto-light-webfont.woff2") format("woff2"),
+       url("webfonts/roboto/roboto-light-webfont.woff") format("woff");
+ }
+ @font-face {
+  font-family: "Roboto";
+  font-weight: 300;
+  font-style: italic;
+  src: url("webfonts/roboto/roboto-lightitalic-webfont.woff2") format("woff2"),
+       url("webfonts/roboto/roboto-lightitalic-webfont.woff") format("woff");
+ }
+// Roboto Regular 400
+@font-face {
+  font-family: "Roboto";
+  font-weight: 400;
+  src: url("webfonts/roboto/roboto-regular-webfont.woff2") format("woff2"),
+       url("webfonts/roboto/roboto-regular-webfont.woff") format("woff");
+ }
+ @font-face {
+  font-family: "Roboto";
+  font-weight: 400;
+  font-style: italic;
+  src: url("webfonts/roboto/roboto-italic-webfont.woff2") format("woff2"),
+       url("webfonts/roboto/roboto-italic-webfont.woff") format("woff");
+ }
+// Roboto Medium 500
+
+@font-face {
+  font-family: "Roboto";
+  font-weight: 500;
+  src: url("webfonts/roboto/roboto-medium-webfont.woff2") format("woff2"),
+       url("webfonts/roboto/roboto-medium-webfont.woff") format("woff");
+ }
+ @font-face {
+  font-family: "Roboto";
+  font-weight: 500;
+  font-style: italic;
+  src: url("webfonts/roboto/roboto-mediumitalic-webfont.woff2") format("woff2"),
+       url("webfonts/roboto/roboto-mediumitalic-webfont.woff") format("woff");
+ }
+
+// Roboto Bold 700
+@font-face {
+  font-family: "Roboto";
+  font-weight: 700;
+  src: url("webfonts/roboto/roboto-bold-webfont.woff2") format("woff2"),
+       url("webfonts/roboto/roboto-bold-webfont.woff") format("woff");
+ }
+ @font-face {
+  font-family: "Roboto";
+  font-weight: 700;
+  font-style: italic;
+  src: url("webfonts/roboto/roboto-bolditalic-webfont.woff2") format("woff2"),
+       url("webfonts/roboto/roboto-bolditalic-webfont.woff") format("woff");
+ }
+
+
+$anton: 'Anton', sans-serif;
+$roboto: 'Roboto', sans-serif;

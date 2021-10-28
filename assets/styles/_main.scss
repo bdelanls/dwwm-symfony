@@ -1,0 +1,664 @@
+// MAIN
+
+
+// Accueil
+// 1 - intro
+// 2 - articles-home
+
+// 3 - Connection
+// 4 - Article
+// 5 - Contact et inscription
+// 6 - Agenda prof et élèves
+// 7 - Cours
+// 8 - 
+
+
+// I - intro
+section{
+    position: relative;
+    padding-bottom: em(40);
+
+    &.intro{
+        display: flex;
+        flex-flow: row wrap;
+
+
+        img{
+            width: 100%;
+            //height: 100%;
+
+            @include tablet{
+                width: 100%;
+            }
+            @include desktop{
+                position: absolute;
+                width: col(8);
+                top: 0; right: rem(20);
+            }
+        }
+
+        .col-intro{
+            position: relative;
+            margin-top: 0;
+            @include tablet{
+                margin-top: em(-92);
+            }
+            @include desktop{
+                width: col(6);
+                margin-top: em(148);
+            }
+        }
+        h1{
+            font-family: $anton;
+            font-size: rem(50);
+            line-height: rem(60);
+            color: $blanc;
+            @include tablet{
+                line-height: 120%;
+                font-size: rem(90);
+            }
+            @include desktop{
+                font-size: rem(113);
+                line-height: rem(126);
+                text-shadow: 0px 5px 10px rgba($color: #000000, $alpha: .5);
+            }
+        }
+        h2{
+            font-family: $roboto;
+            font-size: rem(24);
+            font-weight: 300;
+            line-height: 150%;
+            color: $shadow;
+            @include tablet{
+                font-size: rem(38);
+                margin: rem(-10) 0 rem(16) 0;
+            }
+            @include desktop{
+                font-size: rem(50);
+                margin: rem(-10) 0 rem(16) 0;
+            }
+        }
+
+
+        .bt{
+            @include button();
+            margin: em(10) auto;
+            @include desktop{
+                margin: em(10) 0;
+                
+            }
+        }
+
+        .intro-guitariste{
+            position: relative;
+            background-color: rgba($color: $blanc, $alpha: .8);
+            padding: em(20);
+            height: max-content;
+            margin-top: em(20);
+            @include desktop{
+                width: col(5);
+                margin-left: em(31);
+                margin-top: 24.2%;
+                box-shadow: 0px 15px 15px rgba($color: #000000, $alpha: .2);
+            }
+        }
+    }
+
+}
+
+// II - Articles home & liste articles
+
+.fond-section{
+    background-color: $shadow;
+    width: 100%;
+    max-width: none;
+
+    .vague{
+        background-color: $shadow;
+        
+        svg{
+            fill: $beige;
+            display: block;
+        }
+     }
+}
+
+section.liste-articles{
+    padding-top: em(20);
+    padding-bottom: em(40);
+
+    ul{
+        display: flex;
+        flex-flow: column wrap;
+        @include tablet{
+            flex-flow: row wrap;
+            justify-content: space-between;
+        }
+    }
+    li{
+        margin-bottom: em(20);
+        @include tablet-only {
+            width: col(6);
+            .accueil &:last-child{ display: none;}
+        }
+        @include desktop{
+            width: col(4);
+            //&:last-child{ display: block;}
+        }
+    }
+    
+    img{
+        width: 100%;
+        height: auto;
+
+        @include tablet{
+            box-shadow: 0px 5px 8px rgba($color: #000000, $alpha: .3);
+        }
+    }
+
+    a{
+        text-decoration: none;
+        h3{
+            font-family: $roboto;
+            font-size: rem(16);
+            text-transform: uppercase;
+            color: rgba($color: $blanc, $alpha: 0.8);
+            line-height: 120%;
+            transition: .2s;
+
+
+            &:hover{color:rgba($color: $blanc, $alpha: 1);}
+
+            .articles &{
+                color: rgba($onyx, $alpha: 0.8);
+                font-weight: 700;
+
+                &:hover{color:rgba($color: $onyx, $alpha: 1);}
+            }
+        }
+ 
+    }
+    p{
+        font-size: rem(14);
+        color: $onyx;
+        margin-top: em(5);
+    }
+
+    .bt{
+        @include button($blanc, $shadow);
+        margin: 0 auto;
+    }
+}
+
+
+// III - Connection
+
+body.connection{
+    @include desktop{
+        background: linear-gradient(rgba($beige, 1), rgba($beige, .5), rgba($beige, 1)), 
+                    url("img/guitariste-intro.jpg") no-repeat center/cover;
+    }
+
+}
+
+section.connect{
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    justify-content: center;
+    
+    height: calc(100vh - 198px);
+    @include tablet{
+        height: calc(100vh - 147px);
+    }
+
+    >div{
+        background-color: $shadow;
+        width: 100%;
+        max-width: em(500);
+        padding: em(20);
+        @include tablet{
+            padding: em(40);
+        }
+        @include tablet{
+            box-shadow: 0px 8px 10px rgba($color: #000000, $alpha: .3);
+        }    
+    
+        h1{
+            text-align: center;
+            font-family: $anton;
+            font-size: rem(40);
+            color: $blanc;
+        }
+
+        form{
+            display: flex;
+            flex-flow: column wrap;
+        }
+        label{
+            color: $blanc;
+            font-size: rem(16);
+            margin: em(20) 0 0 0;
+        }
+        input{
+            padding: em(10) em(5);
+            font-family: inherit;
+            font-size: rem(16);
+            background-color: $beige;
+            border: 1px solid $blanc;
+        }
+        input[type=submit]{
+            background-color: $marron;
+            margin: em(20) 0;
+            width: max-content;
+            padding: em(10) em(20);
+            border: none;
+            border-radius: em(8);
+            font-weight: 500;
+            color: $blanc;
+
+            &:hover{
+                filter: brightness(120%);
+                cursor: pointer;
+            }
+        }
+        div.mentions{
+            display: flex;
+            flex-flow: column wrap;
+            align-items: center;
+
+            @include tablet{
+                flex-flow: row wrap;
+                justify-content: space-between;
+            }
+
+            a{
+                color: rgba($color: $blanc, $alpha: .5);
+                &:hover{
+                    color: rgba($color: $blanc, $alpha: 1);
+                }
+            }
+        }
+    }
+}
+
+// IV - ARTICLE
+
+// liste articles géré dans article home (II)
+
+section.article{
+    display: flex;
+    flex-flow: row wrap;
+
+    @include desktop{
+        //flex-flow: column wrap;
+        justify-content: space-between;
+    }
+
+    img{
+        width: 100%;
+        height: 100%;
+
+        @include desktop{
+            width: col(8);
+            height: auto;
+            position: absolute;
+            top: em(5);
+            left: em(20);
+        }
+    }
+
+    h3{
+        font-family: $anton;
+        font-size: rem(22);
+        margin: em(8) 0;
+        color: $onyx;
+
+        @include tablet{
+            font-size: rem(30);
+        }
+
+        @include desktop{
+            width: col(5);
+            margin-top: col(5, 1);
+            text-align: right;
+            font-size: rem(60);
+            line-height: rem(80);
+            color: $shadow;
+        }
+    }
+
+    p{
+        color: $noir;
+        @include desktop{
+            background-color: rgba($color: $blanc, $alpha: .8);
+            padding: em(16);
+            box-shadow: -5px 10px 10px rgba($color: $onyx, $alpha: .5);
+        }
+    }
+
+    nav{
+        display: flex;
+        justify-content: space-between;
+        margin-top: em(16);
+    }
+    nav svg{
+        width: rem(40); height: rem(40);
+        color: $blanc;
+        transition: .2s;
+
+        &:hover{color: $marron;}
+    }
+
+    .txt-article{
+        @include desktop{
+            width: col(7);
+            z-index: 100;
+            margin-top: em(70);
+            
+        }
+    }
+
+    @include desktop{
+
+    }
+
+}
+
+// V - Contact 
+
+.contact section{
+    display: flex;
+    flex-flow: column wrap;
+
+    @include desktop{
+        flex-flow: row wrap;
+        justify-content: space-between;
+    }
+}
+.contact main p, .contact main form{
+    width: 100%;
+    margin: 0 0 em(20) 0;
+
+    @include desktop{
+        width: col(6);
+    }
+}
+
+// VI - Agenda - Prof et élèves
+
+section.admin{
+    .title{
+        background-color: $blanc;
+        display: flex;
+        flex-direction: row-reverse;
+
+        @include desktop{
+            background-color: inherit;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+
+        }
+
+
+        .tb-plus{ 
+            @include desktop{
+                height: em(30);
+            }
+
+            svg{
+                width: em(30); height: em(30);
+                margin: em(8) em(16) 0 em(8);
+                color: $vert;
+
+                @include desktop{
+                    margin: 0;
+                }
+            }
+        }
+    }
+    h3{
+        display: none;
+
+        @include desktop{
+            display: block;
+            font-family: $anton;
+            font-size: rem(60);
+            line-height: 100%;
+            margin: 0;
+            color: $blanc;
+            text-shadow: -5px 10px 10px rgba($color: $onyx, $alpha: .5);
+        }
+    }
+
+    .info{
+        margin: em(16) 0;
+
+        p{
+   
+        }
+        a{
+            height: em(20);
+        }
+        
+        @include desktop{ width: 100%; }
+        
+    }
+
+    @include desktop{
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+
+        .col1{
+            width: col(3);
+        }
+        .col2{
+            width: col(9);
+        }
+
+
+    }    
+}
+
+
+.admin-panel{
+    background-color: $blanc;
+    padding: em(8);
+    position: relative;
+
+    @include desktop{
+        width: 100%;
+        padding: em(16);
+        box-shadow: -5px 10px 10px rgba($color: $onyx, $alpha: .5);
+        //min-height: 100%;
+    }
+    a{
+        color: $onyx;
+        text-decoration: none;
+        &:hover{
+            text-decoration: underline;
+            color: $noir;
+        }
+    }
+    
+    h4{
+        color: $onyx;
+        
+        &.nom{
+            font-size: em(18);
+        }
+        
+    }
+    section{
+        width: 100%;
+        margin: 0 0 em(20) 0;
+        padding: 0;
+    }
+}  
+
+.table{
+    display: flex;
+    flex-flow: column wrap;
+
+    .row{
+        display: flex;
+        flex-direction: row ;
+        border-bottom: 1px solid #aaa;        
+        
+        &:first-child{ border-top: 1px solid #aaa;}
+
+        .item{
+            font-size: rem(14);
+            margin: em(5) em(15) em(5) 0;
+        }
+
+        svg{
+            width: em(22); height: em(22);
+            display: block;
+        }
+
+        .tb-2{min-width: em(150);}
+
+        .tb-titre, .tb-gd{
+            flex-grow: 4;
+        }
+
+        .tb-close  a:hover svg{
+            color: $rouge;
+        }
+        .tb-edit  a:hover svg{
+            color: $bleu;
+        }
+    }
+
+
+}
+
+
+// VII - Cours
+
+.cours{
+
+    section{
+
+        @include desktop{
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-between;
+        }
+    }
+
+    h3{
+        font-family: $anton;
+        color: $shadow;
+        font-size: rem(24);
+        font-weight: 400;
+    }
+
+    p{
+        margin-bottom: em(16);
+    }
+
+    .presentation{
+
+        @include desktop{
+            width: col(8);
+
+            .txt-img{
+                
+                img{
+                    width: 50%;
+                    height: 100%;
+                    float: right;
+                }
+                 
+            }
+       
+        }
+        
+        
+
+    }
+
+    .infos-plus{
+        background-color: rgba($color: $blanc, $alpha: .8);
+        padding: em(16);
+
+        @include desktop{
+            width: col(4);
+
+        }
+    }
+
+    img{
+        width: 100%;
+        height: 100%;
+    }
+
+    .message-inscription{
+        background-color: $shadow;
+        color: $blanc;
+        padding: em(16);
+        
+
+        h4{
+            font-size: rem(24);
+            text-align: center;
+            margin-bottom: em(8);
+            
+        }
+
+        .bt{
+            @include button();
+            margin-right: em(16);
+        }
+
+        div{
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: center;
+            width: 100%;
+            margin: 0 auto;
+            padding-top: em(16);
+            border-top: 1px solid $beige;
+        }
+
+        @include desktop{
+            margin-top: em(16);
+            box-shadow: 0px em(8) em(8) rgba($color: #000000, $alpha: .2);
+
+        }
+    }
+}
+
+
+// VIII - Inscription
+
+.inscription section {
+    display: flex;
+    flex-flow: column wrap;
+
+    .row{
+        display: flex;
+        flex-flow: column wrap;
+        margin-bottom: em(16);
+    }
+
+    @include desktop{
+        flex-flow: row wrap;
+        justify-content: space-between;
+    }
+}
+.inscription .col{
+    width: 100%;
+    margin: 0 0 0 0;
+
+    @include desktop{
+        width: col(6);
+    }
+}
+
+// ################################

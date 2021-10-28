@@ -1,0 +1,207 @@
+// Formulaires
+
+form{
+    display: flex;
+    flex-flow: column wrap;
+
+    label{
+        margin: em(10) 0 em(5) 0;
+        color: $onyx;
+        
+        &:first-child{margin-top: 0;}
+    }
+
+    input, textarea, select{
+        padding: em(10);
+        font-family: inherit;
+        font-size: rem(16);
+        background-color:rgba($color: $blanc, $alpha: .2);
+        border: 1px solid $blanc;
+
+        .admin-panel &{
+          background-color:rgba($color: $beige, $alpha: .2);
+          border: 1px solid #ccc;
+        }
+        
+        &:focus{
+            outline: em(1) solid $beige;
+        }
+    }
+
+  
+
+    input[type="date"]{
+      width: max-content;
+    }
+    input[type="file"]{
+      
+    }
+
+
+    fieldset{margin: em(16) 0;}
+
+    input[type="checkbox"]{
+        appearance: none;
+        margin: 0;
+        border: 1px solid $blanc;
+        padding: em(2);
+        outline: none;
+        cursor: pointer;
+        width: em(15); height: em(15);
+        &:checked{
+            background: $onyx;
+            background-clip: content-box;
+        }
+    }
+
+    input[type="submit"]{
+        width: min-content;
+        background-color: $shadow;
+        color: $blanc;
+        border: none;
+        border-radius: em(10);
+        box-sizing: border-box;
+        padding: em(10) em(20);
+        transition: .2s;
+
+        &:hover{
+            filter:brightness(90%);
+            cursor: pointer;
+        }
+    }
+
+    &#tri-agenda{
+      margin-bottom: em(16);
+
+      @include tablet{
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+      }
+    }
+    select{
+      margin-bottom: em(8);
+      font-size: rem(14);
+
+      @include tablet{
+        // width: 49%;
+      }
+      @include desktop{
+        // width: 24%;
+      }
+
+      option{
+        color: $onyx;
+        background-color: $beige;
+      }
+    }
+
+
+    // dépose photo drag and drop
+    #drop-region{
+      height: em(80);
+      border: em(2) dashed #ccc;
+      line-height: em(80);
+      text-align: center;
+      color: #ccc;
+      cursor: pointer;
+    }
+
+    div#ddrop-region.onDropZone{  
+      color:#000;  
+      border:5px solid #6f6;  
+      padding:7px;
+    }    
+}
+
+// admin-panel
+.admin-panel{
+  form{
+    display: flex;
+    flex-flow: column wrap;
+
+    div{
+      display: flex;
+      flex-flow: column wrap;
+      margin-bottom: em(16);
+    }
+  }
+}
+
+
+
+// check-slide
+
+.check-slide {
+    $checked: #039627;
+    $no-checked: #666;
+    position: relative;
+    font-size: rem(16);
+  
+  input {
+    position: absolute;
+    opacity: 0;
+  }
+  
+  label {
+    display: grid;
+    grid-template-columns: 2em 1fr;
+    grid-template-areas: "checkbox label";
+    gap: 0.7em;
+  }
+  
+  label::before, label::after {
+    grid-area: checkbox;
+    content: "";
+    display: block;
+    margin-top: 0.1em;
+  }
+  
+  label::before {
+    width: 100%;
+    height: 1em;
+    border-radius: 1em;
+    border: solid 1px $no-checked;
+    background-color: $no-checked;
+    transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
+  }
+  
+  label::after {
+    position: relative;
+    left: 2px;
+    top: 2px;
+    width: calc(1em - 2px);
+    height: calc(1em - 2px);
+    border-radius: 50%;
+    background-color: $blanc;
+    transition: background-color 0.3s, transform 0.3s;
+  }
+  
+  input:checked + label::before {
+    background-color: $checked;
+    border-color: $checked;
+  }
+  
+  input:checked + label::after {
+    background-color: $blanc;
+    transform: translateX(1em);
+  }
+  
+  input:focus + label::before {
+    //box-shadow: 0 0 0 0.25em #c4dbf9;
+    border-color: $checked;
+  }
+}
+
+// Quill
+.ql-toolbar{
+  display: block !important;
+  margin-bottom: 0 !important;
+}
+.ql-editor{
+  background-color:rgba($color: $beige, $alpha: .2);
+  margin-bottom: 0 !important;
+  //border: 1px solid $shadow;
+  height: em(250) !important;
+  display: block;
+}
