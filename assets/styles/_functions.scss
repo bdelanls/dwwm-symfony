@@ -61,9 +61,11 @@
     letter-spacing: .1em;
     color: $coul;
     padding: em(8) em(12);
+	margin: em(10) 0;
     border-radius: em(10);
     background-color: $fond;
 	filter: brightness(90%);
+	height: auto !important;
 
     &:hover{
         filter: brightness(110%);

@@ -1,6 +1,6 @@
 <div class="header-content">
-    <a href="index.html">
-        <img src="img/logo.svg" alt="Logo Guy Taracoustik" class="logo">
+    <a href="{{ path("home") }}">
+        <img src="/img/logo.svg" alt="Logo Guy Taracoustik" class="logo">
     </a>
 
     <div class="nav-bar">
@@ -11,17 +11,24 @@
                 <a href="articles.html"><li>Articles</li></a>
                 <a href="contact.html"><li>Contact</li></a>
             </ul>
-            <svg class="bt-menu bt-close"><title>Fermer</title><use xlink:href="img/icons.svg#cross"></use></svg>
+            <svg class="bt-menu bt-close"><title>Fermer</title><use xlink:href="/img/icons.svg#cross"></use></svg>
         </nav>
         <nav class="mobile">
-                <svg class="bt-menu"><title>Conexion</title><use xlink:href="img/icons.svg#menu"></use></svg>
+                <svg class="bt-menu"><title>Conexion</title><use xlink:href="/img/icons.svg#menu"></use></svg>
         </nav>
         <nav class="log">
-            <a href="connexion.html">
-                <svg><title>Conexion</title><use xlink:href="img/icons.svg#user"></use></svg>
+            {% if is_granted("ROLE_USER") == true %}
+            <a href="{{ path("user_show", {'id': app.user.id}) }}">
+                <svg><title>Conexion</title><use xlink:href="/img/icons.svg#user"></use></svg>
+                <span class="nom-log">{{ app.user.firstname }}</span>
+            </a>
+            {% else %}
+            <a href="{{ path("app_login") }}">
+                <svg><title>Conexion</title><use xlink:href="/img/icons.svg#user"></use></svg>
                 <span class="nom-log">Se connecter</span>
             </a>
+
+            {% endif %}
         </nav>
     </div>
 </div>
-

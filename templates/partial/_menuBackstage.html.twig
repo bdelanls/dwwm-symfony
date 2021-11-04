@@ -1,0 +1,51 @@
+<ul>
+	{% if is_granted("ROLE_ADMIN", "ROLE_TEACHER") == true %}
+		<li>
+			<a href="{{ path('user_index') }}" {% if app.request.attributes.get('_route') == 'user_index' or app.request.attributes.get('_route') == 'student_show'%} class="active" {% endif %}>
+				<svg>
+					<title>{% if is_granted("ROLE_ADMIN") == true %} Utilisateurs {% else %} Élèves {% endif %}</title>
+					<use xlink:href="/img/icons.svg#eleves"></use>
+				</svg>
+				<span>{% if is_granted("ROLE_ADMIN") == true %} Utilisateurs {% else %} Élèves {% endif %}</span>
+			</a>
+		</li>
+	{% endif %}
+	{% if is_granted("ROLE_STUDENT") == true %}
+		<li>
+			<a href="eleve.html">
+				<svg>
+					<title>Agenda</title>
+					<use xlink:href="/img/icons.svg#agenda"></use>
+				</svg>
+				<span>Agenda</span>
+			</a>
+		</li>
+		<li>
+			<a href="documents.html">
+				<svg>
+					<title>Documents</title>
+					<use xlink:href="/img/icons.svg#doc"></use>
+				</svg>
+				<span>Documents</span>
+			</a>
+		</li>
+	{% endif %}
+	<li>
+		<a href="{{ path('user_show', {'id': app.user.id}) }}" {% if app.request.attributes.get('_route') == 'user_show' %} class="active" {% endif %}>
+			<svg>
+				<title>Profil</title>
+				<use xlink:href="/img/icons.svg#user"></use>
+			</svg>
+			<span>Profil</span>
+		</a>
+	</li>
+	<li>
+		<a href="{{ path("app_logout") }}">
+			<svg>
+				<title>Se déconnecter</title>
+				<use xlink:href="/img/icons.svg#power-off"></use>
+			</svg>
+			<span>Se déconnecter</span>
+		</a>
+	</li>
+</ul>
