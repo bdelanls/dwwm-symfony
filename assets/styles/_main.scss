@@ -602,6 +602,52 @@ section.admin{
         
     }
 
+    // NOTE
+    .bt-note-pencil, .bt-note-close{
+        background-color: $beige;
+        width: em(30); height: em(30);
+        position: absolute;
+        top: em(14);
+        right: 0;
+        border-radius: 50%;
+        transition: .2s;
+        display: none;
+
+        &.active{
+            display: inline-block;
+        }
+
+        &:hover{
+            cursor: pointer;
+            background-color: $shadow;
+        }
+
+        svg{
+            width: rem(20); height: rem(16);
+            display: block;
+            color: $blanc;
+            margin: em(7) auto 0 auto;
+        }
+    }
+
+    .note-txt, .note-form{
+        display: none;
+
+        &.active{
+            display: block;
+        }
+    }
+
+    // format rendu ckeditor
+    .note{
+        p{margin: em(10) 0;}
+        li{list-style: inside disc; text-indent: em(20);}
+        a{text-decoration-line: underline; text-decoration-color: $beige;}
+
+    }
+
+
+
 }  
 
 .table{

@@ -1,5 +1,5 @@
 <ul>
-	{% if is_granted("ROLE_ADMIN", "ROLE_TEACHER") == true %}
+	{% if is_granted("ROLE_ADMIN") == true or is_granted("ROLE_TEACHER") == true %}
 		<li>
 			<a href="{{ path('user_index') }}" {% if app.request.attributes.get('_route') == 'user_index' or app.request.attributes.get('_route') == 'student_show'%} class="active" {% endif %}>
 				<svg>

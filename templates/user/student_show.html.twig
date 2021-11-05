@@ -3,6 +3,29 @@
 {% block title %}User
 {% endblock %}
 
+{% block javascripts %}
+	<script>
+		function animNote($n){
+			let btPencil = document.querySelector('.bt-note-pencil');
+			let btClose = document.querySelector('.bt-note-close');
+			let noteTxt = document.querySelector('.note-txt');
+			let noteForm = document.querySelector('.note-form');
+
+			if($n == 'pencil'){
+				btClose.classList.add("active");
+				noteForm.classList.add("active");
+				btPencil.classList.remove("active");
+				noteTxt.classList.remove("active");
+			}else{
+				btClose.classList.remove("active");
+				noteForm.classList.remove("active");
+				btPencil.classList.add("active");
+				noteTxt.classList.add("active");
+			}
+		}
+	</script>
+{% endblock %}
+
 {% block main %}
 
 	<section class="admin">
@@ -80,7 +103,27 @@
 				</section>
 
                 <section class="line-top">
-                <h4>Note</h4>
+                	<h4>Note</h4>
+					<a onclick="animNote('pencil')" class="bt-note-pencil active">
+						<svg class="">
+							<title>Éditer</title>
+							<use xlink:href="/img/icons.svg#pencil"></use>
+						</svg>
+					</a>
+					<a onclick="animNote('close')" class="bt-note-close">
+						<svg class="">
+							<title>Éditer</title>
+							<use xlink:href="/img/icons.svg#cross"></use>
+						</svg>
+					</a>
+					<div class="note-txt note active">
+						{{ user.note|raw }}
+					</div>
+					<div class="note-form">
+						{{ include('user/_form_note.html.twig') }}
+					</div>
+					
+						
                 </section>
 
                 <section class="line-top">
