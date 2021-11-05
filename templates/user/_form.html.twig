@@ -1,0 +1,47 @@
+{{ form_start(form) }}
+    {# {{ form_widget(form) }} #}
+
+    <div class="row">
+        {{ form_label(form.firstname) }}
+        {{ form_errors(form.firstname) }}
+        {{ form_widget(form.firstname) }}
+    </div>
+    <div class="row">
+        {{ form_label(form.lastname) }}
+        {{ form_errors(form.lastname) }}
+        {{ form_widget(form.lastname) }}
+    </div>
+    <div class="row">
+        {{ form_label(form.email) }}
+        {{ form_errors(form.email) }}
+        {{ form_widget(form.email) }}
+    </div>
+    <div class="row">
+        {{ form_label(form.phone) }}
+        {{ form_errors(form.phone) }}
+        {{ form_widget(form.phone) }}
+    </div>
+    {# <div class="row">
+        {{ form_label(form.roles) }}
+        {{ form_errors(form.roles) }}
+        {{ form_widget(form.roles) }}
+    </div> #}
+    <div class="row">
+        {{ form_row(form.birthday) }}
+    </div>
+    <div class="row">
+        {{ form_row(form.level) }}
+    </div>
+    <div class="row">
+        {{ form_row(form.years_playing) }}
+    </div>
+    <div class="row">
+        {{ form_row(form.other_instrument) }}
+    </div>
+        <div class="row">
+        {{ form_row(form.comment) }}
+    </div>
+
+    <input type="submit" value="Enregistrer">
+
+{{ form_end(form) }}

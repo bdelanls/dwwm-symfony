@@ -1,0 +1,16 @@
+{{ form_start(form_role) }}
+<div class="row">
+	{{ form_errors(form_role.roles) }}
+	{# {{ form_widget(form_role.roles) }} #}
+	<div class="checkbox-roles">
+		{% for child in form_role.roles %}
+			<div>
+				{{ form_widget(child) }}
+				{{ form_label(child) }}
+			</div>
+		{% endfor %}
+	</div>
+</div>
+<input type="submit" value="Enregistrer">
+
+{{ form_end(form_role) }}

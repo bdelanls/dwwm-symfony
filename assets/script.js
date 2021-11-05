@@ -57,7 +57,14 @@ function lirePlusTxt() {
         
     }
 }
-//
+
+// message alert
+function closeMessage(){
+    
+}
+
+
+
 
 
   

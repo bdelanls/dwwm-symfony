@@ -5,12 +5,17 @@
 // 1 - intro
 // 2 - articles-home
 
-// 3 - Connection
+// 3 - connexion
 // 4 - Article
 // 5 - Contact et inscription
 // 6 - Agenda prof et élèves
 // 7 - Cours
 // 8 - 
+
+.bt{
+    @include button();
+    
+}
 
 
 // I - intro
@@ -191,9 +196,9 @@ section.liste-articles{
 }
 
 
-// III - Connection
+// III - connexion
 
-body.connection{
+body.connexion{
     @include desktop{
         background: linear-gradient(rgba($beige, 1), rgba($beige, .5), rgba($beige, 1)), 
                     url("img/guitariste-intro.jpg") no-repeat center/cover;
@@ -229,6 +234,18 @@ section.connect{
             font-family: $anton;
             font-size: rem(40);
             color: $blanc;
+        }
+        p{
+            color: $onyx;
+            a{
+                color: $onyx;
+            }
+        }
+        .alert-danger{
+            padding: 1em;
+            height: auto;
+            color: #fff;
+            text-align: center;
         }
 
         form{
@@ -437,7 +454,7 @@ section.admin{
         margin: em(16) 0;
 
         p{
-   
+            
         }
         a{
             height: em(20);
@@ -486,6 +503,8 @@ section.admin{
     
     h4{
         color: $onyx;
+        margin-bottom: 1em;
+        text-transform: uppercase;
         
         &.nom{
             font-size: em(18);
@@ -496,7 +515,139 @@ section.admin{
         width: 100%;
         margin: 0 0 em(20) 0;
         padding: 0;
+
+        &.line-top{
+            border-top: 5px double $shadow;
+            padding-top: 1em;
+            margin-top: 2em;
+        }
     }
+
+    table{
+        font-size: rem(16);
+        width: 100%;
+        white-space:nowrap;
+
+        tr{
+            border-bottom: 1px solid #aaa;
+        }
+        td, th{
+            padding: em(5) em(40) em(5) 0;
+            text-align: left;
+        }
+
+        &.tab2col{
+            tr td:last-child, tr th:last-child{
+                width: 100%;
+                padding-right: 0;
+                text-align: right;
+            }
+        }
+        svg{
+            width: rem(16); height: rem(16);
+            display: block;
+        }
+    }
+
+    .checkbox-roles{
+        flex-direction: row;
+        align-items: center;
+        margin: 0;
+
+        div{
+            flex-direction: row;
+            align-items: center;
+            margin: 0;
+        }
+
+        label{
+            margin: 0 em(20) 0 em(5);
+        }
+    }
+
+    .bt-form{
+        width: min-content;
+        background-color: $shadow;
+        color: $blanc;
+        border: none;
+        border-radius: em(10);
+        box-sizing: border-box;
+        padding: em(10) em(20);
+        transition: .2s;
+
+        &:hover{
+            filter:brightness(90%);
+            cursor: pointer;
+            color: $blanc;
+            text-decoration: none;
+        }
+    }
+
+    .bt-tab{
+        width: min-content;
+        background-color: $shadow;
+        color: $blanc;
+        border: none;
+        border-radius: em(5);
+        box-sizing: border-box;
+        padding: em(2) em(8);
+        transition: .2s;
+
+        &:hover{
+            filter:brightness(90%);
+            cursor: pointer;
+            color: $blanc;
+            text-decoration: none;
+        }
+        
+    }
+
+    // NOTE
+    .bt-note-pencil, .bt-note-close{
+        background-color: $beige;
+        width: em(30); height: em(30);
+        position: absolute;
+        top: em(14);
+        right: 0;
+        border-radius: 50%;
+        transition: .2s;
+        display: none;
+
+        &.active{
+            display: inline-block;
+        }
+
+        &:hover{
+            cursor: pointer;
+            background-color: $shadow;
+        }
+
+        svg{
+            width: rem(20); height: rem(16);
+            display: block;
+            color: $blanc;
+            margin: em(7) auto 0 auto;
+        }
+    }
+
+    .note-txt, .note-form{
+        display: none;
+
+        &.active{
+            display: block;
+        }
+    }
+
+    // format rendu ckeditor
+    .note{
+        p{margin: em(10) 0;}
+        li{list-style: inside disc; text-indent: em(20);}
+        a{text-decoration-line: underline; text-decoration-color: $beige;}
+
+    }
+
+
+
 }  
 
 .table{

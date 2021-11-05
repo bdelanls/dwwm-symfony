@@ -211,20 +211,23 @@ nav.admin-nav{
                 display: flex;
                 align-items: center;
             }
+
+            &.active{
+                background-color: $blanc;
+    
+                svg{
+                    color: $shadow;
+                    @include desktop{color: inherit;}
+                }
+                
+                @include desktop{
+                    background-color: inherit;
+                    color: $marron;
+                }
+            }
         }
 
-        &.active{
-            background-color: $blanc;
-
-            svg{
-                color: $shadow;
-                @include desktop{color: inherit;}
-            }
-            
-            @include desktop{
-                background-color: inherit;
-            }
-        }
+        
     }
 
     @include desktop{

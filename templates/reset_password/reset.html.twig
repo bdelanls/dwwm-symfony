@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réinitialisez votre mot de passe
+{% endblock %}
+
+{% block main %}
+	<section class="admin">
+		<div class="col1">
+			<nav class="admin-nav">
+				{% include "partial/_menuBackstage.html.twig" %}
+			</nav>
+			<div class="info">
+				<p class="readmore">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum congue diam quam, at semper sapien posuere non.</p>
+			</div>
+		</div>
+		<div class="col2">
+			<div class="title">
+				<h3>Profil</h3>
+			</div>
+			<div class="admin-panel">
+
+				<section>
+					<h1>Réinitialisez votre mot de passe</h1>
+
+
+				</section>
+
+				<section>
+					{{ form_start(resetForm) }}
+					{{ form_row(resetForm.plainPassword) }}
+					<button class="bt-form">Réinitialiser</button>
+					{{ form_end(resetForm) }}
+				</section>
+
+			</div>
+		</div>
+	</section>
+
+{% endblock %}

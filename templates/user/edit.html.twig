@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit User
+{% endblock %}
+
+{% block main %}
+	<section class="admin">
+		<div class="col1">
+			<nav class="admin-nav">
+				{% include "partial/_menuBackstage.html.twig" %}
+			</nav>
+			<div class="info">
+				<p class="readmore">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quos deleniti sequi
+					                    rerum velit dignissimos quo, beatae hic architecto earum dicta. Ipsa, iste. Fugit, placeat atque
+					                    nemo iure praesentium officia nisi quae esse consequatur fugit ab facilis unde facere impedit
+					                    aperiam</p>
+
+			</div>
+		</div>
+		<div class="col2">
+			<div class="title">
+				<h3>Profil</h3>
+			</div>
+			<div class="admin-panel">
+				<section>
+						{{ include('user/_form.html.twig') }}
+				</section>
+
+                <section class="line-top">
+                    <h4>Mot de passe</h4>
+                    <a class="bt-form" href="{{ path('app_reset_mdp') }}">Modifier mon mot de passe</a>
+                </section>
+				{% if is_granted("ROLE_ADMIN") == true %}
+				<section class="line-top">
+					<h4>Rôles du compte</h4>
+					{{ include('user/_form_role.html.twig') }}
+				</section>
+
+				<section class="line-top">
+					<h4>Supprimer le compte</h4>
+					{{ include('user/_delete_form.html.twig') }}
+				</section>
+				{% endif %}
+
+			</div>
+		</div>
+	</section>
+
+{% endblock %}
