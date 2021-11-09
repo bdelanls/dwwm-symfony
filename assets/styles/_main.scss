@@ -669,6 +669,24 @@ section.admin{
 
     }
 
+    // bt +
+    #bt-plus{
+        @extend .bt-note-pencil;
+        display: block;
+        transition: .2s;
+
+        &.active{
+            transform: rotate(45deg);
+        }
+    }
+    #file-list, #form-file-user{
+        display: none;
+
+        &.active{
+            display: block;
+        }
+    }
+
 
 
 }  

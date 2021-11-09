@@ -6,8 +6,11 @@ use DateTimeZone;
 use App\Entity\File;
 use App\Entity\User;
 use App\Form\UserType;
+use App\Form\FilesType;
 use App\Form\UserNoteType;
 use App\Form\UserRoleType;
+use App\Form\FilesUserType;
+use App\Service\UploadService;
 use App\Repository\FileRepository;
 use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,6 +30,9 @@ class UserController extends AbstractController
         $roleUser = $this->getUser()->getRoles();
         
         $tabUsers = $userRepository->findAll();
+        //$tabUsers = $userRepository->findAllRole('ROLE_USER', 'ROLE_STUDENT');
+
+
         
 
         if (in_array("ROLE_ADMIN", $roleUser)) {
@@ -83,14 +89,11 @@ class UserController extends AbstractController
     /**
      * Method student_show
      *
-     * @param User $user [explicite description]
-     * @param Request $request [explicite description]
      *
-     * @return Response
      */
     #[Route('backstage/student/{id}', name: 'student_show', methods: ['GET', 'POST']), 
     Security("is_granted('ROLE_ADMIN') and is_granted('ROLE_TEACHER')")]    
-    public function student_show(User $user, File $file, Request $request, FileRepository $fileRepository): Response
+    public function student_show(User $user, File $file, Request $request, FileRepository $fileRepository, UploadService $uploader): Response
     {
 
         // Note
@@ -107,10 +110,38 @@ class UserController extends AbstractController
         // Documents
         $files = $fileRepository->findAllByUser($user->getId());
 
+        $file = new File();
+        $form_file = $this->createForm(FilesUserType::class, $file);
+        $form_file->handleRequest($request);
+
+        if ($form_file->isSubmitted() && $form_file->isValid()) {
+            $time = new \DateTime('now', new DateTimeZone('Europe/Paris'));
+            $file->setPublishedAt($time);
+            $userFile = $user;
+            //dd($userFile);
+            $file->addUser($user);
+
+            $filePath = $form_file->get('path')->getData();
+            if ($filePath) {
+                $filename = $uploader->upload($filePath);
+                $file->setPath($filename);
+
+            }
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($file);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Le document a bien été envoyé');
+            return $this->redirectToRoute('student_show', ['id' => $user->getId()], Response::HTTP_SEE_OTHER);
+        }
+
+
         return $this->renderForm('user/student_show.html.twig', [
             'user' => $user,
             'form_note' => $form_note,
             'files' => $files,
+            'form_file' => $form_file,
         ]);
 
     }

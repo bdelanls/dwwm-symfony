@@ -4,6 +4,10 @@ form{
     display: flex;
     flex-flow: column wrap;
 
+    // label.required:after {
+    //   content: "*";
+    // }
+
     label{
         margin: em(10) 0 em(5) 0;
         color: $onyx;
