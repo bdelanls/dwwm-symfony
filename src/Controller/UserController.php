@@ -3,10 +3,12 @@
 namespace App\Controller;
 
 use DateTimeZone;
+use App\Entity\File;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Form\UserNoteType;
 use App\Form\UserRoleType;
+use App\Repository\FileRepository;
 use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
@@ -88,7 +90,7 @@ class UserController extends AbstractController
      */
     #[Route('backstage/student/{id}', name: 'student_show', methods: ['GET', 'POST']), 
     Security("is_granted('ROLE_ADMIN') and is_granted('ROLE_TEACHER')")]    
-    public function student_show(User $user, Request $request): Response
+    public function student_show(User $user, File $file, Request $request, FileRepository $fileRepository): Response
     {
 
         // Note
@@ -102,9 +104,13 @@ class UserController extends AbstractController
             return $this->redirectToRoute('student_show', ['id' => $user->getId()], Response::HTTP_SEE_OTHER);
         }
 
+        // Documents
+        $files = $fileRepository->findAllByUser($user->getId());
+
         return $this->renderForm('user/student_show.html.twig', [
             'user' => $user,
             'form_note' => $form_note,
+            'files' => $files,
         ]);
 
     }

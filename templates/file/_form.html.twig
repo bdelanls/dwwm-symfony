@@ -1,0 +1,31 @@
+{{ form_start(form) }}
+
+    <div class="row">
+        {{ form_label(form.title) }}
+        {{ form_errors(form.title) }}
+        {{ form_widget(form.title) }}
+    </div>
+    <div class="row">
+        {{ form_label(form.path) }}
+        {{ form_errors(form.path) }}
+        {{ form_widget(form.path) }}
+    </div>
+    <div class="row">
+        {{ form_label(form.user) }}
+        <div class="checkbox-roles">
+            {% for child in form.user %}
+                <div>
+                    {{ form_widget(child) }}
+                    {{ form_label(child) }}
+                </div>
+            {% endfor %}
+        </div>
+     </div>
+    <div class="row">
+        {{ form_label(form.description) }}
+        {{ form_errors(form.description) }}
+        {{ form_widget(form.description) }}
+    </div>
+
+    <input type="submit" value="{{ button_label|default('Enregistrer') }}">
+{{ form_end(form) }}

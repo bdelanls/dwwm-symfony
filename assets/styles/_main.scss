@@ -453,9 +453,7 @@ section.admin{
     .info{
         margin: em(16) 0;
 
-        p{
-            
-        }
+        
         a{
             height: em(20);
         }
@@ -485,6 +483,8 @@ section.admin{
     background-color: $blanc;
     padding: em(8);
     position: relative;
+
+    .txt-gris{color: $gris;}
 
     @include desktop{
         width: 100%;
@@ -521,12 +521,23 @@ section.admin{
             padding-top: 1em;
             margin-top: 2em;
         }
+
+        &.boutons{
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: flex-start;
+            gap: em(8);
+
+        }
     }
 
     table{
         font-size: rem(16);
         width: 100%;
-        white-space:nowrap;
+        // white-space:nowrap;
+
+        .ws{white-space:nowrap;}
+        .w100{width: 100%;}
 
         tr{
             border-bottom: 1px solid #aaa;
@@ -545,7 +556,11 @@ section.admin{
         }
         svg{
             width: rem(16); height: rem(16);
-            display: block;
+            // display: block;
+
+            &.svg-24{
+                width: rem(24); height: rem(24);
+            }
         }
     }
 
@@ -572,15 +587,22 @@ section.admin{
         border: none;
         border-radius: em(10);
         box-sizing: border-box;
-        padding: em(10) em(20);
+        padding: em(8) em(15);
         transition: .2s;
+        font-size: rem(16);
+        white-space: nowrap;
+        line-height: normal;
 
         &:hover{
-            filter:brightness(90%);
+            filter:brightness(130%);
             cursor: pointer;
             color: $blanc;
             text-decoration: none;
         }
+    }
+
+    .bt-supp{
+        background-color: $rouge;
     }
 
     .bt-tab{
@@ -592,9 +614,10 @@ section.admin{
         box-sizing: border-box;
         padding: em(2) em(8);
         transition: .2s;
+        font-size: rem(16);
 
         &:hover{
-            filter:brightness(90%);
+            filter:brightness(130%);
             cursor: pointer;
             color: $blanc;
             text-decoration: none;

@@ -65,37 +65,37 @@
 				<section>
                 <table class="tab2col">
                             <tr>
-                                <td>Email :</td>
+                                <td class="ws">Email :</td>
                                 <td><a href="mailto:{{ user.email }}">{{ user.email }}</a></td>
                                 <td></td>
                             </tr>
                             <tr>
-                                <td>Téléphone :</td>
+                                <td class="ws">Téléphone :</td>
                                 <td>{{ user.phone }}</td>
                                 <td></td>
                             </tr>
                             <tr>
-                                <td>Anniversaire :</td>
+                                <td class="ws">Anniversaire :</td>
                                 <td>{{ user.birthday }}</td>
                                 <td></td>
                             </tr>
                             <tr>
-                                <td>Niveau :</td>
+                                <td class="ws">Niveau :</td>
                                 <td>{{ user.level }}</td>
                                 <td></td>
                             </tr>
                             <tr>
-                                <td>Années de pratique :</td>
+                                <td class="ws">Années de pratique :</td>
                                 <td>{{ user.yearsPlaying }}</td>
                                 <td></td>
                             </tr>
                             <tr>
-                                <td>Autre instrument :</td>
+                                <td class="ws">Autre instrument :</td>
                                 <td>{{ user.otherInstrument }}</td>
                                 <td></td>
                             </tr>
                             <tr>
-                                <td>Info supplémentaire :</td>
+                                <td class="ws">Info supplémentaire :</td>
                                 <td>{{ user.comment }}</td>
                                 <td></td>
                             </tr>
@@ -128,10 +128,51 @@
 
                 <section class="line-top">
                 <h4>Cours</h4>
+
                 </section>
 
                 <section class="line-top">
                 <h4>Documents</h4>
+				<a onclick="animNote('pencil')" class="bt-note-pencil active">
+						<svg class="">
+							<title>Ajouter un document</title>
+							<use xlink:href="/img/icons.svg#plus"></use>
+						</svg>
+					</a>
+				<section>
+					<table class="tab2col">
+						<tr>
+							<th>Date</th>
+							<th>Titre / Information</th>
+							<th></th>
+						</tr>
+						{% for file in files %}
+							<tr>
+								<td>
+									{{ file.publishedAt ? file.publishedAt|date('d/m/Y') : '' }}
+								</td>
+								<td class="w100">
+									<p>{{ file.title }}</p>
+									<p class="txt-gris">{{ file.description|raw }}</p>
+								</td>
+								<td>
+									<a class="" href="{{ path('file_edit', {'id': file.id}) }}">
+										<svg class="">
+											<title>Éditer</title>
+											<use xlink:href="/img/icons.svg#pencil"></use>
+										</svg>
+									</a>
+								</td>
+							</tr>
+
+						{% else %}
+							<tr>
+								<td>Aucun Document !</td>
+								<td></td>
+							</tr>
+						{% endfor %}
+					</table>
+				</section>
                 </section>
 
 				<section class="boutons">

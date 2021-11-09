@@ -9,6 +9,15 @@
 				<span>{% if is_granted("ROLE_ADMIN") == true %} Utilisateurs {% else %} Élèves {% endif %}</span>
 			</a>
 		</li>
+		<li>
+			<a href="{{ path('file_index') }}" {% if app.request.attributes.get('_route') == 'file_index' or app.request.attributes.get('_route') == 'file_new' %} class="active" {% endif %}>
+				<svg>
+					<title>Documents</title>
+					<use xlink:href="/img/icons.svg#doc"></use>
+				</svg>
+				<span>Documents</span>
+			</a>
+		</li>
 	{% endif %}
 	{% if is_granted("ROLE_STUDENT") == true %}
 		<li>
@@ -21,7 +30,7 @@
 			</a>
 		</li>
 		<li>
-			<a href="documents.html">
+			<a href="{{ path('file_index_student') }}" {% if app.request.attributes.get('_route') == 'file_index_student' %} class="active" {% endif %}>
 				<svg>
 					<title>Documents</title>
 					<use xlink:href="/img/icons.svg#doc"></use>
