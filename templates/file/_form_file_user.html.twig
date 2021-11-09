@@ -1,0 +1,21 @@
+{{ form_start(form_file) }}
+
+    <div class="row">
+        {{ form_label(form_file.title) }}
+        {{ form_errors(form_file.title) }}
+        {{ form_widget(form_file.title) }}
+    </div>
+    <div class="row">
+        {{ form_label(form_file.path) }}
+        {{ form_errors(form_file.path) }}
+        {{ form_widget(form_file.path) }}
+    </div>
+    
+    <div class="row">
+        {{ form_label(form_file.description) }}
+        {{ form_errors(form_file.description) }}
+        {{ form_widget(form_file.description) }}
+    </div>
+
+    <input type="submit" value="{{ button_label|default('Enregistrer') }}">
+{{ form_end(form_file) }}

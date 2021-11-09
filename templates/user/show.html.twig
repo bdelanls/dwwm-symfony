@@ -33,53 +33,53 @@
                 <div class="admin-panel">
 
                     <section>
-                        <p>Vous êtes enregistré depuis le {{ user.addedDate ? user.addedDate|date('d/m/Y') : '' }}</p>
+                        <p>Enregistré depuis le {{ user.addedDate ? user.addedDate|date('d/m/Y') : '' }}</p>
                     </section>
                     
                     <section>
                         <table class="tab2col">
                             <tr>
-                                <td>Prénom :</td>
+                                <td class="ws">Prénom :</td>
                                 <td>{{ user.firstname }}</td>
                                 <td></td>
                             </tr>
                             <tr>
-                                <td>Nom :</td>
+                                <td class="ws">Nom :</td>
                                 <td>{{ user.lastname }}</td>
                                 <td></td>
                             </tr>
                             <tr>
-                                <td>Email :</td>
+                                <td class="ws">Email :</td>
                                 <td>{{ user.email }}</td>
                                 <td></td>
                             </tr>
                             <tr>
-                                <td>Téléphone :</td>
+                                <td class="ws">Téléphone :</td>
                                 <td>{{ user.phone }}</td>
                                 <td></td>
                             </tr>
                             <tr>
-                                <td>Anniversaire :</td>
+                                <td class="ws">Anniversaire :</td>
                                 <td>{{ user.birthday }}</td>
                                 <td></td>
                             </tr>
                             <tr>
-                                <td>Niveau :</td>
+                                <td class="ws">Niveau :</td>
                                 <td>{{ user.level }}</td>
                                 <td></td>
                             </tr>
                             <tr>
-                                <td>Années de pratique :</td>
+                                <td class="ws">Années de pratique :</td>
                                 <td>{{ user.yearsPlaying }}</td>
                                 <td></td>
                             </tr>
                             <tr>
-                                <td>Autre instrument :</td>
+                                <td class="ws">Autre instrument :</td>
                                 <td>{{ user.otherInstrument }}</td>
                                 <td></td>
                             </tr>
                             <tr>
-                                <td>Information supplémentaire :</td>
+                                <td class="ws">Information supplémentaire :</td>
                                 <td>{{ user.comment }}</td>
                                 <td></td>
                             </tr>

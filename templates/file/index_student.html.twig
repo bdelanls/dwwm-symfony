@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Documents
+{% endblock %}
+
+{% block main %}
+
+	<section class="admin">
+		<div class="col1">
+			<nav class="admin-nav">
+				{% include "partial/_menuBackstage.html.twig" %}
+			</nav>
+			<div class="info">
+				<p class="readmore">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quos deleniti sequi
+										                rerum velit dignissimos quo, beatae hic architecto earum dicta. Ipsa, iste. Fugit, placeat atque
+										                nemo iure praesentium officia nisi quae esse consequatur fugit ab facilis unde facere impedit
+										                aperiam</p>
+
+			</div>
+		</div>
+		<div class="col2">
+			<div class="title">
+				<h3>
+					Documents
+				</h3>
+			</div>
+			<div class="admin-panel">
+
+				<section>
+					<table class="tab2col">
+						<tr>
+							<th>Date</th>
+							<th>Titre / Information</th>
+							<th></th>
+						</tr>
+						{% for file in files %}
+							<tr>
+								<td>
+									{{ file.publishedAt ? file.publishedAt|date('d/m/Y') : '' }}
+								</td>
+								<td class="w100">
+									<p>{{ file.title }}</p>
+									<p class="txt-gris">{{ file.description|raw }}</p>
+								</td>
+								<td>
+									<a href="/img/documents/{{ file.path }}" target="_blank">
+                                        <svg class="svg-24">
+                                            <title>Télécharger</title>
+                                            <use xlink:href="/img/icons.svg#download"></use>
+                                        </svg>
+                                    </a>
+								</td>
+							</tr>
+
+						{% else %}
+							<tr>
+								<td>Aucun Document !</td>
+								<td></td>
+							</tr>
+						{% endfor %}
+					</table>
+				</section>
+
+				
+
+
+			</div>
+		</div>
+
+
+	</section>
+
+
+{% endblock %}

@@ -5,22 +5,38 @@
 
 {% block javascripts %}
 	<script>
-		function animNote($n){
+		function animNote($n) {
 			let btPencil = document.querySelector('.bt-note-pencil');
 			let btClose = document.querySelector('.bt-note-close');
 			let noteTxt = document.querySelector('.note-txt');
 			let noteForm = document.querySelector('.note-form');
 
-			if($n == 'pencil'){
+			if ($n == 'pencil') {
 				btClose.classList.add("active");
 				noteForm.classList.add("active");
 				btPencil.classList.remove("active");
 				noteTxt.classList.remove("active");
-			}else{
+			} else {
 				btClose.classList.remove("active");
 				noteForm.classList.remove("active");
 				btPencil.classList.add("active");
 				noteTxt.classList.add("active");
+			}
+		}
+		function btFile() {
+			let btPlus = document.querySelector('#bt-plus');
+			let fileList = document.querySelector('#file-list'); 
+			let fileForm = document.querySelector('#form-file-user'); 
+
+			
+			if (btPlus.className == "active"){
+				btPlus.classList.remove("active");
+				fileList.classList.add("active");
+				fileForm.classList.remove("active");
+			}else{
+				btPlus.classList.add("active");
+				fileList.classList.remove("active");
+				fileForm.classList.add("active");
 			}
 		}
 	</script>
@@ -58,52 +74,56 @@
 			<div class="admin-panel">
 
 				<section>
-					<p>Enregistré le {{ user.addedDate ? user.addedDate|date('d/m/Y') : '' }}, 
-                    mis à jour le {{ user.addedDate ? user.updateDate|date('d/m/Y') : '' }}</p>
+					<p>Enregistré le
+						{{ user.addedDate ? user.addedDate|date('d/m/Y') : '' }}, 
+												                    mis à jour le
+						{{ user.addedDate ? user.updateDate|date('d/m/Y') : '' }}</p>
 				</section>
 
 				<section>
-                <table class="tab2col">
-                            <tr>
-                                <td>Email :</td>
-                                <td><a href="mailto:{{ user.email }}">{{ user.email }}</a></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>Téléphone :</td>
-                                <td>{{ user.phone }}</td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>Anniversaire :</td>
-                                <td>{{ user.birthday }}</td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>Niveau :</td>
-                                <td>{{ user.level }}</td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>Années de pratique :</td>
-                                <td>{{ user.yearsPlaying }}</td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>Autre instrument :</td>
-                                <td>{{ user.otherInstrument }}</td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>Info supplémentaire :</td>
-                                <td>{{ user.comment }}</td>
-                                <td></td>
-                            </tr>
-                        </table>
+					<table class="tab2col">
+						<tr>
+							<td class="ws">Email :</td>
+							<td>
+								<a href="mailto:{{ user.email }}">{{ user.email }}</a>
+							</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td class="ws">Téléphone :</td>
+							<td>{{ user.phone }}</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td class="ws">Anniversaire :</td>
+							<td>{{ user.birthday }}</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td class="ws">Niveau :</td>
+							<td>{{ user.level }}</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td class="ws">Années de pratique :</td>
+							<td>{{ user.yearsPlaying }}</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td class="ws">Autre instrument :</td>
+							<td>{{ user.otherInstrument }}</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td class="ws">Info supplémentaire :</td>
+							<td>{{ user.comment }}</td>
+							<td></td>
+						</tr>
+					</table>
 				</section>
 
-                <section class="line-top">
-                	<h4>Note</h4>
+				<section class="line-top">
+					<h4>Note</h4>
 					<a onclick="animNote('pencil')" class="bt-note-pencil active">
 						<svg class="">
 							<title>Éditer</title>
@@ -122,56 +142,67 @@
 					<div class="note-form">
 						{{ include('user/_form_note.html.twig') }}
 					</div>
-					
-						
-                </section>
 
-                <section class="line-top">
-                <h4>Cours</h4>
-                </section>
 
-                <section class="line-top">
-                <h4>Documents</h4>
-                </section>
-
-				<section class="boutons">
-
-					<a class="bt-form" href="{{ path('user_edit', {'id': user.id}) }}">Modifier</a>
 				</section>
 
+				<section class="line-top">
+					<h4>Cours</h4>
 
-			</div>
+				</section>
+
+				<section class="line-top">
+					<h4>Documents</h4>
+					<a onclick="btFile()" class="" id="bt-plus">
+						<svg class="">
+							<title>Ajouter un document</title>
+							<use xlink:href="/img/icons.svg#plus"></use>
+						</svg>
+					</a>
+				</section>
+				<section class="active" id="file-list">
+					<table class="tab2col">
+						<tr>
+							<th>Date</th>
+							<th>Titre / Information</th>
+							<th></th>
+						</tr>
+						{% for file in files %}
+							<tr>
+								<td>
+									{{ file.publishedAt ? file.publishedAt|date('d/m/Y') : '' }}
+								</td>
+								<td class="w100">
+									<p>{{ file.title }}</p>
+									<p class="txt-gris">{{ file.description|raw }}</p>
+								</td>
+								<td>
+									<a class="" href="{{ path('file_edit', {'id': file.id}) }}">
+										<svg class="">
+											<title>Éditer</title>
+											<use xlink:href="/img/icons.svg#pencil"></use>
+										</svg>
+									</a>
+								</td>
+							</tr>
+
+						{% else %}
+							<tr>
+								<td>Aucun Document !</td>
+								<td></td>
+							</tr>
+						{% endfor %}
+					</table>
+
+				</section>
+				<section class="" id="form-file-user">
+					{# formulaire #}
+					{{ include('file/_form_file_user.html.twig') }}
+
+				</section>
+			</section>
+
+
 		</div>
-	</section>
-
-
-	{# <table class="table">
-	        <tbody>
-	            <tr>
-	                <th>Roles</th>
-	                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-	            </tr>
-	           
-	           
-	            <tr>
-	                <th>Added_date</th>
-	                <td>{{ user.addedDate ? user.addedDate|date('Y-m-d H:i:s') : '' }}</td>
-	            </tr>
-	            <tr>
-	                <th>Update_date</th>
-	                <td>{{ user.updateDate ? user.updateDate|date('Y-m-d H:i:s') : '' }}</td>
-	            </tr>
-	            <tr>
-	                <th>IsVerified</th>
-	                <td>{{ user.isVerified ? 'Yes' : 'No' }}</td>
-	            </tr>
-	            
-	            <tr>
-	                <th>AgreeTerms</th>
-	                <td>{{ user.agreeTerms ? 'Yes' : 'No' }}</td>
-	            </tr>
-	        </tbody>
-	    </table> #}
-
-
-{% endblock %}
+	</div>
+</section>{% endblock %}

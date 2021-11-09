@@ -2,8 +2,11 @@
 
 namespace App\Entity;
 
+use App\Entity\File;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -101,6 +104,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="text", nullable=true)
      */
     private $note;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=File::class, mappedBy="user")
+     */
+    private $files;
+
+    public function __construct()
+    {
+        $this->files = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -346,6 +359,33 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setNote(?string $note): self
     {
         $this->note = $note;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|File[]
+     */
+    public function getFiles(): Collection
+    {
+        return $this->files;
+    }
+
+    public function addFile(File $file): self
+    {
+        if (!$this->files->contains($file)) {
+            $this->files[] = $file;
+            $file->addUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFile(File $file): self
+    {
+        if ($this->files->removeElement($file)) {
+            $file->removeUser($this);
+        }
 
         return $this;
     }
