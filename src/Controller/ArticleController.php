@@ -2,18 +2,22 @@
 
 namespace App\Controller;
 
+use DateTimeZone;
 use App\Entity\Article;
 use App\Form\ArticleType;
+use App\Form\ArticleEditType;
+use App\Service\UploadImageService;
 use App\Repository\ArticleRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-#[Route('/article')]
+#[Route('/')]
 class ArticleController extends AbstractController
 {
-    #[Route('/', name: 'article_index', methods: ['GET'])]
+    #[Route('backstage/article', name: 'article_index', methods: ['GET']), IsGranted('ROLE_TEACHER')]
     public function index(ArticleRepository $articleRepository): Response
     {
         return $this->render('article/index.html.twig', [
@@ -21,18 +25,35 @@ class ArticleController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'article_new', methods: ['GET','POST'])]
-    public function new(Request $request): Response
+    #[Route('backstage/article/new', name: 'article_new', methods: ['GET','POST']), IsGranted('ROLE_TEACHER')]
+    public function new(Request $request, UploadImageService $uploaderImage): Response
     {
         $article = new Article();
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $time = new \DateTime('now', new DateTimeZone('Europe/Paris'));
+            $article->setPublishedAt($time);
+            $article->setUpdateAt($time);
+
+            $user = $this->getUser();
+            $article->setUser($user);
+
+            // slug automatique
+
+            $photoPath = $form->get('photo_path')->getData();
+            if ($photoPath) {
+                $filename = $uploaderImage->upload($photoPath);
+                $article->setPhotoPath($filename);
+
+            }
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($article);
             $entityManager->flush();
 
+            $this->addFlash('success', 'L\'article a bien été enregistré');
             return $this->redirectToRoute('article_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -42,7 +63,7 @@ class ArticleController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'article_show', methods: ['GET'])]
+    #[Route('article/{slug}', name: 'article_show', methods: ['GET'])]
     public function show(Article $article): Response
     {
         return $this->render('article/show.html.twig', [
@@ -50,15 +71,19 @@ class ArticleController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'article_edit', methods: ['GET','POST'])]
+    #[Route('backstage/article/{id}/edit', name: 'article_edit', methods: ['GET','POST'])]
     public function edit(Request $request, Article $article): Response
     {
-        $form = $this->createForm(ArticleType::class, $article);
+        $form = $this->createForm(ArticleEditType::class, $article);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $time = new \DateTime('now', new DateTimeZone('Europe/Paris'));
+            $article->setUpdateAt($time);
+
             $this->getDoctrine()->getManager()->flush();
 
+            $this->addFlash('success', 'L\'article a été mis à jour');
             return $this->redirectToRoute('article_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -68,7 +93,7 @@ class ArticleController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'article_delete', methods: ['POST'])]
+    #[Route('backstage/article/{id}', name: 'article_delete', methods: ['POST'])]
     public function delete(Request $request, Article $article): Response
     {
         if ($this->isCsrfTokenValid('delete'.$article->getId(), $request->request->get('_token'))) {

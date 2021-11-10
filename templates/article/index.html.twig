@@ -1,49 +1,78 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Article index{% endblock %}
+{% block title %}Articles
+{% endblock %}
 
-{% block body %}
-    <h1>Article index</h1>
+{% block main %}
+	<section class="admin">
+		<div class="col1">
+			<nav class="admin-nav">
+				{% include "partial/_menuBackstage.html.twig" %}
+			</nav>
+			<div class="info">
+				<p class="readmore">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quos deleniti sequi
+															                rerum velit dignissimos quo, beatae hic architecto earum dicta. Ipsa, iste. Fugit, placeat atque
+															                nemo iure praesentium officia nisi quae esse consequatur fugit ab facilis unde facere impedit
+															                aperiam</p>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Body</th>
-                <th>Published_at</th>
-                <th>Update_at</th>
-                <th>Is_active</th>
-                <th>Photo_path</th>
-                <th>Photo_title</th>
-                <th>Meta</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for article in articles %}
-            <tr>
-                <td>{{ article.id }}</td>
-                <td>{{ article.title }}</td>
-                <td>{{ article.body }}</td>
-                <td>{{ article.publishedAt ? article.publishedAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ article.updateAt ? article.updateAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ article.isActive ? 'Yes' : 'No' }}</td>
-                <td>{{ article.photoPath }}</td>
-                <td>{{ article.photoTitle }}</td>
-                <td>{{ article.meta }}</td>
-                <td>
-                    <a href="{{ path('article_show', {'id': article.id}) }}">show</a>
-                    <a href="{{ path('article_edit', {'id': article.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="10">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+			</div>
+		</div>
+		<div class="col2">
+			<div class="title">
+				<h3>
+					Articles
+				</h3>
+			</div>
+			<div class="admin-panel">
 
-    <a href="{{ path('article_new') }}">Create new</a>
+				<section>
+					<table class="tab2col">
+						<tr>
+							<th>Visible</th>
+							<th>Titre</th>
+							<th>Date</th>
+							<th>Actions</th>
+						</tr>
+						{% for article in articles %}
+							<tr>
+								<td>
+									<svg>
+										{% if article.isActive == true %}
+											<title>Visible</title>
+											<use xlink:href="/img/icons.svg#check">
+											{% else %}
+												<title>Non visible</title>
+												<use xlink:href="/img/icons.svg#clock"></use>
+											{% endif %}
+									</svg>
+								</td>
+								<td class="ws">{{ article.title }}</td>
+								<td class="ws">{{ article.publishedAt ? article.publishedAt|date('d-m-Y') : '' }}</td>
+								<td>
+									<a class="bt-tab" href="{{ path('article_show', {'slug': article.slug}) }}">Voir</a>
+									<a class="bt-tab" href="{{ path('article_edit', {'id': article.id}) }}">Éditer</a>
+								</td>
+							</tr>
+						{% else %}
+							<tr>
+								<td colspan="10">Aucun article trouvé !</td>
+                                <td></td>
+							</tr>
+						{% endfor %}
+					</table>
+
+				</section>
+
+				<section>
+					<a class="bt-form" href="{{ path('article_new') }}">Ajouter un article</a>
+				</section>
+
+
+			</div>
+		</div>
+
+
+	</section>
+
+
 {% endblock %}

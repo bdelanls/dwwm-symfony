@@ -15,11 +15,11 @@
         {{ form_errors(form.title) }}
     </div>
     
-    {# <div class="row">
+    <div class="row">
         {{ form_label(form.slug) }}
         {{ form_errors(form.slug) }}
         {{ form_widget(form.slug) }}
-    </div> #}
+    </div>
 
     <div class="row">
         {{ form_label(form.body) }}
@@ -28,6 +28,9 @@
     </div>
     <fieldset class="fieldset">
         <legend>PHOTO</legend>
+        <div>
+            <img src="/img/article/{{ article.photoPath }}" alt="{{ article.photoTitle }}" class="photo">
+        </div>
         <div class="row">
             {{ form_label(form.photo_path) }}
             {{ form_errors(form.photo_path) }}

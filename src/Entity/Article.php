@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+
 
 /**
  * @ORM\Entity(repositoryClass=ArticleRepository::class)
@@ -61,6 +63,17 @@ class Article
      * @ORM\ManyToOne(targetEntity=user::class, inversedBy="articles")
      */
     private $user;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $meta_title;
+
+    /**
+     * @Gedmo\Slug(fields={"title"})
+     * @ORM\Column(unique=true, length=255)
+     */
+    private $slug;
 
     public function getId(): ?int
     {
@@ -171,6 +184,30 @@ class Article
     public function setUser(?user $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getMetaTitle(): ?string
+    {
+        return $this->meta_title;
+    }
+
+    public function setMetaTitle(?string $meta_title): self
+    {
+        $this->meta_title = $meta_title;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }

@@ -2,12 +2,42 @@
 
 {% block title %}Edit Article{% endblock %}
 
-{% block body %}
-    <h1>Edit Article</h1>
+{% block main %}
 
-    {{ include('article/_form.html.twig', {'button_label': 'Update'}) }}
+	<section class="admin">
+		<div class="col1">
+			<nav class="admin-nav">
+				{% include "partial/_menuBackstage.html.twig" %}
+			</nav>
+			<div class="info">
+				<p class="readmore">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quos deleniti sequi
+                rerum velit dignissimos quo, beatae hic architecto earum dicta. </p>
 
-    <a href="{{ path('article_index') }}">back to list</a>
+			</div>
+		</div>
+		<div class="col2">
+			<div class="title">
+				<h3>
+					Édition de l'article
+				</h3>
+			</div>
+			<div class="admin-panel">
+                <section>
+                    {{ include('article/_form_edit.html.twig', {'button_label': 'Mettre à jour'}) }}
+                </section>
+                <section class="boutons">
+                    <a class="bt-form" href="{{ path('article_index') }}">Retour à la liste</a>
+                    {{ include('article/_delete_form.html.twig') }}
+                </section>
 
-    {{ include('article/_delete_form.html.twig') }}
+				
+
+
+			</div>
+		</div>
+
+
+	</section>
+
+    
 {% endblock %}

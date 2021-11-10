@@ -15,7 +15,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
-class ArticleType extends AbstractType
+class ArticleEditType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -79,15 +79,15 @@ class ArticleType extends AbstractType
                     'placeholder' => "La limite maximale recommandée est de 60 caractères."
                 ],
             ])
-            // ->add('slug', TextType::class, [
-            //     'label' => "Slug :",
-            //     'required' => false,
-            //     'constraints' => [
-            //         new NotBlank([
-            //             'message' => "ce champs ne doit pas être vide",
-            //         ]),
-            //     ],
-            // ])
+            ->add('slug', TextType::class, [
+                'label' => "Slug :",
+                'required' => false,
+                'constraints' => [
+                    new NotBlank([
+                        'message' => "ce champs ne doit pas être vide",
+                    ]),
+                ],
+            ])
             // ->add('user')
         ;
     }

@@ -50,7 +50,7 @@
 
 
 // bouton
-@mixin button($coul: $marron, $fond: $beige){
+@mixin button($coul: $onyx, $fond: $beige){
 	display: block;
 	width: max-content;
     border: 2px solid $coul;
@@ -64,11 +64,12 @@
 	margin: em(10) 0;
     border-radius: em(10);
     background-color: $fond;
-	filter: brightness(90%);
+	//filter: brightness(90%);
 	height: auto !important;
+	transition: .2s;
 
     &:hover{
-        filter: brightness(110%);
+        filter: brightness(115%);
     }
 
 }

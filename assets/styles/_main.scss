@@ -234,6 +234,7 @@ section.connect{
             font-family: $anton;
             font-size: rem(40);
             color: $blanc;
+            line-height: 120%;
         }
         p{
             color: $onyx;
@@ -265,11 +266,11 @@ section.connect{
             border: 1px solid $blanc;
         }
         input[type=submit]{
-            background-color: $marron;
+            background-color: $shadow;
             margin: em(20) 0;
             width: max-content;
             padding: em(10) em(20);
-            border: none;
+            border: 1px solid $blanc;
             border-radius: em(8);
             font-weight: 500;
             color: $blanc;
@@ -295,6 +296,14 @@ section.connect{
                     color: rgba($color: $blanc, $alpha: 1);
                 }
             }
+        }
+    }
+
+    &.reset{
+
+        p, a{
+            margin-top: em(16);
+            color: $blanc;
         }
     }
 }

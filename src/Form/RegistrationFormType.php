@@ -71,7 +71,7 @@ class RegistrationFormType extends AbstractType
                 'label' => "J'accepte la politique de confidentialité.",
                 'constraints' => [
                     new IsTrue([
-                        'message' => 'You should agree to our terms.',
+                        'message' => 'Vous devez accepter la politique de confidentialité.',
                     ]),
                 ],
             ])
