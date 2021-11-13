@@ -29,7 +29,7 @@
     <fieldset class="fieldset">
         <legend>PHOTO</legend>
         <div>
-            <img src="/img/article/{{ article.photoPath }}" alt="{{ article.photoTitle }}" class="photo">
+            <img src="/img/article/thumbnail/{{ article.photoPath }}" alt="{{ article.photoTitle }}" class="photo">
         </div>
         <div class="row">
             {{ form_label(form.photo_path) }}
@@ -49,12 +49,14 @@
             {{ form_label(form.meta_title) }}
             {{ form_errors(form.meta_title) }}
             {{ form_widget(form.meta_title) }}
+            <p class="nbCharTitle">nombre de caractères</p>
         </div>
 
         <div class="row">
             {{ form_label(form.meta) }}
             {{ form_errors(form.meta) }}
             {{ form_widget(form.meta) }}
+            <p class="nbCharDescription">nombre de caractères</p>
         </div>
     </fieldset>
     

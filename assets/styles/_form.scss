@@ -128,8 +128,16 @@ form{
     }  
     
     .photo{
-      width: 50%;
+      width: max-content;
     }
+
+    .nbCharTitle, .nbCharDescription{
+      color: #999;
+      font-size: rem(14);
+      text-align: right;
+    }
+
+
 }
 
 // admin-panel

@@ -8,6 +8,7 @@ use App\Form\ArticleType;
 use App\Form\ArticleEditType;
 use App\Service\UploadImageService;
 use App\Repository\ArticleRepository;
+use App\Service\ImageService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -25,8 +26,18 @@ class ArticleController extends AbstractController
         ]);
     }
 
+    #[Route('articles', name: 'articles_front', methods: ['GET'])]
+    public function index_articles(ArticleRepository $articleRepository): Response
+    {
+        return $this->render('article/index_articles.html.twig', [
+            'articles' => $articleRepository->findAllFront(true, 100),
+        ]);
+    }
+
+
+
     #[Route('backstage/article/new', name: 'article_new', methods: ['GET','POST']), IsGranted('ROLE_TEACHER')]
-    public function new(Request $request, UploadImageService $uploaderImage): Response
+    public function new(Request $request, UploadImageService $uploaderImage, ImageService $imageService): Response
     {
         $article = new Article();
         $form = $this->createForm(ArticleType::class, $article);
@@ -43,10 +54,15 @@ class ArticleController extends AbstractController
             // slug automatique
 
             $photoPath = $form->get('photo_path')->getData();
+            
             if ($photoPath) {
                 $filename = $uploaderImage->upload($photoPath);
                 $article->setPhotoPath($filename);
 
+                $path = "/img/article/$filename";
+                $imageService->resize($path);
+
+                dd($imageService);
             }
 
             $entityManager = $this->getDoctrine()->getManager();
@@ -72,7 +88,7 @@ class ArticleController extends AbstractController
     }
 
     #[Route('backstage/article/{id}/edit', name: 'article_edit', methods: ['GET','POST'])]
-    public function edit(Request $request, Article $article): Response
+    public function edit(Request $request, Article $article, UploadImageService $uploaderImage, ImageService $imageService): Response
     {
         $form = $this->createForm(ArticleEditType::class, $article);
         $form->handleRequest($request);
@@ -80,6 +96,16 @@ class ArticleController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $time = new \DateTime('now', new DateTimeZone('Europe/Paris'));
             $article->setUpdateAt($time);
+
+            $photoPath = $form->get('photo_path')->getData();
+
+            if ($photoPath) {
+                $filename = $uploaderImage->upload($photoPath);
+                $article->setPhotoPath($filename);
+
+                $imageService->resize($filename);
+            }
+
 
             $this->getDoctrine()->getManager()->flush();
 

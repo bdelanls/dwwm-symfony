@@ -139,6 +139,10 @@ section.liste-articles{
             flex-flow: row wrap;
             justify-content: space-between;
         }
+        @include desktop {
+            justify-content: flex-start;
+            gap: 2.8%;
+        }
     }
     li{
         margin-bottom: em(20);
@@ -355,10 +359,21 @@ section.article{
     }
 
     p{
+        margin: em(16) 0;
+    }
+    li{
+        list-style: disc inside;
+        padding-left: em(32);
+        text-indent: em(-16);
+        margin: 0 0 em(8) 0;
+    }
+
+
+    .body-article{
         color: $noir;
         @include desktop{
             background-color: rgba($color: $blanc, $alpha: .8);
-            padding: em(16);
+            padding: em(4) em(16);
             box-shadow: -5px 10px 10px rgba($color: $onyx, $alpha: .5);
         }
     }

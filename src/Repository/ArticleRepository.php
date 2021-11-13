@@ -19,6 +19,20 @@ class ArticleRepository extends ServiceEntityRepository
         parent::__construct($registry, Article::class);
     }
 
+
+
+    public function findAllFront($visible, $nbResult)
+    {
+        return $this->createQueryBuilder('a')
+            ->where('a.is_active = :vis')
+            ->orderBy('a.published_at', 'DESC')
+            ->setMaxResults($nbResult)
+            ->setParameter('vis', $visible)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Article[] Returns an array of Article objects
     //  */

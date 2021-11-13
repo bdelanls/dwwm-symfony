@@ -12,7 +12,7 @@ class UploadImageService
     public function __construct(SluggerInterface $slugger)
     {
         $this->slugger = $slugger;
-        $this->imagedirectory = "img/article/";
+        $this->imagedirectory = "img/article/origin/";
     }
 
     public function upload($newFile, string $oldPath = ""): string

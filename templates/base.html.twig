@@ -12,9 +12,7 @@
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
         {{ encore_entry_script_tags('app') }}
-        {% block javascripts %}
-            
-        {% endblock %}
+        
     </head>
     <body {% if class_body is defined %}class="{{ class_body }}{% endif %}">
         <header>
@@ -27,5 +25,6 @@
         <footer>
             {% include "partial/_footer.html.twig" %}
         </footer>
+        {% block javascripts %}{% endblock %}
     </body>
 </html>

@@ -25,7 +25,7 @@ header{
     width: 100%;
     padding: rem(20) 0 0 0;
     @include desktop{
-        height: auto;
+        min-height: em(80);
     }
 }
 main, footer{

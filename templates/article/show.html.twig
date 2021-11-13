@@ -1,73 +1,32 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ article.title }}{% endblock %}
+{% block title %}
+    {% if article.metaTitle == "" %}
+        {{ article.title }}
+    {% else %}
+        {{ article.metaTitle }}
+    {% endif %}
+{% endblock %}
 {% block meta_description %}{{ article.meta }}{% endblock %}
 
 
 
 {% block main %}
 
-<section class="article">
-            <img src="/img/article/{{ article.photoPath }}" alt="{{ article.photoTitle }}">
-            <h3>{{ article.title }}</h3>
-            <div class="txt-article">
-                {{ article.body }}
-                <nav>
-                    <a href="#"><svg><title>Article précédent</title><use xlink:href="img/icons.svg#angle-left"></use></svg></a>
-                    <a href="#"><svg><title>Article suivant</title><use xlink:href="img/icons.svg#angle-right"></use></svg></a>
-                </nav>
+    <section class="article">
+        <img src="/img/article/wide/{{ article.photoPath }}" alt="{{ article.photoTitle }}">
+        <h3>{{ article.title }}</h3>
+        <div class="txt-article">
+            <div class="body-article">
+            {{ article.body|raw }}
             </div>
+            <nav>
+                <a href="#"><svg><title>Article précédent</title><use xlink:href="/img/icons.svg#angle-left"></use></svg></a>
+                <a href="#"><svg><title>Article suivant</title><use xlink:href="/img/icons.svg#angle-right"></use></svg></a>
+            </nav>
+        </div>
 
-            
-        </section> 
-
-
-
-    <h1>Article</h1>
-
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ article.id }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ article.title }}</td>
-            </tr>
-            <tr>
-                <th>Body</th>
-                <td>{{ article.body }}</td>
-            </tr>
-            <tr>
-                <th>Published_at</th>
-                <td>{{ article.publishedAt ? article.publishedAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Update_at</th>
-                <td>{{ article.updateAt ? article.updateAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Is_active</th>
-                <td>{{ article.isActive ? 'Yes' : 'No' }}</td>
-            </tr>
-            <tr>
-                <th>Photo_path</th>
-                <td>{{ article.photoPath }}</td>
-            </tr>
-            <tr>
-                <th>Photo_title</th>
-                <td>{{ article.photoTitle }}</td>
-            </tr>
-            <tr>
-                <th>Meta</th>
-                <td>{{ article.meta }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    
-
-    
+        
+    </section> 
 
 {% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Articles
+{% endblock %}
+
+{% block main %}
+<section class="liste-articles">
+            <ul>
+
+			{% for article in articles %}
+                <li>
+                    <a href="{{ path("article_show", {'slug': article.slug}) }}">
+                        <img src="/img/article/thumbnail/{{ article.photoPath }}" alt="{{ article.photoTitle }}">
+                        <h3>{{ article.title }}</h3>
+                    </a>
+                    <p>{{ article.body|u.truncate(150, '...', false)|striptags }}</p>
+                </li>
+
+			{% endfor %}	
+                            
+            </ul>
+            <a href="#" class="bt">Plus d'articles</a>
+        </section>	
+
+
+{% endblock %}

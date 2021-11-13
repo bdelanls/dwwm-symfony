@@ -2,6 +2,42 @@
 
 {% block title %}Edit Article{% endblock %}
 
+{% block javascripts %}
+	<script>
+
+		// init
+		var metaTitle = document.querySelector('#article_edit_meta_title');
+		var pCharTitle = document.querySelector('.nbCharTitle');
+		var metaDescription = document.querySelector('#article_edit_meta');
+		var pCharDescription = document.querySelector('.nbCharDescription');
+		
+		show(metaTitle, pCharTitle, 60);
+		show(metaDescription, pCharDescription, 160);
+
+		const eventTitle = (event) => {
+ 			show(metaTitle, pCharTitle, 60);
+		}
+		const eventDescription = (event) => {
+ 			show(metaDescription, pCharDescription, 160);
+		}
+
+		function show(champ, p, nb){
+			nbChar =  champ.value.length;
+			p.innerHTML = nbChar + " caractères / " + nb;
+			if (nbChar > nb){
+				p.style.color = 'red';
+			}else{
+				p.style = '';
+			}
+		}		
+
+		metaTitle.onkeyup = eventTitle;
+		metaDescription.onkeyup = eventDescription;
+
+	</script>
+
+{% endblock %}
+
 {% block main %}
 
 	<section class="admin">
@@ -22,6 +58,7 @@
 				</h3>
 			</div>
 			<div class="admin-panel">
+				<section>Article créé le {{ article.publishedAt ? article.publishedAt|date('d-m-Y') : '' }} / Dernière modification le {{ article.updateAt ? article.updateAt|date('d-m-Y') : '' }}</section>
                 <section>
                     {{ include('article/_form_edit.html.twig', {'button_label': 'Mettre à jour'}) }}
                 </section>

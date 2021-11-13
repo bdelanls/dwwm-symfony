@@ -54,9 +54,9 @@ class ArticleEditType extends AbstractType
                 'multiple' => false,
                 'constraints' => [
                     new File([
-                        'maxSize' => "2048K",
-                        'mimeTypes' => ['image/png', 'image/jpg', 'image/jpeg'],
-                        'mimeTypesMessage' => "Uploader une image valide, PNG ou JPG.",
+                        'maxSize' => "10240K",
+                        'mimeTypes' => ['image/jpg', 'image/jpeg'],
+                        'mimeTypesMessage' => "Uploader une image au format JPG.",
                     ])
                 ],
             ])
@@ -81,7 +81,7 @@ class ArticleEditType extends AbstractType
             ])
             ->add('slug', TextType::class, [
                 'label' => "Slug :",
-                'required' => false,
+                'required' => true,
                 'constraints' => [
                     new NotBlank([
                         'message' => "ce champs ne doit pas être vide",
