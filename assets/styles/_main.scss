@@ -139,9 +139,15 @@ section.liste-articles{
             flex-flow: row wrap;
             justify-content: space-between;
         }
+        @include desktop {
+            justify-content: flex-start;
+            gap: 2.8%;
+        }
     }
     li{
         margin-bottom: em(20);
+
+
         @include tablet-only {
             width: col(6);
             .accueil &:last-child{ display: none;}
@@ -192,6 +198,13 @@ section.liste-articles{
     .bt{
         @include button($blanc, $shadow);
         margin: 0 auto;
+        z-index: 1000;
+        position: relative;
+
+        &:hover{
+            cursor: pointer;
+        }
+        
     }
 }
 
@@ -234,6 +247,7 @@ section.connect{
             font-family: $anton;
             font-size: rem(40);
             color: $blanc;
+            line-height: 120%;
         }
         p{
             color: $onyx;
@@ -265,11 +279,11 @@ section.connect{
             border: 1px solid $blanc;
         }
         input[type=submit]{
-            background-color: $marron;
+            background-color: $shadow;
             margin: em(20) 0;
             width: max-content;
             padding: em(10) em(20);
-            border: none;
+            border: 1px solid $blanc;
             border-radius: em(8);
             font-weight: 500;
             color: $blanc;
@@ -295,6 +309,14 @@ section.connect{
                     color: rgba($color: $blanc, $alpha: 1);
                 }
             }
+        }
+    }
+
+    &.reset{
+
+        p, a{
+            margin-top: em(16);
+            color: $blanc;
         }
     }
 }
@@ -346,10 +368,21 @@ section.article{
     }
 
     p{
+        margin: em(16) 0;
+    }
+    li{
+        list-style: disc inside;
+        padding-left: em(32);
+        text-indent: em(-16);
+        margin: 0 0 em(8) 0;
+    }
+
+
+    .body-article{
         color: $noir;
         @include desktop{
             background-color: rgba($color: $blanc, $alpha: .8);
-            padding: em(16);
+            padding: em(4) em(16);
             box-shadow: -5px 10px 10px rgba($color: $onyx, $alpha: .5);
         }
     }
@@ -358,13 +391,14 @@ section.article{
         display: flex;
         justify-content: space-between;
         margin-top: em(16);
+        height: em(48);
     }
     nav svg{
         width: rem(40); height: rem(40);
         color: $blanc;
         transition: .2s;
 
-        &:hover{color: $marron;}
+        &:hover{color: $shadow;}
     }
 
     .txt-article{
@@ -378,6 +412,25 @@ section.article{
 
     @include desktop{
 
+    }
+
+    // pagination
+    .pagination{
+        position: relative;
+        width: 100%;
+
+        .first, .page, .current, .last{
+            display: none;
+        }
+
+        .previous{
+            position: absolute;
+            left: 0;
+        }
+        .next{
+            position: absolute;
+            right: 0;
+        }
     }
 
 }

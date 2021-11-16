@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {% for article in articles %}
+        {% if article.metaTitle == "" %}
+            {{ article.title }}
+        {% else %}
+            {{ article.metaTitle }}
+        {% endif %}
+    {% endfor %}
+{% endblock %}
+
+{% block meta_description %}
+    {% for article in articles %}
+        {{ article.meta }}
+    {% endfor %}
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        const btPrevious = document.querySelector('.previous a');
+        const btNext = document.querySelector('.next a');
+
+        if (btPrevious) {
+            btPrevious.innerHTML = '<svg><title>Article précédent</title><use xlink:href="/img/icons.svg#angle-left"></use></svg>';
+        }
+        if (btNext) {
+            btNext.innerHTML = '<svg><title>Article suivant</title><use xlink:href="/img/icons.svg#angle-right"></use></svg>';
+        }
+    
+    </script>
+{% endblock %}
+
+
+
+{% block main %}
+    {% for article in articles %}
+    <section class="article">
+        <img src="/img/article/wide/{{ article.photoPath }}" alt="{{ article.photoTitle }}">
+        <h3>{{ article.title }}</h3>
+        <div class="txt-article">
+            <div class="body-article">
+            {{ article.body|raw }}
+            </div>
+            <nav>
+                {{ knp_pagination_render(articles) }}
+            </nav>
+        </div>
+
+        
+    </section> 
+    {% endfor %}
+    
+
+{% endblock %}

@@ -1,0 +1,71 @@
+{{ form_start(form) }}
+
+    {# {{ form_widget(form) }} #}
+    <fieldset class="fieldset">
+            <fieldset>
+                {{ form_widget(form.is_active) }}
+                {{ form_label(form.is_active) }}
+                {{ form_errors(form.is_active) }}
+            </fieldset>
+   
+            <fieldset>
+                {{ form_widget(form.promote) }}
+                {{ form_label(form.promote) }}
+                {{ form_errors(form.promote) }}
+            </fieldset>
+    </fieldset>
+
+    <div class="row">
+        {{ form_label(form.title) }}
+        {{ form_widget(form.title) }}
+        {{ form_errors(form.title) }}
+    </div>
+    
+    <div class="row">
+        {{ form_label(form.slug) }}
+        {{ form_errors(form.slug) }}
+        {{ form_widget(form.slug) }}
+    </div>
+
+    <div class="row">
+        {{ form_label(form.body) }}
+        {{ form_errors(form.body) }}
+        {{ form_widget(form.body) }}
+    </div>
+    <fieldset class="fieldset">
+        <legend>PHOTO</legend>
+        <div>
+            <img src="/img/article/thumbnail/{{ article.photoPath }}" alt="{{ article.photoTitle }}" class="photo">
+        </div>
+        <div class="row">
+            {{ form_label(form.photo_path) }}
+            {{ form_errors(form.photo_path) }}
+            {{ form_widget(form.photo_path) }}
+        </div>
+
+        <div class="row">
+            {{ form_label(form.photo_title) }}
+            {{ form_errors(form.photo_title) }}
+            {{ form_widget(form.photo_title) }}
+        </div>
+    </fieldset>
+    <fieldset class="fieldset">
+        <legend>RÉFÉRENCEMENT</legend>
+        <div class="row">
+            {{ form_label(form.meta_title) }}
+            {{ form_errors(form.meta_title) }}
+            {{ form_widget(form.meta_title) }}
+            <p class="nbCharTitle">nombre de caractères</p>
+        </div>
+
+        <div class="row">
+            {{ form_label(form.meta) }}
+            {{ form_errors(form.meta) }}
+            {{ form_widget(form.meta) }}
+            <p class="nbCharDescription">nombre de caractères</p>
+        </div>
+    </fieldset>
+    
+    <button class="bt-form">{{ button_label|default('Enregistrer') }}</button>
+
+{{ form_end(form) }}

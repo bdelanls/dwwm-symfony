@@ -18,6 +18,16 @@
 				<span>Documents</span>
 			</a>
 		</li>
+		<li>
+			<a href="{{ path('article_index') }}" {% if app.request.attributes.get('_route') == 'article_index' or app.request.attributes.get('_route') == 'article_new' or app.request.attributes.get('_route') == 'article_edit'%} class="active" {% endif %}>
+				<svg>
+					<title>Articles</title>
+					<use xlink:href="/img/icons.svg#article"></use>
+				</svg>
+				<span>Articles</span>
+			</a>
+		</li>
+
 	{% endif %}
 	{% if is_granted("ROLE_STUDENT") == true %}
 		<li>

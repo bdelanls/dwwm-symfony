@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvel article{% endblock %}
+
+{% block javascripts %}
+	<script>
+
+		// init
+		var metaTitle = document.querySelector('#article_meta_title');
+		var pCharTitle = document.querySelector('.nbCharTitle');
+		var metaDescription = document.querySelector('#article_meta');
+		var pCharDescription = document.querySelector('.nbCharDescription');
+
+		show(metaTitle, pCharTitle, 60);
+		show(metaDescription, pCharDescription, 160);
+
+		const eventTitle = (event) => {
+ 			show(metaTitle, pCharTitle, 60);
+		}
+		const eventDescription = (event) => {
+ 			show(metaDescription, pCharDescription, 160);
+		}
+
+		function show(champ, p, nb){
+			nbChar =  champ.value.length;
+			p.innerHTML = nbChar + " caractères / " + nb;
+			if (nbChar > nb){
+				p.style.color = 'red';
+			}else{
+				p.style = '';
+			}
+		}		
+
+		metaTitle.onkeyup = eventTitle;
+		metaDescription.onkeyup = eventDescription;
+
+	</script>
+
+{% endblock %}
+
+{% block main %}
+	<section class="admin">
+		<div class="col1">
+			<nav class="admin-nav">
+				{% include "partial/_menuBackstage.html.twig" %}
+			</nav>
+			<div class="info">
+				<p class="readmore">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quos deleniti sequi
+                rerum velit dignissimos quo, beatae hic architecto earum dicta. </p>
+
+			</div>
+		</div>
+		<div class="col2">
+			<div class="title">
+				<h3>
+					Nouvel article
+				</h3>
+			</div>
+			<div class="admin-panel">
+
+				{{ include('article/_form.html.twig') }}
+
+				{# <a class="bt-form" href="{{ path('article_index') }}">Retour à la liste</a> #}
+			</div>
+		</div>
+
+
+	</section>
+    
+    
+
+    
+
+{% endblock %}

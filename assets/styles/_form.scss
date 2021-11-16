@@ -37,12 +37,22 @@ form{
     input[type="date"]{
       width: max-content;
     }
-    input[type="file"]{
-      
+
+
+    fieldset{
+      margin: em(16) 0;
+
+      &.fieldset{
+        padding: em(12);
+        border: 1px solid #ccc;
+
+        legend{
+          padding: 0 em(8);
+          margin: 0 auto;
+          border: 1px solid #ccc;
+        }
+      }
     }
-
-
-    fieldset{margin: em(16) 0;}
 
     input[type="checkbox"]{
         appearance: none;
@@ -65,11 +75,11 @@ form{
         border: none;
         border-radius: em(10);
         box-sizing: border-box;
-        padding: em(10) em(20);
+        padding: em(8) em(15);
         transition: .2s;
 
         &:hover{
-            filter:brightness(90%);
+            filter:brightness(130%);
             cursor: pointer;
         }
     }
@@ -115,7 +125,25 @@ form{
       color:#000;  
       border:5px solid #6f6;  
       padding:7px;
-    }    
+    }  
+    
+    .photo{
+      width: max-content;
+    }
+
+    .nbCharTitle, .nbCharDescription{
+      color: #999;
+      font-size: rem(14);
+      text-align: right;
+    }
+
+    .row{
+      li{
+        color: $rouge;
+      }
+    }
+
+
 }
 
 // admin-panel

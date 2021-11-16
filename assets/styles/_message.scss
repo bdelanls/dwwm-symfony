@@ -1,11 +1,12 @@
 .message{
-    max-width: 1200px;
-    margin: 0 auto;
     padding: 1.25em;
+    display: contents;
 }
 .alert{
     position: relative;
     display: block;
+    max-width: 1200px;
+    margin: 0 auto;
     opacity: 1;
     transition: .5s;
     height: 60px;

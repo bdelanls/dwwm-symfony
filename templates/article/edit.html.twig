@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Article{% endblock %}
+
+{% block javascripts %}
+	<script>
+
+		// init
+		var metaTitle = document.querySelector('#article_edit_meta_title');
+		var pCharTitle = document.querySelector('.nbCharTitle');
+		var metaDescription = document.querySelector('#article_edit_meta');
+		var pCharDescription = document.querySelector('.nbCharDescription');
+		
+		show(metaTitle, pCharTitle, 60);
+		show(metaDescription, pCharDescription, 160);
+
+		const eventTitle = (event) => {
+ 			show(metaTitle, pCharTitle, 60);
+		}
+		const eventDescription = (event) => {
+ 			show(metaDescription, pCharDescription, 160);
+		}
+
+		function show(champ, p, nb){
+			nbChar =  champ.value.length;
+			p.innerHTML = nbChar + " caractères / " + nb;
+			if (nbChar > nb){
+				p.style.color = 'red';
+			}else{
+				p.style = '';
+			}
+		}		
+
+		metaTitle.onkeyup = eventTitle;
+		metaDescription.onkeyup = eventDescription;
+
+	</script>
+
+{% endblock %}
+
+{% block main %}
+
+	<section class="admin">
+		<div class="col1">
+			<nav class="admin-nav">
+				{% include "partial/_menuBackstage.html.twig" %}
+			</nav>
+			<div class="info">
+				<p class="readmore">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quos deleniti sequi
+                rerum velit dignissimos quo, beatae hic architecto earum dicta. </p>
+
+			</div>
+		</div>
+		<div class="col2">
+			<div class="title">
+				<h3>
+					Édition de l'article
+				</h3>
+			</div>
+			<div class="admin-panel">
+				<section>Article créé le {{ article.publishedAt ? article.publishedAt|date('d-m-Y') : '' }} / Dernière modification le {{ article.updateAt ? article.updateAt|date('d-m-Y') : '' }}</section>
+                <section>
+                    {{ include('article/_form_edit.html.twig', {'button_label': 'Mettre à jour'}) }}
+                </section>
+                <section class="boutons">
+                    <a class="bt-form" href="{{ path('article_index') }}">Retour à la liste</a>
+                    {{ include('article/_delete_form.html.twig') }}
+                </section>
+
+				
+
+
+			</div>
+		</div>
+
+
+	</section>
+
+    
+{% endblock %}
