@@ -21,11 +21,11 @@ class ArticleRepository extends ServiceEntityRepository
 
 
 
-    public function findAllFront($visible, $nbResult)
+    public function findAllFront($visible, $nbResult = 100)
     {
         return $this->createQueryBuilder('a')
             ->where('a.is_active = :vis')
-            ->orderBy('a.published_at', 'DESC')
+            ->orderBy('a.promote DESC, a.published_at',  'DESC')
             ->setMaxResults($nbResult)
             ->setParameter('vis', $visible)
             ->getQuery()

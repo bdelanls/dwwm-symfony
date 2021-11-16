@@ -47,6 +47,10 @@ class ArticleType extends AbstractType
                 'label' => "Visible",
                 'required' => false,
             ])
+            ->add('promote', CheckboxType::class, [
+                'label' => "Mise en avant",
+                'required' => false,
+            ])
             ->add('photo_path', FileType::class, [
                 'mapped' => false,
                 'label' => "Photo :",

@@ -75,6 +75,11 @@ class Article
      */
     private $slug;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $promote;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -208,6 +213,18 @@ class Article
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getPromote(): ?bool
+    {
+        return $this->promote;
+    }
+
+    public function setPromote(?bool $promote): self
+    {
+        $this->promote = $promote;
 
         return $this;
     }

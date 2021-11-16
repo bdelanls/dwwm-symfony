@@ -1,13 +1,19 @@
 {{ form_start(form) }}
 
     {# {{ form_widget(form) }} #}
-    <div class="row">
-        <fieldset>
-            {{ form_widget(form.is_active) }}
-            {{ form_label(form.is_active) }}
-            {{ form_errors(form.is_active) }}
-        </fieldset>
-    </div>
+    <fieldset class="fieldset">
+            <fieldset>
+                {{ form_widget(form.is_active) }}
+                {{ form_label(form.is_active) }}
+                {{ form_errors(form.is_active) }}
+            </fieldset>
+   
+            <fieldset>
+                {{ form_widget(form.promote) }}
+                {{ form_label(form.promote) }}
+                {{ form_errors(form.promote) }}
+            </fieldset>
+    </fieldset>
 
     <div class="row">
         {{ form_label(form.title) }}

@@ -146,6 +146,8 @@ section.liste-articles{
     }
     li{
         margin-bottom: em(20);
+
+
         @include tablet-only {
             width: col(6);
             .accueil &:last-child{ display: none;}
@@ -196,6 +198,13 @@ section.liste-articles{
     .bt{
         @include button($blanc, $shadow);
         margin: 0 auto;
+        z-index: 1000;
+        position: relative;
+
+        &:hover{
+            cursor: pointer;
+        }
+        
     }
 }
 
@@ -382,13 +391,14 @@ section.article{
         display: flex;
         justify-content: space-between;
         margin-top: em(16);
+        height: em(48);
     }
     nav svg{
         width: rem(40); height: rem(40);
         color: $blanc;
         transition: .2s;
 
-        &:hover{color: $marron;}
+        &:hover{color: $shadow;}
     }
 
     .txt-article{
@@ -402,6 +412,25 @@ section.article{
 
     @include desktop{
 
+    }
+
+    // pagination
+    .pagination{
+        position: relative;
+        width: 100%;
+
+        .first, .page, .current, .last{
+            display: none;
+        }
+
+        .previous{
+            position: absolute;
+            left: 0;
+        }
+        .next{
+            position: absolute;
+            right: 0;
+        }
     }
 
 }

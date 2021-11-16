@@ -127,6 +127,12 @@
     "intervention/image": {
         "version": "2.7.0"
     },
+    "knplabs/knp-components": {
+        "version": "v3.3.0"
+    },
+    "knplabs/knp-paginator-bundle": {
+        "version": "v5.7.0"
+    },
     "laminas/laminas-code": {
         "version": "4.4.3"
     },

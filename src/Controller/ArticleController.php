@@ -6,9 +6,10 @@ use DateTimeZone;
 use App\Entity\Article;
 use App\Form\ArticleType;
 use App\Form\ArticleEditType;
+use App\Service\ImageService;
 use App\Service\UploadImageService;
 use App\Repository\ArticleRepository;
-use App\Service\ImageService;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -59,10 +60,8 @@ class ArticleController extends AbstractController
                 $filename = $uploaderImage->upload($photoPath);
                 $article->setPhotoPath($filename);
 
-                $path = "/img/article/$filename";
-                $imageService->resize($path);
+                $imageService->resize($filename);
 
-                dd($imageService);
             }
 
             $entityManager = $this->getDoctrine()->getManager();
@@ -79,13 +78,44 @@ class ArticleController extends AbstractController
         ]);
     }
 
+    // #[Route('article/{slug}', name: 'article_show', methods: ['GET'])]
+    // public function show(Article $article): Response
+    // {
+    //     return $this->render('article/show.html.twig', [
+    //         'article' => $article,
+    //     ]);
+    // }
+    
+    /**
+     *  Article
+     */
     #[Route('article/{slug}', name: 'article_show', methods: ['GET'])]
-    public function show(Article $article): Response
+    public function show(string $slug, ArticleRepository $articleRepository, Request $request, PaginatorInterface $paginator): Response
     {
+        $donnees = $articleRepository->findAllFront(true, 100);
+
+        for ($i=0; $i < count($donnees); $i++) {
+            $donnee = $donnees[$i];
+            if ($donnee->getSlug() == $slug) {
+                $page = $i+1;
+            }
+        }
+        
+
+        $articles = $paginator->paginate(
+            $donnees,
+            $request->query->getInt('page', $page),
+            1
+        );
+
+
+
         return $this->render('article/show.html.twig', [
-            'article' => $article,
+            'articles' => $articles,
         ]);
     }
+
+
 
     #[Route('backstage/article/{id}/edit', name: 'article_edit', methods: ['GET','POST'])]
     public function edit(Request $request, Article $article, UploadImageService $uploaderImage, ImageService $imageService): Response

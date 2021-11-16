@@ -37,13 +37,16 @@
 							<tr>
 								<td>
 									<svg>
-										{% if article.isActive == true %}
+										{% if article.isActive == true and article.promote == true %}
+											<title>Mis en avant</title>
+											<use xlink:href="/img/icons.svg#check-double">
+										{% elseif article.isActive == true and article.promote == false %}
 											<title>Visible</title>
 											<use xlink:href="/img/icons.svg#check">
-											{% else %}
-												<title>Non visible</title>
-												<use xlink:href="/img/icons.svg#clock"></use>
-											{% endif %}
+										{% else %}
+											<title>Non visible</title>
+											<use xlink:href="/img/icons.svg#clock"></use>
+										{% endif %}
 									</svg>
 								</td>
 								<td class="ws">{{ article.title }}</td>

@@ -33,26 +33,18 @@
             </div>
             <section class="liste-articles">
                 <ul>
-                    <li>
-                        <a href="/article.html">
-                            <img src="img/img-1.jpg" alt="">
-                            <h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h3>
+                {% for article in articles %}
+                    <li class="item">
+                        <a href="{{ path("article_show", {'slug': article.slug}) }}">
+                            <img src="/img/article/thumbnail/{{ article.photoPath }}" alt="{{ article.photoTitle }}">
+                            <h3>{{ article.title }}</h3>
                         </a>
+                        <p>{{ article.body|u.truncate(150, '...', false)|striptags }}</p>
                     </li>
-                    <li>
-                        <a href="#">
-                            <img src="img/img-2.jpg" alt="">
-                            <h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h3>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img src="img/img-3.jpg" alt="">
-                            <h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h3>
-                        </a>
-                    </li>
+
+                {% endfor %}                    
                 </ul>
-                <a href="/articles.html" class="bt">Voir tous les articles</a>
+                <a href="{{ path('articles_front') }}" class="bt">Voir tous les articles</a>
             </section>
         </div>
 
