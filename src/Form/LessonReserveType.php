@@ -9,7 +9,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
-class LessonType extends AbstractType
+class LessonReserveType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -21,10 +21,10 @@ class LessonType extends AbstractType
         
         // ->add('hour')
         // ->add('booked_on')
-        ->add('valid', CheckboxType::class, [
-            'label' => "Validé",
-            'required' => false,
-        ])
+        // ->add('valid', CheckboxType::class, [
+        //     'label' => "Validé",
+        //     'required' => false,
+        // ])
         // ->add('user')
         ;
     }

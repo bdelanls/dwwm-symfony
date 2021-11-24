@@ -22,7 +22,7 @@ class FileController extends AbstractController
     public function index(FileRepository $fileRepository): Response
     {
         return $this->render('file/index.html.twig', [
-            'files' => $fileRepository->findAll(),
+            'files' => $fileRepository->findBy([], ['published_at' => 'DESC']),
         ]);
     }
 

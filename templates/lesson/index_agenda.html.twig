@@ -1,0 +1,202 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Lesson index{% endblock %}
+
+{% block main %}
+
+    {# <pre>
+        {{ dump(lessons) }}
+    </pre>  #}
+
+    {# {% for lesson in lessons %} #}
+        {# {{ lessons[16].user.lastname }} #}
+    {# {% endfor %} #}
+
+    
+
+	<section class="admin">
+		<div class="col1">
+			<nav class="admin-nav">
+				{% include "partial/_menuBackstage.html.twig" %}
+			</nav>
+			<div class="info">
+				<p class="readmore">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quos deleniti sequi
+                rerum velit dignissimos quo, beatae hic architecto earum dicta. Ipsa, iste. Fugit, placeat atque
+                nemo iure praesentium officia nisi quae esse consequatur fugit ab facilis unde facere impedit
+                aperiam</p>
+
+			</div>
+		</div>
+		<div class="col2">
+			<div class="title">
+				<h3>
+					{{ mois }}
+				</h3>
+                <nav class="mois">
+                {% if month == 1 %}
+                     {% set newMonth = 12 %}
+                     {% set newYear = year -1 %}
+                {% else %}
+                     {% set newMonth = month -1 %}
+                     {% set newYear = year %}
+                {% endif %}
+                    <a href="{{ path('lesson_agenda_index', {'month': newMonth, 'year': newYear}) }}">
+                        <svg class="">
+                            <title>Mois précédent</title>
+                            <use xlink:href="/img/icons.svg#angle-left"></use>
+                        </svg>
+                    </a>
+                {% if month == 12 %}
+                     {% set newMonth = 1 %}
+                     {% set newYear = year +1 %}
+                {% else %}
+                     {% set newMonth = month +1 %}
+                     {% set newYear = year %}
+                {% endif %}                    
+                    <a href="{{ path('lesson_agenda_index', {'month': newMonth, 'year': newYear}) }}">
+                        <svg class="">
+                            <title>Mois suivant</title>
+                            <use xlink:href="/img/icons.svg#angle-right"></use>
+                        </svg>
+                    </a>
+                </nav>
+                
+			</div>
+			<div class="admin-panel">
+
+				<section>
+                    <table class="tab2col agenda">
+                    {% for i in range(1, jours) %}
+                        <tr {% if firstDay == 0 or firstDay == 6 %}class="fond-we" {% endif %}>
+                            <td class="ws">
+                                {{ daysOfWeek[firstDay] }}
+
+                                {% if firstDay == 6 %}
+                                    {% set firstDay = 0 %}
+                                {% else %}
+                                    {% set firstDay = firstDay + 1 %}
+                                {% endif %}
+                            </td>
+                            <td>
+                                {{ i }}
+                            </td>
+                            <td class="w100">
+                                <ul>
+                                    {% for h in range(8, 20) %}
+                                    
+                                        {% set buzy = 1 %}
+                                        {% for lesson in lessons %}
+
+                                            
+
+                                            {# la date et l'heure corresponde #}
+                                            {% if lesson.date|date("d") == i and lesson.hour == h %}
+
+                                                {# h = valide #}
+                                                {% if lesson.valid == true %}
+                                                    {% if is_granted('ROLE_TEACHER') %}
+                                                        <li class="active valid">
+                                                            <a href="{{ path('lesson_edit', {'id': lesson.id}) }}" title="Le cours est validé">{{ h }}</a>
+                                                        </li>
+                                                    {% elseif lesson.user.id == curentUser.id %}
+                                                        <li class="active valid">
+                                                            <a title="Le cours est validé">{{ h }}</a>
+                                                        </li>
+                                                    {% else %}
+                                                        <li class="">
+                                                            <a>{{ h }}</a>
+                                                        </li>
+                                                    {% endif %}
+                                                
+                                                {# h = reserve #}
+                                                {% elseif lesson.user.id is defined and lesson.user.id is not null %}
+                                                    {% if is_granted('ROLE_TEACHER') %}
+                                                        <li class="active reserve">
+                                                            <a href="{{ path('lesson_edit', {'id': lesson.id}) }}" title="Le cours est en attente de validation">{{ h }}</a>
+                                                        </li>
+                                                    {% elseif lesson.user.id == curentUser.id %}
+                                                        <li class="active reserve">
+                                                            <a title="Le cours est en attente de validation">{{ h }}</a>
+                                                        </li>
+                                                    {% else %}
+                                                        <li class="">
+                                                            <a>{{ h }}</a>
+                                                        </li>
+                                                    {% endif %}    
+
+                                                {# h = active #}
+                                                {% else %}
+                                                    <li class="active">
+                                                        {# prof #}
+                                                        {% if is_granted('ROLE_TEACHER') %}
+                                                            <a href="{{ path('lesson_edit', {'id': lesson.id}) }}" title="Éditer">{{ h }}</a>
+
+                                                        {# élève #}
+                                                        {% else %}
+                                                            <a href="{{ path('reserve_edit', {'id': lesson.id}) }}" title="Réserver le cours">{{ h }}</a>
+                                                        {% endif %}
+                                                    </li>
+
+                                                {% endif %}
+                                                {% set buzy = 0 %}
+
+                                            
+                                            
+                                            {% endif %}
+
+
+                                        
+                                        {% endfor %}
+                                            
+                                            {% if buzy == 1 %}
+                                                {# h = null #}
+                                                {% if is_granted('ROLE_TEACHER') %}
+                                                    {# ajout d'une heure de cours #}
+                                                    {% set date = year ~ '-' ~ month ~ '-' ~ i %}
+                                                    <li>{{ include('lesson/_hour_form.html.twig') }}</li>
+                                                {% else %}
+                                                    <li><a>{{ h }}</a></li>
+                                                {% endif %}
+                                               
+                                            {% endif %}
+                                            
+
+                                        
+                                    {% endfor %}
+                                </ul>
+
+                            </td>
+                            <td>
+                            {% if is_granted('ROLE_TEACHER') %}
+                                {% if i < 10 %}
+                                    {% set date = year ~ '-' ~ month ~ '-0' ~ i %}
+                                {% else %}
+                                    {% set date = year ~ '-' ~ month ~ '-' ~ i %}
+                                {% endif %}
+                                    <a href="{{ path('lesson_new_day', {'date': date}) }}">
+                                        <svg class="">
+                                            <title>Ajouter des heures de cours</title>
+                                            <use xlink:href="/img/icons.svg#plus-cercle"></use>
+                                        </svg>
+                                    </a>
+                            {% endif %}
+                            </td>
+                        </tr>
+                        
+                    {% endfor %}
+                    </table>
+
+
+
+
+                   
+
+				</section>
+
+				<section>
+				</section>
+
+
+			</div>
+		</div>
+{% endblock %}

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Lesson{% endblock %}
+{% block title %}Edit Lesson{% endblock %}
 
 {% block main %}
 
@@ -20,17 +20,20 @@
 		<div class="col2">
 			<div class="title">
 				<h3>
-					Create new Lesson
+					Cours du {{ lesson.date|date("j M\\. Y", "Europe/paris") }}
 				</h3>
 			</div>
 			<div class="admin-panel">
 
 				<section>
-                    {{ include('lesson/_form.html.twig') }}
-
-                    <a href="{{ path('lesson_index') }}">back to list</a>
-
+					<p>Je réserve le cours</p>
+					<p>du {{ lesson.date|date("j M\\. Y", "Europe/paris") }} à {{ lesson.hour }} h.</p>
 				</section>
+
+				<section>
+				 	{{ include('lesson/_form_reserve.html.twig', {'button_label': 'Réserver'}) }}
+				</section>
+				
 
 
 
@@ -38,6 +41,4 @@
 		</div>
 
 
-
-    
 {% endblock %}

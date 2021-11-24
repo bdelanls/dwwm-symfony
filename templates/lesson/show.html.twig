@@ -2,37 +2,79 @@
 
 {% block title %}Lesson{% endblock %}
 
-{% block body %}
-    <h1>Lesson</h1>
+{% block main %}
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ lesson.id }}</td>
-            </tr>
-            <tr>
-                <th>Date</th>
-                <td>{{ lesson.date ? lesson.date|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Hour</th>
-                <td>{{ lesson.hour }}</td>
-            </tr>
-            <tr>
-                <th>Booked_on</th>
-                <td>{{ lesson.bookedOn ? lesson.bookedOn|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Valid</th>
-                <td>{{ lesson.valid ? 'Yes' : 'No' }}</td>
-            </tr>
-        </tbody>
-    </table>
+	<section class="admin">
+		<div class="col1">
+			<nav class="admin-nav">
+				{% include "partial/_menuBackstage.html.twig" %}
+			</nav>
+			<div class="info">
+				<p class="readmore">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quos deleniti sequi
+                rerum velit dignissimos quo, beatae hic architecto earum dicta. Ipsa, iste. Fugit, placeat atque
+                nemo iure praesentium officia nisi quae esse consequatur fugit ab facilis unde facere impedit
+                aperiam</p>
 
-    <a href="{{ path('lesson_index') }}">back to list</a>
+			</div>
+		</div>
+		<div class="col2">
+			<div class="title">
+				<h3>
+					Cours
+				</h3>
+			</div>
+			<div class="admin-panel">
 
-    <a href="{{ path('lesson_edit', {'id': lesson.id}) }}">edit</a>
+				<section>
+                    <table class="table">
+                        <tr>
+                            <th class="ws">Date du cours :</th>
+                            <td>{{ lesson.date ? lesson.date|date('d M Y') : '' }}</td>
+                        </tr>
+                        <tr>
+                            <th class="ws">Heure :</th>
+                            <td>à {{ lesson.hour }} h.</td>
+                        </tr>
+                        <tr>
+                            <th class="ws">Avec :</th>
+                            <td><a href="{{ path('student_show', {'id': lesson.user.id}) }}">{{ lesson.user.firstname }} {{ lesson.user.lastname }}</a></td>
+                        </tr>
+                        <tr>
+                            <th class="ws">Enregistré le :</th>
+                            <td>{{ lesson.bookedOn ? lesson.bookedOn|date('d M Y') : '' }}</td>
+                        </tr>
+                        <tr>
+                            <th class="ws">Validé :</th>
+                            <td class="w100">
+                                <svg>
+                                    {% if lesson.valid == true %}
+                                        <title>Cours validé</title>
+                                        <use xlink:href="/img/icons.svg#check">
+                                    {% else %}
+                                        <title>En attente de validation</title>
+                                        <use xlink:href="/img/icons.svg#clock"></use>
+                                    {% endif %}
+                                </svg>
+                            </td>
+                        </tr>
+                    </table>
+				</section>
 
-    {{ include('lesson/_delete_form.html.twig') }}
+                <section>
+                    <a class="bt-form" href="{{ path('lesson_index') }}">Retour à la liste</a>
+
+                    <a class="bt-form" href="{{ path('lesson_edit', {'id': lesson.id}) }}">Éditer</a>
+
+                    
+                </section>
+
+
+
+
+			</div>
+		</div>
+
+
+
+
 {% endblock %}

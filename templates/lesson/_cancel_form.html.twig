@@ -1,0 +1,4 @@
+<form method="post" action="{{ path('lesson_cancel', {'id': lesson.id}) }}" onsubmit="return confirm('Êtes-vous sur de vouloir annuler ce cours ?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('cancel' ~ lesson.id) }}">
+    <button class="bt-form">Annuler le cours</button>
+</form>

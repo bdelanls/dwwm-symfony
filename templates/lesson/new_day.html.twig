@@ -20,17 +20,19 @@
 		<div class="col2">
 			<div class="title">
 				<h3>
-					Create new Lesson
+					Heures de cours
 				</h3>
 			</div>
 			<div class="admin-panel">
+				<section>
+					<h4>Cours disponibles pour le {{ lesson.date|date("j M Y", "Europe/paris") }}</h4>
+				</section>
 
 				<section>
-                    {{ include('lesson/_form.html.twig') }}
-
-                    <a href="{{ path('lesson_index') }}">back to list</a>
-
+					
+                    {{ include('lesson/_form_day.html.twig') }}
 				</section>
+
 
 
 
@@ -38,6 +40,11 @@
 		</div>
 
 
+	</section>
+
+
+
+    
 
     
 {% endblock %}

@@ -24,7 +24,7 @@
 		<div class="col2">
 			<div class="title">
 				<h3>
-					{% if is_granted("ROLE_ADMIN") != true %}
+					{% if is_granted("ROLE_ADMIN") == true %}
 						Utilisateurs
 					{% else %}
 						Élèves
@@ -36,6 +36,7 @@
 				<table class="tab2col">
 					<tr>
 						<th>Valide</th>
+						<th class="ws">Date d'enregistrement</th>
 						<th>Nom</th>
 						<th>Rôle</th>
 						<th></th>
@@ -53,6 +54,9 @@
 											{% endif %}
 										</svg>
 									</td>
+								</td>
+								<td>
+									{{ user.addedDate ? user.addedDate|date('d/m/Y') : '' }}
 								</td>
 								<td class="ws">
 									<a href="{{ path('student_show', {'id': user.id}) }}">{{ user.firstname }}

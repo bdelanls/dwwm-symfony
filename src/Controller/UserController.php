@@ -12,6 +12,7 @@ use App\Form\UserRoleType;
 use App\Form\FilesUserType;
 use App\Service\UploadService;
 use App\Repository\FileRepository;
+use App\Repository\LessonRepository;
 use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
@@ -29,11 +30,8 @@ class UserController extends AbstractController
 
         $roleUser = $this->getUser()->getRoles();
         
-        $tabUsers = $userRepository->findAll();
-        //$tabUsers = $userRepository->findAllRole('ROLE_USER', 'ROLE_STUDENT');
+        $tabUsers = $userRepository->findBy([], ['id' => 'DESC']);
 
-
-        
 
         if (in_array("ROLE_ADMIN", $roleUser)) {
             return $this->render('user/index.html.twig', [
@@ -88,13 +86,13 @@ class UserController extends AbstractController
 
     /**
      * Method student_show
-     *
-     *
      */
     #[Route('backstage/student/{id}', name: 'student_show', methods: ['GET', 'POST']), 
     Security("is_granted('ROLE_ADMIN') and is_granted('ROLE_TEACHER')")]    
-    public function student_show(User $user, File $file, Request $request, FileRepository $fileRepository, UploadService $uploader): Response
+    public function student_show(int $id, User $user, Request $request, FileRepository $fileRepository, UploadService $uploader, LessonRepository $lessonRepository): Response
     {
+
+        //dd($id);
 
         // Note
         $form_note = $this->createForm(UserNoteType::class, $user);
@@ -106,6 +104,12 @@ class UserController extends AbstractController
             $this->addFlash('success', 'La note a été mise à jour');
             return $this->redirectToRoute('student_show', ['id' => $user->getId()], Response::HTTP_SEE_OTHER);
         }
+
+        // Cours
+        $time = new \DateTime('now', new DateTimeZone('Europe/Paris'));
+        $lessons = $lessonRepository->findByNextDayUser($time, $user->getId());
+
+
 
         // Documents
         $files = $fileRepository->findAllByUser($user->getId());
@@ -142,6 +146,7 @@ class UserController extends AbstractController
             'form_note' => $form_note,
             'files' => $files,
             'form_file' => $form_file,
+            'lessons' => $lessons,
         ]);
 
     }

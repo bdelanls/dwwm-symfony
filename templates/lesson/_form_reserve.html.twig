@@ -10,13 +10,13 @@
         {{ form_widget(form.hour) }}
         {{ form_errors(form.hour) }}
     </div> #}
-    <div>
+    {# <div>
         <fieldset>
             {{ form_widget(form.valid) }}
             {{ form_label(form.valid) }}
             {{ form_errors(form.valid) }}
         </fieldset>
-    </div>
+    </div> #}
 
     <button class="bt-form">{{ button_label|default('Enregistrer') }}</button>
 {{ form_end(form) }}
