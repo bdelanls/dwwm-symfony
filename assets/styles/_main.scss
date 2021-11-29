@@ -467,7 +467,7 @@ section.admin{
             background-color: inherit;
             flex-direction: row;
             justify-content: space-between;
-            align-items: center;
+            align-items: end;
             width: 100%;
 
         }
@@ -575,6 +575,21 @@ section.admin{
             margin-top: 2em;
         }
 
+        &.block-option{
+            border-top: em(2) solid $beige;
+            margin-top: em(64);
+
+            h4{
+                margin: em(-16) auto em(16) auto;
+                display: block;
+                width: max-content;
+                background-color: $beige;
+                padding: em(2) em(10);
+                //border: em(2) solid $beige;
+                color: $blanc;
+            }
+        }
+
         &.boutons{
             display: flex;
             flex-flow: row wrap;
@@ -591,6 +606,7 @@ section.admin{
 
         .ws{white-space:nowrap;}
         .w100{width: 100%;}
+        .td-soustitre{text-align: center !important; color: $shadow; background-color: rgba($beige, .3);}
 
         tr{
             border-bottom: 1px solid #aaa;
@@ -740,9 +756,120 @@ section.admin{
         }
     }
 
+    // agenda
+    table.agenda{
+
+        tr{
+            td:first-child{
+                padding-right: em(10);
+            }
+
+            &.fond-we{
+                background-color: #eee;
+            }
+        }
+        ul{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: em(5);
+
+            li{
+                border: 1px solid #ccc;
+                border-radius: em(5);
+                padding: .2em .5em;
+                line-height: 1em;
+                display: flex;
+                color: #ccc;
+
+                a{color: #ccc; line-height: initial;}
+                a:hover{text-decoration: none;}
+
+                &.active{
+                    background-color: #aaa;
+                    border-color: #aaa;
+                    transition: .2s;
+
+                    a{color: $blanc;}
+
+                    &:hover{background-color: #bbb; cursor: pointer;}
+                }
+                &.valid{
+                    background-color: $vert;
+                    border-color: $vert;
+                    transition: .2s;
+
+                    a{color: $blanc;}
+
+                    &:hover{background-color: #03bd03; cursor: pointer;}
+                }
+                &.reserve{
+                    background-color: $rouge;
+                    border-color: $rouge;
+                    transition: .2s;
+
+                    a{color: $blanc;}
+
+                    &:hover{background-color: rgba(187, 0, 0, 0.7); cursor: pointer;}
+                }
+
+                button{
+                    border: none;
+                    background: none;
+                    padding: 0;
+                    margin: 0;
+                    font-size: rem(16);
+                    color: #ccc;
+                    font-family: $roboto;
+
+                    &:hover{
+                        cursor: pointer;
+                        color: #aaa;
+                    }
+                    
+
+                }
+
+
+
+            }
+        }
+    }
+
+    fieldset.disabled{
+        input[type='checkbox']{
+            background-color: #eee;
+        }
+        label{
+            color: #ccc;
+        }
+        
+        
+    }
+
 
 
 }  
+
+// nav agenda
+nav.mois{
+    svg{
+        width: rem(32);
+        height: rem(32);
+        color: rgba(255, 255, 255, 0.7);
+        transition: .2s;
+
+        &:hover{
+            color: #fff;
+        }
+    }
+
+    a{
+        text-decoration: none;
+    }
+
+}
+
 
 .table{
     display: flex;

@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Lesson index{% endblock %}
+
+{% block main %}
+
+	<section class="admin">
+		<div class="col1">
+			<nav class="admin-nav">
+				{% include "partial/_menuBackstage.html.twig" %}
+			</nav>
+			<div class="info">
+				<p class="readmore">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quos deleniti sequi
+                rerum velit dignissimos quo, beatae hic architecto earum dicta. Ipsa, iste. Fugit, placeat atque
+                nemo iure praesentium officia nisi quae esse consequatur fugit ab facilis unde facere impedit
+                aperiam</p>
+
+			</div>
+		</div>
+		<div class="col2">
+			<div class="title">
+				<h3>
+					Cours
+				</h3>
+			</div>
+			<div class="admin-panel">
+
+				<section>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Date</th>
+                                <th>Hour</th>
+                                <th>Booked_on</th>
+                                <th>Valid</th>
+                                <th>actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for lesson in lessons %}
+                            <tr>
+                                <td>{{ lesson.id }}</td>
+                                <td>{{ lesson.date ? lesson.date|date('Y-m-d H:i:s') : '' }}</td>
+                                <td>{{ lesson.hour }}</td>
+                                <td>{{ lesson.bookedOn ? lesson.bookedOn|date('Y-m-d H:i:s') : '' }}</td>
+                                <td>{{ lesson.valid ? 'Yes' : 'No' }}</td>
+                                <td>
+                                    <a href="{{ path('lesson_show', {'id': lesson.id}) }}">show</a>
+                                    <a href="{{ path('lesson_edit', {'id': lesson.id}) }}">edit</a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="6">no records found</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+				</section>
+
+				<section>
+				</section>
+
+
+			</div>
+		</div>
+
+
+
+
+
+
+    <a href="{{ path('lesson_new') }}">Create new</a>
+{% endblock %}

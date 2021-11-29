@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Lesson{% endblock %}
+
+{% block main %}
+
+	<section class="admin">
+		<div class="col1">
+			<nav class="admin-nav">
+				{% include "partial/_menuBackstage.html.twig" %}
+			</nav>
+			<div class="info">
+				<p class="readmore">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quos deleniti sequi
+                rerum velit dignissimos quo, beatae hic architecto earum dicta. Ipsa, iste. Fugit, placeat atque
+                nemo iure praesentium officia nisi quae esse consequatur fugit ab facilis unde facere impedit
+                aperiam</p>
+
+			</div>
+		</div>
+		<div class="col2">
+			<div class="title">
+				<h3>
+					Cours du {{ lesson.date|date("j M\\. Y", "Europe/paris") }}
+				</h3>
+			</div>
+			<div class="admin-panel">
+
+				<section>
+					<p>Je réserve le cours</p>
+					<p>du {{ lesson.date|date("j M\\. Y", "Europe/paris") }} à {{ lesson.hour }} h.</p>
+				</section>
+
+				<section>
+				 	{{ include('lesson/_form_reserve.html.twig', {'button_label': 'Réserver'}) }}
+				</section>
+				
+
+
+
+			</div>
+		</div>
+
+
+{% endblock %}

@@ -1,0 +1,6 @@
+<form method="post" action="{{ path('hour_new') }}" onsubmit="return confirm('Êtes-vous sur de vouloir ajouter ce cours ?');">
+    <input type="hidden" name="token" value="{{ csrf_token('new-hour') }}">
+    <input type="hidden" name="date" value="{{ date }}">
+    <input type="hidden" name="hour" value="{{ h }}">
+    <button class="">{{ h }}</button>
+</form>

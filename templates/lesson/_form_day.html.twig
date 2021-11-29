@@ -1,0 +1,133 @@
+{{ form_start(form) }}
+
+    {# <div class="row">
+        {{ form_label(form.date) }}
+        {{ form_widget(form.date, {'attr': {'value': arrLesson.date}}) }}
+        {{ form_errors(form.date) }}
+    </div> #}
+    <div class="row">
+        <fieldset {{ arrLesson.h8 == true ? 'class="disabled"' }}>
+            {% if arrLesson.h8 == true %}
+                {{ form_widget(form.h8, {'attr': {'checked': '', 'disabled': ''}}) }}
+            {% else %}
+                {{ form_widget(form.h8) }}
+            {% endif %}
+            {{ form_label(form.h8) }}
+            {{ form_errors(form.h8) }}
+        </fieldset>
+        <fieldset {{ arrLesson.h9 == true ? 'class="disabled"' }}>
+            {% if arrLesson.h9 == true %}
+                {{ form_widget(form.h9, {'attr': {'checked': '', 'disabled': ''}}) }}
+            {% else %}
+                {{ form_widget(form.h9) }}
+            {% endif %}
+            {{ form_label(form.h9) }}
+            {{ form_errors(form.h9) }}
+        </fieldset>
+        <fieldset {{ arrLesson.h10 == true ? 'class="disabled"' }}>
+            {% if arrLesson.h10 == true %}
+                {{ form_widget(form.h10, {'attr': {'checked': '', 'disabled': ''}}) }}
+            {% else %}
+                {{ form_widget(form.h10) }}
+            {% endif %}
+            {{ form_label(form.h10) }}
+            {{ form_errors(form.h10) }}
+        </fieldset>
+        <fieldset {{ arrLesson.h11 == true ? 'class="disabled"' }}>
+            {% if arrLesson.h11 == true %}
+                {{ form_widget(form.h11, {'attr': {'checked': '', 'disabled': ''}}) }}
+            {% else %}
+                {{ form_widget(form.h11) }}
+            {% endif %}
+            {{ form_label(form.h11) }}
+            {{ form_errors(form.h11) }}
+        </fieldset>
+        <fieldset {{ arrLesson.h12 == true ? 'class="disabled"' }}>
+            {% if arrLesson.h12 == true %}
+                {{ form_widget(form.h12, {'attr': {'checked': '', 'disabled': ''}}) }}
+            {% else %}
+                {{ form_widget(form.h12) }}
+            {% endif %}
+            {{ form_label(form.h12) }}
+            {{ form_errors(form.h12) }}
+        </fieldset>
+        <fieldset {{ arrLesson.h13 == true ? 'class="disabled"' }}>
+            {% if arrLesson.h13 == true %}
+                {{ form_widget(form.h13, {'attr': {'checked': '', 'disabled': ''}}) }}
+            {% else %}
+                {{ form_widget(form.h13) }}
+            {% endif %}
+            {{ form_label(form.h13) }}
+            {{ form_errors(form.h13) }}
+        </fieldset>
+        <fieldset {{ arrLesson.h14 == true ? 'class="disabled"' }}>
+            {% if arrLesson.h14 == true %}
+                {{ form_widget(form.h14, {'attr': {'checked': '', 'disabled': ''}}) }}
+            {% else %}
+                {{ form_widget(form.h14) }}
+            {% endif %}
+            {{ form_label(form.h14) }}
+            {{ form_errors(form.h14) }}
+        </fieldset>
+        <fieldset {{ arrLesson.h15 == true ? 'class="disabled"' }}>
+            {% if arrLesson.h15 == true %}
+                {{ form_widget(form.h15, {'attr': {'checked': '', 'disabled': ''}}) }}
+            {% else %}
+                {{ form_widget(form.h15) }}
+            {% endif %}
+            {{ form_label(form.h15) }}
+            {{ form_errors(form.h15) }}
+        </fieldset>
+        <fieldset {{ arrLesson.h16 == true ? 'class="disabled"' }}>
+            {% if arrLesson.h16 == true %}
+                {{ form_widget(form.h16, {'attr': {'checked': '', 'disabled': ''}}) }}
+            {% else %}
+                {{ form_widget(form.h16) }}
+            {% endif %}
+            {{ form_label(form.h16) }}
+            {{ form_errors(form.h16) }}
+        </fieldset>
+        <fieldset {{ arrLesson.h17 == true ? 'class="disabled"' }}>
+            {% if arrLesson.h17 == true %}
+                {{ form_widget(form.h17, {'attr': {'checked': '', 'disabled': ''}}) }}
+            {% else %}
+                {{ form_widget(form.h17) }}
+            {% endif %}
+            {{ form_label(form.h17) }}
+            {{ form_errors(form.h17) }}
+        </fieldset>
+        <fieldset {{ arrLesson.h18 == true ? 'class="disabled"' }}>
+            {% if arrLesson.h18 == true %}
+                {{ form_widget(form.h18, {'attr': {'checked': '', 'disabled': ''}}) }}
+            {% else %}
+                {{ form_widget(form.h18) }}
+            {% endif %}
+            {{ form_label(form.h18) }}
+            {{ form_errors(form.h18) }}
+        </fieldset>
+        <fieldset {{ arrLesson.h19 == true ? 'class="disabled"' }}>
+            {% if arrLesson.h19 == true %}
+                {{ form_widget(form.h19, {'attr': {'checked': '', 'disabled': ''}}) }}
+            {% else %}
+                {{ form_widget(form.h19) }}
+            {% endif %}
+            {{ form_label(form.h19) }}
+            {{ form_errors(form.h19) }}
+        </fieldset>
+        <fieldset {{ arrLesson.h20 == true ? 'class="disabled"' }}>
+            {% if arrLesson.h20 == true %}
+                {{ form_widget(form.h20, {'attr': {'checked': '', 'disabled': ''}}) }}
+            {% else %}
+                {{ form_widget(form.h20) }}
+            {% endif %}
+            {{ form_label(form.h20) }}
+            {{ form_errors(form.h20) }}
+        </fieldset>
+
+    </div>
+
+
+
+
+    <button class="bt-form">{{ button_label|default('Enregistrer') }}</button>
+{{ form_end(form) }}

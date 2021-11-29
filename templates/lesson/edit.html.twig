@@ -1,0 +1,89 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Lesson{% endblock %}
+
+{% block main %}
+
+	<section class="admin">
+		<div class="col1">
+			<nav class="admin-nav">
+				{% include "partial/_menuBackstage.html.twig" %}
+			</nav>
+			<div class="info">
+				<p class="readmore">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quos deleniti sequi
+                rerum velit dignissimos quo, beatae hic architecto earum dicta. Ipsa, iste. Fugit, placeat atque
+                nemo iure praesentium officia nisi quae esse consequatur fugit ab facilis unde facere impedit
+                aperiam</p>
+
+			</div>
+		</div>
+		<div class="col2">
+			<div class="title">
+				<h3>
+					Cours du {{ lesson.date|date("j M\\. Y", "Europe/paris") }}
+				</h3>
+			</div>
+			<div class="admin-panel">
+
+				<section>
+					<p><b>Le cours du {{ lesson.date|date("j M\\. Y", "Europe/paris") }} à {{ lesson.hour }} h. 
+					{% if lesson.valid != null %}
+						est validé.
+					{% else %}
+						n'est pas encore validé !
+					{% endif %}
+					</b></p>
+
+					{% if lesson.user != null %}
+						
+						{% if is_granted("ROLE_STUDENT") != true %}
+							<p>avec {{ lesson.user.firstname }} {{ lesson.user.lastname }}</p>
+						{% endif %}
+						<p>Réservé le {{ lesson.bookedOn|date("j M\\. Y", "Europe/paris") }}</p>
+						
+						{% if is_granted("ROLE_STUDENT") != true %}
+                        	{{ include('lesson/_form.html.twig', {'button_label': 'Enregistrer'}) }}
+						{% endif %}
+
+					{% endif %}	
+
+                        {# <a href="{{ path('lesson_index') }}">back to list</a> #}
+				</section>
+				<section>
+
+					{% if is_granted("ROLE_STUDENT") == true %}
+						{% if lesson.date|date('d-m-Y') > "now"|date_modify('+2 day')|date('d-m-Y') %}
+							
+							{{ include('lesson/_cancel_form.html.twig') }}
+						{% else %}
+							<p>Le délais est trop court pour annuler le cours.</p>
+							<p>Pour le faire, vous devez contacter Guy Taracoustik soit par téléphone, soit par le <a href="#">formulaire de contact</a>.</p>
+							
+						{% endif %}
+					{% else %}
+						{% if lesson.user is not null %}
+							{{ include('lesson/_cancel_form.html.twig') }}
+						{% endif %}
+						
+					{% endif %}
+						
+						
+
+
+
+					{% if is_granted("ROLE_STUDENT") != true %}
+						{% if lesson.valid != 1 %}
+							{{ include('lesson/_delete_form.html.twig') }}
+						{% endif %}
+					{% endif %}
+
+					
+				</section>
+
+
+
+			</div>
+		</div>
+
+
+{% endblock %}

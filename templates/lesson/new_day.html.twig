@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Lesson{% endblock %}
+
+{% block main %}
+
+	<section class="admin">
+		<div class="col1">
+			<nav class="admin-nav">
+				{% include "partial/_menuBackstage.html.twig" %}
+			</nav>
+			<div class="info">
+				<p class="readmore">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quos deleniti sequi
+                rerum velit dignissimos quo, beatae hic architecto earum dicta. Ipsa, iste. Fugit, placeat atque
+                nemo iure praesentium officia nisi quae esse consequatur fugit ab facilis unde facere impedit
+                aperiam</p>
+
+			</div>
+		</div>
+		<div class="col2">
+			<div class="title">
+				<h3>
+					Heures de cours
+				</h3>
+			</div>
+			<div class="admin-panel">
+				<section>
+					<h4>Cours disponibles pour le {{ lesson.date|date("j M Y", "Europe/paris") }}</h4>
+				</section>
+
+				<section>
+					
+                    {{ include('lesson/_form_day.html.twig') }}
+				</section>
+
+
+
+
+			</div>
+		</div>
+
+
+	</section>
+
+
+
+    
+
+    
+{% endblock %}

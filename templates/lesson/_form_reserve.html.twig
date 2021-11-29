@@ -1,0 +1,22 @@
+{{ form_start(form) }}
+    {# {{ form_widget(form) }} #}
+    {# <div class="row">
+        {{ form_label(form.date) }}
+        {{ form_widget(form.date) }}
+        {{ form_errors(form.date) }}
+    </div>
+    <div class="row">
+        {{ form_label(form.hour) }}
+        {{ form_widget(form.hour) }}
+        {{ form_errors(form.hour) }}
+    </div> #}
+    {# <div>
+        <fieldset>
+            {{ form_widget(form.valid) }}
+            {{ form_label(form.valid) }}
+            {{ form_errors(form.valid) }}
+        </fieldset>
+    </div> #}
+
+    <button class="bt-form">{{ button_label|default('Enregistrer') }}</button>
+{{ form_end(form) }}

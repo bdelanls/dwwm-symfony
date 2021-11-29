@@ -60,7 +60,7 @@
                             </tr>
                             <tr>
                                 <td class="ws">Anniversaire :</td>
-                                <td>{{ user.birthday }}</td>
+                                <td>{{ user.birthday ? user.birthday|date('d/m/Y') : '' }}</td>
                                 <td></td>
                             </tr>
                             <tr>

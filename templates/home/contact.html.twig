@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Guy Taracoustik - Guitariste{% endblock %}
+
+{% block main %}
+
+
+    <section>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab at ipsum voluptates quaerat molestias obcaecati tempora consectetur quisquam omnis harum. Nemo non autem at ab aperiam officiis minus earum ipsum, voluptates accusantium eius quae esse corrupti accusamus dolorum magni, atque iure ullam, cupiditate dignissimos inventore odio repellendus. Adipisci, quisquam.</p>
+       
+        {{ form_start(form) }}
+
+            {{ form_label(form.firstname) }}
+            {{ form_widget(form.firstname) }}
+            {{ form_errors(form.firstname) }}
+
+            {{ form_label(form.lastname) }}
+            {{ form_widget(form.lastname) }}
+            {{ form_errors(form.lastname) }}
+
+            {{ form_label(form.email) }}
+            {{ form_widget(form.email) }}
+            {{ form_errors(form.email) }}
+
+            {{ form_label(form.message) }}
+            {{ form_widget(form.message) }}
+            {{ form_errors(form.message) }}
+
+            <fieldset>
+                {{ form_widget(form.agreeTerms) }}
+                {{ form_label(form.agreeTerms) }}
+                {{ form_errors(form.agreeTerms) }}
+            </fieldset>
+        
+        
+         <input type="submit" value="Enregistrer">
+
+        {{ form_end(form) }}
+    </section>   
+
+
+{% endblock %}

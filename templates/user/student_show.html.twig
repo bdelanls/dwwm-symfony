@@ -80,7 +80,8 @@
 						{{ user.addedDate ? user.updateDate|date('d/m/Y') : '' }}</p>
 				</section>
 
-				<section>
+				<section class="block-option">
+					<h4>Informations</h4>
 					<table class="tab2col">
 						<tr>
 							<td class="ws">Email :</td>
@@ -96,7 +97,7 @@
 						</tr>
 						<tr>
 							<td class="ws">Anniversaire :</td>
-							<td>{{ user.birthday }}</td>
+							<td>{{ user.birthday ? user.birthday|date('d/m/Y') : '' }}</td>
 							<td></td>
 						</tr>
 						<tr>
@@ -122,7 +123,7 @@
 					</table>
 				</section>
 
-				<section class="line-top">
+				<section class="block-option">
 					<h4>Note</h4>
 					<a onclick="animNote('pencil')" class="bt-note-pencil active">
 						<svg class="">
@@ -146,12 +147,77 @@
 
 				</section>
 
-				<section class="line-top">
-					<h4>Cours</h4>
+				<section class="block-option">
+					<h4>Cours à venir</h4>
+
+					<table class="tab2col">
+                            <tr>
+                                <th>Valid</th>
+                                <th>Date</th>
+                                <th>Heure</th>
+                                
+                                <th class=""></th>
+                            </tr>
+
+                        {% set mois = '' %}    
+                        {% for lesson in lessons %}
+                            
+                            
+                            {% if mois != lesson.date|date("m-Y") %}
+                                <tr>
+                                    <td colspan="5" class="td-soustitre">
+                                        {{ lesson.date|date("M\\. Y") }}
+                                    </td>
+                                </tr>
+                                {% set mois = lesson.date|date("m-Y") %}
+                            {% endif %}
+
+                            
+                            
+
+                            <tr>
+                                <td>
+                                    <svg>
+										{% if lesson.valid == true %}
+											<title>Cours validé</title>
+											<use xlink:href="/img/icons.svg#check">
+                                        {% else %}
+                                            <title>En attente de validation</title>
+                                            <use xlink:href="/img/icons.svg#clock"></use>
+                                        {% endif %}
+                                    </svg>
+                                </td>
+                                <td>{{ lesson.date ? lesson.date|date('d-m-Y') : '' }}</td>
+                                <td>{{ lesson.hour }} h.</td>
+
+                                 
+
+                                <td class="ws">
+                                    {% if is_granted("ROLE_STUDENT") == true %}
+                                        {% if lesson.date|date('d-m-Y') > "now"|date_modify('+1 day')|date('d-m-Y') %}
+                                            
+                                            <a class="bt-tab" href="">Annuler le cours</a>
+                                        {% else %}
+                                            <a href="">Contacter le prof</a> 
+                                        {% endif %}
+                                        
+                                    {% else %}
+                                        <a class="bt-tab" href="{{ path('lesson_show', {'id': lesson.id}) }}">Voir</a>
+                                        <a class="bt-tab" href="{{ path('lesson_edit', {'id': lesson.id}) }}">Éditer</a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="6">Aucun cours !</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+
 
 				</section>
 
-				<section class="line-top">
+				<section class="block-option">
 					<h4>Documents</h4>
 					<a onclick="btFile()" class="" id="bt-plus">
 						<svg class="">
@@ -188,7 +254,7 @@
 
 						{% else %}
 							<tr>
-								<td>Aucun Document !</td>
+								<td class="ws">Aucun Document !</td>
 								<td></td>
 							</tr>
 						{% endfor %}
@@ -196,7 +262,6 @@
 
 				</section>
 				<section class="" id="form-file-user">
-					{# formulaire #}
 					{{ include('file/_form_file_user.html.twig') }}
 
 				</section>
