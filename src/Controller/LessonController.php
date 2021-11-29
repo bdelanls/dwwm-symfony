@@ -7,15 +7,19 @@ use DateTimeZone;
 use App\Entity\User;
 use ReflectionClass;
 use App\Entity\Lesson;
+use App\Service\Mailer;
 use App\Form\LessonType;
 use App\Entity\LessonDay;
 use App\Form\LessonDayType;
 use App\Form\LessonReserveType;
 use App\Service\CalendarService;
 use App\Service\FunctionService;
-use App\Repository\LessonRepository;
 use App\Repository\UserRepository;
+use Symfony\Component\Mime\Address;
+use App\Repository\LessonRepository;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -34,8 +38,12 @@ class LessonController extends AbstractController
 
         if (in_array("ROLE_STUDENT", $role)){
             $lessons = $lessonRepository->findByNextDayUser($time, $curentUser->getId());
-        }else{
+        }else if (in_array("ROLE_TEACHER", $role) || in_array("ROLE_ADMIN", $role)){
             $lessons = $lessonRepository->findByNextDay($time);
+        }else{
+            return $this->render('user/show.html.twig', [
+                'user' => $curentUser,
+            ]);
         }
 
 
@@ -248,7 +256,7 @@ class LessonController extends AbstractController
      * Reservation d'un cours
      */
     #[Route('/{id}/reservation', name: 'reserve_edit', methods: ['GET','POST'])]
-    public function reserve(Request $request, Lesson $lesson): Response
+    public function reserve(Request $request, Lesson $lesson, Mailer $mailer): Response
     {
         $form = $this->createForm(LessonReserveType::class, $lesson);
         $form->handleRequest($request);
@@ -263,6 +271,14 @@ class LessonController extends AbstractController
 
             $this->getDoctrine()->getManager()->flush();
 
+            // Envoi d'un mail
+            $to = '';
+            $subject = "Un cours vient d'être réservé";
+            $date = $lesson->getDate();
+            $student = $user;
+            $tmp = 'email_reservation.html.twig';
+            $mailer->envoiEmail($to , $subject, $date, $student, $tmp);
+
             $this->addFlash('success', 'La réservation a été enregistré');
             return $this->redirectToRoute('lesson_agenda_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -274,9 +290,11 @@ class LessonController extends AbstractController
     }
 
 
-
+    /**
+     * Validation d'un cours
+     */
     #[Route('/{id}/edit', name: 'lesson_edit', methods: ['GET','POST'])]
-    public function edit(Request $request, Lesson $lesson): Response
+    public function edit(Request $request, Lesson $lesson, Mailer $mailer): Response
     {
         $form = $this->createForm(LessonType::class, $lesson);
         $form->handleRequest($request);
@@ -284,7 +302,22 @@ class LessonController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            $this->addFlash('success', 'Le cours a été validé');
+            $user = $this->getUser();
+
+            // Envoi d'un mail si valid
+            if ($lesson->getValid()){
+            
+                $to = $lesson->getUser()->getEmail();
+                $subject = "Un cours vient d'être validé";
+                $date = $lesson->getDate();
+                $student = $lesson->getUser();    
+                $tmp = 'email_validation.html.twig';
+                $mailer->envoiEmail($to , $subject, $date, $student, $tmp);
+
+                $this->addFlash('success', 'Le cours a été validé');
+            }else{
+                $this->addFlash('success', 'Le cours n\'est plus validé ! Vous devez prévenir ' . $lesson->getUser()->getFirstname() . ' ' . $lesson->getUser()->getLastname());
+            }
             return $this->redirectToRoute('lesson_agenda_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -293,6 +326,32 @@ class LessonController extends AbstractController
             'form' => $form,
         ]);
     }
+
+    /**
+     * Envoi de mail
+     */
+    // #[Route('/{id}/mail', name: 'lesson_mail', methods: ['POST'])]
+    // public function mail(Request $request, Lesson $lesson, MailerInterface $mailer): Response
+    // {
+
+    //     $user = $this->getUser();
+
+    //     $email = (new TemplatedEmail())
+    //         ->from(new Address('no-reply@bdelanls.fr', 'no-reply'))
+    //         ->to($user->getEmail())
+    //         ->subject('Sujet')
+    //         ->htmlTemplate('email.html.twig')
+    //     ;
+
+
+
+    //     $mailer->send($email);
+
+       
+
+    //     return $this->redirectToRoute('', [], Response::HTTP_SEE_OTHER);
+    // }
+
 
     /**
      * Annulation d'un cours

@@ -23,21 +23,27 @@
 			</div>
 			<div class="admin-panel">
 				<section>
-						{{ include('user/_form.html.twig') }}
+						{{ include('user/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
 				</section>
 
-                <section class="line-top">
+                <section class="block-option">
                     <h4>Mot de passe</h4>
-                    <a class="bt-form" href="{{ path('app_reset_mdp') }}">Modifier mon mot de passe</a>
+					<p>Par sécurité, il est fortement recommandé de modifier son mot de passe régulièrement.</p>
+                    <a class="bt-form" href="{{ path('app_reset_mdp') }}">Modifier le mot de passe</a>
                 </section>
+				
 				{% if is_granted("ROLE_ADMIN") == true %}
-				<section class="line-top">
+				<section class="block-option">
 					<h4>Rôles du compte</h4>
 					{{ include('user/_form_role.html.twig') }}
 				</section>
+				{% endif %}
 
-				<section class="line-top">
+				{% if is_granted("ROLE_ADMIN") == true  or app.user.id == user.id and is_granted("ROLE_TEACHER") == false %}
+				<section class="block-option">
 					<h4>Supprimer le compte</h4>
+					<p>Cela implique la suppression de toutes les données vous concernant.</p>
+					<p>Il sera impossible de le faire vous même si un ou des cours sont prévus dans les 48h. Contacter le professeur qui annulera vos cours et supprimera votre compte.</p>
 					{{ include('user/_delete_form.html.twig') }}
 				</section>
 				{% endif %}

@@ -575,6 +575,21 @@ section.admin{
             margin-top: 2em;
         }
 
+        &.block-option{
+            border-top: em(2) solid $beige;
+            margin-top: em(64);
+
+            h4{
+                margin: em(-16) auto em(16) auto;
+                display: block;
+                width: max-content;
+                background-color: $beige;
+                padding: em(2) em(10);
+                //border: em(2) solid $beige;
+                color: $blanc;
+            }
+        }
+
         &.boutons{
             display: flex;
             flex-flow: row wrap;
