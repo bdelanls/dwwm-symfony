@@ -1,0 +1,29 @@
+
+<div style="font-family: Arial;">
+
+<p><a href="mailto:{{ student.email }}">{{ student.firstname }} {{ student.lastname }}</a> souhaite supprimer son compte !</p> 
+
+<p>Cours annulés :</p>
+<ul>
+{% for lessonDelete in lessonsDelete %}
+    <li>Le {{ lessonDelete.date|date('d-m-Y') }} à {{ lessonDelete.hour }} h.</li>
+{% else %}
+    <li>Aucun cours</li>
+{% endfor %}
+</ul>
+
+
+<p>Cours restants :</p>
+<ul>
+{% for lessonNoDelete in lessonsNoDelete %}
+    <li>Le {{ lessonNoDelete.date|date('d-m-Y') }} à {{ lessonNoDelete.hour }} h.</li>
+{% else %}
+    <li>Aucun cours</li>
+{% endfor %}
+</ul>
+
+<p>Le compte n'a pas pu être supprimé car il reste des cours actifs.<br>
+Les anciens cours sont attribués à l'admin.<br>
+L'élève a reçu un mail pour prendre contact.</p>
+
+</div>

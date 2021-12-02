@@ -1,0 +1,19 @@
+
+<div style="font-family: Arial;">
+
+<p><a href="mailto:{{ student.email }}">{{ student.firstname }} {{ student.lastname }}</a> a supprimé son compte !</p> 
+
+<p>Cours annulés :</p>
+<ul>
+{% for lessonDelete in lessonsDelete %}
+    <li>Le {{ lessonDelete.date|date('d-m-Y') }} à {{ lessonDelete.hour }} h.</li>
+{% else %}
+    <li>Aucun cours</li>
+{% endfor %}
+</ul>
+
+<p>Toutes les données de l'élève ont été supprimées et <br>
+les anciens cours sont attribués à l'admin.<br>
+L'élève a reçu un mail de confirmation.</p>
+
+</div>

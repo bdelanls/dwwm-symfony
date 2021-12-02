@@ -86,7 +86,7 @@ class LessonController extends AbstractController
 
         // préparation repository
         $dateDebut = date("$year-$month-01");
-        $dateFin = date("$year-$month-$jours");
+        $dateFin = date("$year-$month-$jours".' 23:59:59.9');
 
         $lessons = $lessonRepository->findByMonth($dateDebut, $dateFin);
         $users = $userRepository->findAll();
@@ -278,9 +278,13 @@ class LessonController extends AbstractController
             $student = $user;
             $tmp = 'email_reservation.html.twig';
             $mailer->envoiEmail($to , $subject, $date, $student, $tmp);
+            
 
             $this->addFlash('success', 'La réservation a été enregistré');
-            return $this->redirectToRoute('lesson_agenda_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('lesson_agenda_index', [
+                'month' => date_format($date, 'm'), 
+                'year' => date_format($date, 'Y')
+            ], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('lesson/reserve.html.twig', [
@@ -318,7 +322,10 @@ class LessonController extends AbstractController
             }else{
                 $this->addFlash('success', 'Le cours n\'est plus validé ! Vous devez prévenir ' . $lesson->getUser()->getFirstname() . ' ' . $lesson->getUser()->getLastname());
             }
-            return $this->redirectToRoute('lesson_agenda_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('lesson_agenda_index', [
+                'month' => date_format($lesson->getDate(), 'm'), 
+                'year' => date_format($lesson->getDate(), 'Y')
+            ], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('lesson/edit.html.twig', [
