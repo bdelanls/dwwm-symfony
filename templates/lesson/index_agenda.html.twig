@@ -4,13 +4,7 @@
 
 {% block main %}
 
-    {# <pre>
-        {{ dump(lessons) }}
-    </pre>  #}
 
-    {# {% for lesson in lessons %} #}
-        {# {{ lessons[16].user.lastname }} #}
-    {# {% endfor %} #}
 
     
 
@@ -133,7 +127,14 @@
 
                                                         {# élève #}
                                                         {% else %}
-                                                            <a href="{{ path('reserve_edit', {'id': lesson.id}) }}" title="Réserver le cours">{{ h }}</a>
+                                                            {% if date(lesson.date) > date('+1days') %}
+                                                                <a href="{{ path('reserve_edit', {'id': lesson.id}) }}" title="Réserver le cours">{{ h }}</a>
+                                                            {% elseif date(lesson.date) >= date('-1days')  and date(lesson.date) <= date('+1days') %}
+                                                                <a title="Impossible de réserver à moins de 24 h.">{{ h }}</a>
+                                                            {% else %}
+                                                                <a title="La date est passée !">{{ h }}</a>
+                                                            {% endif %}
+                                                            
                                                         {% endif %}
                                                     </li>
 

@@ -26,9 +26,33 @@ class Mailer
             ->from(new Address('no-reply@bdelanls.fr', 'no-reply'))
             ->to($to)
             ->subject($subject)
-            ->htmlTemplate('lesson/'.$tmp)
+            ->htmlTemplate('email/'.$tmp)
             ->context([
                 'date' => $date,
+                'student' => $student,
+            ]);
+
+        $this->mailer->send($email);
+
+
+    }
+
+
+    public function envoiEmailDelete(string $to, string $subject, array $lessonsDelete, array $lessonsNoDelete, object $student, string $tmp) {
+
+        if ($to == ''){
+            $to = "guy@taracoustik.fr";
+        }
+
+
+        $email = (new TemplatedEmail())
+            ->from(new Address('no-reply@bdelanls.fr', 'no-reply'))
+            ->to($to)
+            ->subject($subject)
+            ->htmlTemplate('email/'.$tmp)
+            ->context([
+                'lessonsDelete' => $lessonsDelete,
+                'lessonsNoDelete' => $lessonsNoDelete,
                 'student' => $student,
             ]);
 

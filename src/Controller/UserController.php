@@ -14,6 +14,9 @@ use App\Service\UploadService;
 use App\Repository\FileRepository;
 use App\Repository\LessonRepository;
 use App\Repository\UserRepository;
+use App\Service\Mailer;
+use DateInterval;
+use DateTime;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\HttpFoundation\Response;
@@ -190,12 +193,107 @@ class UserController extends AbstractController
 
 
     #[Route('user/{id}', name: 'user_delete', methods: ['POST'])]
-    public function delete(Request $request, User $user): Response
+    public function delete(Request $request, User $user, LessonRepository $lessonRepository, Mailer $mailer, UserRepository $userRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($user);
-            $entityManager->flush();
+
+            $admin = $userRepository->findByRole('ADMIN');
+            
+
+            // on récupère toutes les cours de l'user
+            // $time = new DateTime('now', new DateTimeZone('Europe/Paris'));
+            // $lessons = $lessonRepository->findByNextDayUser($time, $user->getId());
+            $lessons = $lessonRepository->findBy(['user' => $user->getId()], []);
+            
+            $message = "";
+
+           
+
+            if ($lessons){
+
+                $now = new DateTime('now', new DateTimeZone('Europe/Paris'));
+                $afterTomorrow = $now->add(new DateInterval('P2D'));
+
+                $arrLessonsSupp = [];
+                $arrLessonsNonSupp = [];
+            
+                for ($i=0; $i < count($lessons); $i++){
+
+                    if($lessons[$i]->getDate() < $now) {
+
+                        // le cours est attribué à l'admin
+                        $lessons[$i]->setUser($admin[0]);
+
+                    }else if($lessons[$i]->getDate() > $afterTomorrow || $lessons[$i]->getValid() == false ){
+                        $arrLessonsSupp[] = $lessons[$i];
+
+                        $lessons[$i]->setBookedOn(null);
+                        $lessons[$i]->setValid(null);
+                        $lessons[$i]->setUser(null);
+
+                        $this->getDoctrine()->getManager()->flush();
+
+                    }else{
+                        $arrLessonsNonSupp[] = $lessons[$i];
+                    }
+                }
+
+            }
+
+
+            if (isset($arrLessonsNonSupp) && $arrLessonsNonSupp){
+
+                // mail
+                $to = $user->getEmail();
+                $subject = "Suppression de compte";
+                $lessonsDelete = $arrLessonsSupp;
+                $lessonsNoDelete = $arrLessonsNonSupp;
+                $student = $user; 
+                $tmp = 'email_delete_standby.html.twig';
+                // mail à l'élève
+                $mailer->envoiEmailDelete($to , $subject, $lessonsDelete, $lessonsNoDelete, $student, $tmp);
+                // mail au prof
+                $mailer->envoiEmailDelete('' , $subject, $lessonsDelete, $lessonsNoDelete, $student, 'email_delete_standby_teacher.html.twig');
+
+
+                // message
+                if (count($arrLessonsNonSupp) == 1){
+                    $message = "Un cours ne peut pas être annulé. Un mail a été envoyé au professeur pour qu'il annule le cours et supprime votre compte.";
+                }else if (count($arrLessonsNonSupp) > 1) {
+                    $message = "Des cours ne peuvent pas être annulé. Un mail a été envoyé au professeur pour qu'il annule les cours et supprime votre compte.";
+                }
+
+            }else{
+
+                // aucune cours
+
+                //mail
+                $to = $user->getEmail();
+                $subject = "Suppression de compte";
+                $lessonsDelete = [];
+                $lessonsNoDelete = [];
+                $student = $user; 
+                $tmp = 'email_delete.html.twig';
+                // mail à l'élève
+                $mailer->envoiEmailDelete($to , $subject, $lessonsDelete, $lessonsNoDelete, $student, $tmp);
+                // mail au prof
+                $mailer->envoiEmailDelete('' , $subject, $lessonsDelete, $lessonsNoDelete, $student, 'email_delete_teacher.html.twig');
+
+                //message
+                $message = "Votre compte a été supprimé ainsi que toutes les données vous concernant.";
+
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->remove($user);
+                $entityManager->flush();
+
+            }
+
+
+            $this->addFlash('success', $message);
+            return $this->redirectToRoute('home', [], Response::HTTP_SEE_OTHER);
+
+  
+            
         }
 
         return $this->redirectToRoute('user_index', [], Response::HTTP_SEE_OTHER);
