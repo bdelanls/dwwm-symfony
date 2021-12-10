@@ -1,7 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit User
-{% endblock %}
+{% block title %}Édition du profil{% endblock %}
 
 {% block main %}
 	<section class="admin">
@@ -43,7 +42,7 @@
 				<section class="block-option">
 					<h4>Supprimer le compte</h4>
 					<p>Cela implique la suppression de toutes les données vous concernant.</p>
-					<p>Il sera impossible de le faire vous même si un ou des cours sont prévus dans les 48h. Contacter le professeur qui annulera vos cours et supprimera votre compte.</p>
+					<p>Il est impossible de le faire vous même si un ou des cours sont prévus dans les 48h. Contacter le professeur qui annulera vos cours et supprimera votre compte.</p>
 					{{ include('user/_delete_form.html.twig') }}
 				</section>
 				{% endif %}

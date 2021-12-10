@@ -1,8 +1,10 @@
 <ul>
 	{% if is_granted("ROLE_TEACHER") == true %}
 		{# users #}
-		<li>
-			<a href="{{ path('user_index') }}" {% if app.request.attributes.get('_route') == 'user_index' or app.request.attributes.get('_route') == 'student_show'%} class="active" {% endif %}>
+		<li {% if app.request.attributes.get('_route') == 'user_index' 
+			or app.request.attributes.get('_route') == 'student_show'
+			%} class="active" {% endif %}>
+			<a href="{{ path('user_index') }}">
 				<svg>
 					<title>{% if is_granted("ROLE_ADMIN") == true %} Utilisateurs {% else %} Élèves {% endif %}</title>
 					<use xlink:href="/img/icons.svg#eleves"></use>
@@ -14,12 +16,11 @@
 
 	{% if is_granted("ROLE_TEACHER") == true or is_granted("ROLE_STUDENT") == true %}
 		{# Cours #}
-		<li>
-			<a href="{{ path('lesson_index') }}" {% if	app.request.attributes.get('_route') == 'lesson_index' or 
-														app.request.attributes.get('_route') == 'lesson_new' or 
-														app.request.attributes.get('_route') == 'lesson_edit' or
-														app.request.attributes.get('_route') == 'lesson_show' %} 
-														class="active" {% endif %}>
+		<li {% if	app.request.attributes.get('_route') == 'lesson_index' or 
+					app.request.attributes.get('_route') == 'lesson_new' or 
+					app.request.attributes.get('_route') == 'lesson_show' %} 
+					class="active" {% endif %}>
+			<a href="{{ path('lesson_index') }}">
 				<svg>
 					<title>Cours</title>
 					<use xlink:href="/img/icons.svg#guitar"></use>
@@ -28,10 +29,12 @@
 			</a>
 		</li>
 		{# Agenda #}
-		<li>
-			<a href="{{ path('lesson_agenda_index') }}" {% if 	app.request.attributes.get('_route') == 'lesson_agenda_index' or 
-																app.request.attributes.get('_route') == 'lesson_new_day' %} 
-																class="active" {% endif %}>
+		<li {% if app.request.attributes.get('_route') == 'lesson_agenda_index' 
+				or app.request.attributes.get('_route') == 'lesson_new_day' 
+				or app.request.attributes.get('_route') == 'reserve_edit'
+				or app.request.attributes.get('_route') == 'lesson_edit'
+				%} class="active" {% endif %}>
+			<a href="{{ path('lesson_agenda_index') }}">
 				<svg>
 					<title>Agenda</title>
 					<use xlink:href="/img/icons.svg#agenda"></use>
@@ -42,7 +45,7 @@
 	{% endif %}	
 
 	{% if is_granted("ROLE_TEACHER") == true %}
-		{# documents #}
+		{# documents for teacher #}
 		<li>
 			<a href="{{ path('file_index') }}" {% if app.request.attributes.get('_route') == 'file_index' or app.request.attributes.get('_route') == 'file_new' %} class="active" {% endif %}>
 				<svg>
@@ -64,9 +67,10 @@
 		</li>
 	{% endif %}
 
-	{% if is_granted("ROLE_STUDENT") == true %}
-		<li>
-			<a href="{{ path('file_index_student') }}" {% if app.request.attributes.get('_route') == 'file_index_student' %} class="active" {% endif %}>
+	{% if is_granted("ROLE_TEACHER") != true %}
+		{# documents for students #}
+		<li {% if app.request.attributes.get('_route') == 'file_index_student' %} class="active" {% endif %}>
+			<a href="{{ path('file_index_student') }}">
 				<svg>
 					<title>Documents</title>
 					<use xlink:href="/img/icons.svg#doc"></use>
@@ -76,9 +80,11 @@
 		</li>
 	{% endif %}
 
-	{# Pour tous #}
-	<li>
-		<a href="{{ path('user_show', {'id': app.user.id}) }}" {% if app.request.attributes.get('_route') == 'user_show' %} class="active" {% endif %}>
+	{# For all #}
+	<li {% if app.request.attributes.get('_route') == 'user_show' 
+		or app.request.attributes.get('_route') == 'user_edit' 
+		%} class="active" {% endif %}>
+		<a href="{{ path('user_show', {'id': app.user.id}) }}">
 			<svg>
 				<title>Profil</title>
 				<use xlink:href="/img/icons.svg#user"></use>
