@@ -46,10 +46,12 @@ class ArticleEditType extends AbstractType
             ->add('is_active', CheckboxType::class, [
                 'label' => "Visible",
                 'required' => false,
+                'attr' => ['class' => 'check-input'],
             ])
             ->add('promote', CheckboxType::class, [
                 'label' => "Mise en avant",
                 'required' => false,
+                'attr' => ['class' => 'check-input'],
             ])
             ->add('photo_path', FileType::class, [
                 'mapped' => false,

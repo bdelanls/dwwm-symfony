@@ -14,18 +14,11 @@ class LessonType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-        // ->add('date', DateType::class, [
-        //     'label' => "Date",
-        //     'widget' => "single_text",
-        // ])
-        
-        // ->add('hour')
-        // ->add('booked_on')
         ->add('valid', CheckboxType::class, [
             'label' => "Validé",
             'required' => false,
+            'attr' => ['class' => 'check-input'],
         ])
-        // ->add('user')
         ;
     }
 

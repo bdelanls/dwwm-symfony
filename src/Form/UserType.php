@@ -24,7 +24,7 @@ class UserType extends AbstractType
     {
         $builder
             ->add('firstname', TextType::class, [
-                'label' => "Prénom :",
+                'label' => "Prénom* :",
                 'required' => true,
                 'constraints' => [
                     new NotBlank([
@@ -33,7 +33,7 @@ class UserType extends AbstractType
                 ],
             ])
             ->add('lastname', TextType::class, [
-                'label' => "Nom :",
+                'label' => "Nom* :",
                 'required' => true,
                 'constraints' => [
                     new NotBlank([
@@ -42,7 +42,7 @@ class UserType extends AbstractType
                 ],
             ])
             ->add('email', EmailType::class, [
-                'label' => "E-mail :",
+                'label' => "E-mail* :",
                 'required' => true,
                 'constraints' => [
                     new NotBlank([
@@ -54,7 +54,7 @@ class UserType extends AbstractType
                 ],
             ])
             ->add('phone', TextType::class, [
-                'label' => "Téléphone :",
+                'label' => "Téléphone* :",
                 'required' => true,
                 'constraints' => [
                     new NotBlank([

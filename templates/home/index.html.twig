@@ -2,6 +2,11 @@
 
 {% block title %}Guy Taracoustik - Guitariste{% endblock %}
 
+{% block meta_description %}
+    Guitariste et professeur de guitare classique au conservatoire de Paris. 
+    Donne des cours particulier à des amateurs avancés ou professionnels.
+{% endblock %}
+
 {% block main %}
 
 
@@ -13,7 +18,7 @@
                 <div class="intro-cours">
                     <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Maiores vitae tempora eveniet praesentium! Neque asperiores, modi molestias eligendi id, provident ab nostrum, dicta facilis animi commodi numquam nemo quos saepe.
                     Id, quam. Quidem fugit cum vero deserunt consectetur eos. Facilis magni ipsum numquam assumenda doloremque accusamus nobis? Quam officiis, earum dolorum pariatur quos, vitae mollitia non illo, nemo voluptatibus aspernatur!</p>
-                    <a href="#" class="bt">En savoir plus</a>
+                    <a href="{{ path('cours') }}" class="bt">En savoir plus</a>
                 </div>
             </div>
             <div class="intro-guitariste">

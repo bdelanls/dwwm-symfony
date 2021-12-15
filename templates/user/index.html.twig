@@ -1,7 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}User index
-{% endblock %}
+{% block title %}Liste des Élèves{% endblock %}
 
 {% block main %}
 
@@ -10,16 +9,7 @@
 			<nav class="admin-nav">
 				{% include "partial/_menuBackstage.html.twig" %}
 			</nav>
-			<div class="info">
-				<p class="readmore">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quos deleniti sequi
-					                rerum velit dignissimos quo, beatae hic architecto earum dicta. Ipsa, iste. Fugit, placeat atque
-					                nemo iure praesentium officia nisi quae esse consequatur fugit ab facilis unde facere impedit
-					                aperiam
-					                veritatis earum fuga optio, debitis doloremque at velit totam accusamus excepturi. Repudiandae
-					                animi voluptatem soluta officia veritatis, molestiae aliquam quo in impedit sit suscipit
-					                reprehenderit fugiat, architecto iure vitae laboriosam cupiditate obcaecati?</p>
-
-			</div>
+			
 		</div>
 		<div class="col2">
 			<div class="title">
@@ -35,11 +25,13 @@
 
 				<table class="tab2col">
 					<tr>
-						<th>Valide</th>
-						<th class="ws">Date d'enregistrement</th>
-						<th>Nom</th>
-						<th>Rôle</th>
-						<th></th>
+						<th>Val.</th>
+						<th class="w-mc mobile-none">Date d'enregistrement</th>
+						<th class="w100">Nom</th>
+						<th class="mobile-none w100">Rôle</th>
+						{% if is_granted("ROLE_ADMIN") == true %}
+							<th class="w100"></th>
+						{% endif %}
 					</tr>
 					{% for user in users %}
 							<tr>
@@ -55,14 +47,14 @@
 										</svg>
 									</td>
 								</td>
-								<td>
+								<td class="w-mc mobile-none">
 									{{ user.addedDate ? user.addedDate|date('d/m/Y') : '' }}
 								</td>
-								<td class="ws">
+								<td class="ws w100">
 									<a href="{{ path('student_show', {'id': user.id}) }}">{{ user.firstname }}
 										{{ user.lastname }}</a>
 								</td>
-								<td>
+								<td class="mobile-none w100">
 									{% if  "ROLE_ADMIN" in user.roles %}
 										Admin
 									{% elseif "ROLE_TEACHER" in user.roles %}
@@ -73,11 +65,11 @@
 										User
 									{% endif %}
 								</td>
-								<td>
-									{% if is_granted("ROLE_ADMIN") == true %}
+								{% if is_granted("ROLE_ADMIN") == true %}
+									<td class="w100">
 										<a class="bt-tab" href="{{ path('user_edit', {'id': user.id}) }}">Éditer</a>
-									{% endif %}
-								</td>
+									</td>
+								{% endif %}
 							</tr>
 
 					{% else %}

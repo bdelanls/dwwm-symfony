@@ -22,13 +22,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/backstage/lesson')]
 class LessonController extends AbstractController
 {
     
-    #[Route('/', name: 'lesson_index', methods: ['GET'])]
+    #[Route('/', name: 'lesson_index', methods: ['GET']), IsGranted('ROLE_STUDENT')]
     public function index(LessonRepository $lessonRepository, UserRepository $userRepository): Response
     {
         $time = new \DateTime('now', new DateTimeZone('Europe/Paris'));
@@ -57,48 +58,32 @@ class LessonController extends AbstractController
     }
 
 
-    // #[Route('/', name: 'lesson_index', methods: ['GET'])]
-    // public function index(LessonRepository $lessonRepository): Response
-    // {
-    //     return $this->render('lesson/index.html.twig', [
-    //         'lessons' => $lessonRepository->findAll(),
-    //     ]);
-    // }
 
 
     /**
      * Agenda du mois
      */
-    #[Route('/agenda/{month}/{year}', name: 'lesson_agenda_index', methods: ['GET'])]
-    public function index_month(int $month=null, int $year=null, LessonRepository $lessonRepository, UserRepository $userRepository): Response
+    #[Route('/agenda/{month}/{year}', name: 'lesson_agenda_index', methods: ['GET']), IsGranted('ROLE_STUDENT')]
+    public function index_month(int $month=null, int $year=null, LessonRepository $lessonRepository): Response
     {
         $calendar = new CalendarService($month, $year);
         $mois = $calendar->toString();
 
         $month = $calendar->month;
         $year = $calendar->year;
-        
-        
 
         $jours = cal_days_in_month(CAL_GREGORIAN, $calendar->month, $calendar->year);
 
-
-
-        // préparation repository
+        // repository
         $dateDebut = date("$year-$month-01");
         $dateFin = date("$year-$month-$jours".' 23:59:59.9');
-
         $lessons = $lessonRepository->findByMonth($dateDebut, $dateFin);
-        $users = $userRepository->findAll();
-
 
         setlocale(LC_TIME, "fr_FR");
         $firstDay = strftime('%w', strtotime($dateDebut));
         $daysOfWeek = $calendar->days;
 
-        $curentUser = $this->getUser();
-
-        
+        $curentUser = $this->getUser();        
 
         return $this->render('lesson/index_agenda.html.twig', [
             'lessons' => $lessons,
@@ -108,16 +93,14 @@ class LessonController extends AbstractController
             'jours' => $jours,
             'firstDay' => $firstDay,
             'daysOfWeek' => $daysOfWeek,
-            'users' => $users,
             'curentUser' => $curentUser,
-
         ]);
     }
 
     /**
      * Ajouter des heures de cours dans une journée
      */
-    #[Route('/new_day/{date}', name: 'lesson_new_day', methods: ['GET','POST'])]
+    #[Route('/new_day/{date}', name: 'lesson_new_day', methods: ['GET','POST']), IsGranted('ROLE_TEACHER')]
     public function new_day($date, Request $request, FunctionService $functionService, LessonRepository $lessonRepository): Response
     {      
         $lessons = $lessonRepository->findByDay($date.'%');
@@ -182,7 +165,7 @@ class LessonController extends AbstractController
     /**
      *  Création d'un cours direct par l'agenda
      */
-    #[Route('/hour', name: 'hour_new', methods: ['GET','POST'])]
+    #[Route('/hour', name: 'hour_new', methods: ['GET','POST']), IsGranted('ROLE_TEACHER')]
     public function newHour(Request $request): Response
     {
         $submittedToken = $request->request->get('token');
@@ -220,31 +203,9 @@ class LessonController extends AbstractController
 
 
 
-    #[Route('/new', name: 'lesson_new', methods: ['GET','POST'])]
-    public function new(Request $request): Response
-    {
-        $lesson = new Lesson();
-        $form = $this->createForm(LessonType::class, $lesson);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($lesson);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('lesson_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->renderForm('lesson/new.html.twig', [
-            'lesson' => $lesson,
-            'form' => $form,
-        ]);
-    }
 
 
-
-
-    #[Route('/{id}', name: 'lesson_show', methods: ['GET'])]
+    #[Route('/{id}', name: 'lesson_show', methods: ['GET']), IsGranted('ROLE_TEACHER')]
     public function show(Lesson $lesson): Response
     {
         return $this->render('lesson/show.html.twig', [
@@ -255,7 +216,7 @@ class LessonController extends AbstractController
     /**
      * Reservation d'un cours
      */
-    #[Route('/{id}/reservation', name: 'reserve_edit', methods: ['GET','POST'])]
+    #[Route('/{id}/reservation', name: 'reserve_edit', methods: ['GET','POST']), IsGranted('ROLE_STUDENT')]
     public function reserve(Request $request, Lesson $lesson, Mailer $mailer): Response
     {
         $form = $this->createForm(LessonReserveType::class, $lesson);
@@ -297,7 +258,7 @@ class LessonController extends AbstractController
     /**
      * Validation d'un cours
      */
-    #[Route('/{id}/edit', name: 'lesson_edit', methods: ['GET','POST'])]
+    #[Route('/{id}/edit', name: 'lesson_edit', methods: ['GET','POST']), IsGranted('ROLE_STUDENT')]
     public function edit(Request $request, Lesson $lesson, Mailer $mailer): Response
     {
         $form = $this->createForm(LessonType::class, $lesson);
@@ -334,36 +295,11 @@ class LessonController extends AbstractController
         ]);
     }
 
-    /**
-     * Envoi de mail
-     */
-    // #[Route('/{id}/mail', name: 'lesson_mail', methods: ['POST'])]
-    // public function mail(Request $request, Lesson $lesson, MailerInterface $mailer): Response
-    // {
-
-    //     $user = $this->getUser();
-
-    //     $email = (new TemplatedEmail())
-    //         ->from(new Address('no-reply@bdelanls.fr', 'no-reply'))
-    //         ->to($user->getEmail())
-    //         ->subject('Sujet')
-    //         ->htmlTemplate('email.html.twig')
-    //     ;
-
-
-
-    //     $mailer->send($email);
-
-       
-
-    //     return $this->redirectToRoute('', [], Response::HTTP_SEE_OTHER);
-    // }
-
-
+ 
     /**
      * Annulation d'un cours
      */
-    #[Route('/{id}/cancel', name: 'lesson_cancel', methods: ['POST'])]
+    #[Route('/{id}/cancel', name: 'lesson_cancel', methods: ['POST']), IsGranted('ROLE_STUDENT')]
     public function cancel(Request $request, Lesson $lesson): Response
     {
         if ($this->isCsrfTokenValid('cancel'.$lesson->getId(), $request->request->get('_token'))) {
@@ -382,7 +318,7 @@ class LessonController extends AbstractController
 
 
 
-    #[Route('/{id}', name: 'lesson_delete', methods: ['POST'])]
+    #[Route('/{id}', name: 'lesson_delete', methods: ['POST']), IsGranted('ROLE_TEACHER')]
     public function delete(Request $request, Lesson $lesson): Response
     {
         if ($this->isCsrfTokenValid('delete'.$lesson->getId(), $request->request->get('_token'))) {

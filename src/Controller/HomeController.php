@@ -115,4 +115,17 @@ class HomeController extends AbstractController
     }
 
 
+    /**
+     * CGU / CGV
+     */ 
+    #[Route('/CGV-CGU', name: 'cgv-cgu')]
+    public function cgvcgu(): Response
+    {
+
+        return $this->render('home/cgv-cgu.html.twig', [
+            'class_body' => 'cgv-cgu',
+        ]);
+    }
+
+
 }

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Profil{% endblock %}
+{% block title %}User{% endblock %}
 
 {% block main %}
 
@@ -11,13 +11,13 @@
                 </nav>
                 <div class="info">
                     {% if is_granted("ROLE_ADMIN") == true %}
-                        <p class="readmore">Bienvenue administrateur du site !</p>
+                        <p class="readmore">Je suis admin</p>
                     {% elseif is_granted("ROLE_TEACHER") == true %}
-                        <p class="readmore">Bienvenue professeur !</p>
+                        <p class="readmore">Je suis le professeur</p>
                      {% elseif is_granted("ROLE_STUDENT") == true %}
-                        <p class="readmore">Bienvenue {{ user.firstname }} sur votre espace d'administration, vous êtes enregistré comme élève.</p>    
+                        <p class="readmore">Bienvenue sur votre espace d'administration, vous êtes enregistré comme élève.</p>    
                     {% elseif is_granted("ROLE_USER") == true %}
-                        <p class="readmore">Merci {{ user.firstname }} de vous être enregistré.</p>
+                        <p class="readmore">Merci de vous être enregistré.</p>
                         <p class="readmore">Mais pour avoir accès à toutes les fonctions et notamment réserver des cours vous devez confirmer votre adresse mail.</p>
                         <p class="readmore">Si vous n'avez pas reçu le mail lors de votre inscription vous pouvez renvoyer la demande avec le bouton ci-dessous.</p>
                         <a class="bt" href="{{ path('app_emailvalid', {'user': user.id}) }}">Envoyer un mail</a>
@@ -79,7 +79,7 @@
                                 <td></td>
                             </tr>
                             <tr>
-                                <td class="ws">Information supplémentaire&#8239;:</td>
+                                <td class="ws">Information supplémentaire :</td>
                                 <td>{{ user.comment }}</td>
                                 <td></td>
                             </tr>

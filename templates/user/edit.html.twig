@@ -1,7 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit User
-{% endblock %}
+{% block title %}Édition du profil{% endblock %}
 
 {% block main %}
 	<section class="admin">
@@ -9,13 +8,7 @@
 			<nav class="admin-nav">
 				{% include "partial/_menuBackstage.html.twig" %}
 			</nav>
-			<div class="info">
-				<p class="readmore">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quos deleniti sequi
-					                    rerum velit dignissimos quo, beatae hic architecto earum dicta. Ipsa, iste. Fugit, placeat atque
-					                    nemo iure praesentium officia nisi quae esse consequatur fugit ab facilis unde facere impedit
-					                    aperiam</p>
-
-			</div>
+			
 		</div>
 		<div class="col2">
 			<div class="title">
@@ -43,7 +36,7 @@
 				<section class="block-option">
 					<h4>Supprimer le compte</h4>
 					<p>Cela implique la suppression de toutes les données vous concernant.</p>
-					<p>Il sera impossible de le faire vous même si un ou des cours sont prévus dans les 48h. Contacter le professeur qui annulera vos cours et supprimera votre compte.</p>
+					<p>Il est impossible de le faire vous même si un ou des cours sont prévus dans les 48h. Contacter le professeur qui annulera vos cours et supprimera votre compte.</p>
 					{{ include('user/_delete_form.html.twig') }}
 				</section>
 				{% endif %}

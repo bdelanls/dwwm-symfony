@@ -18,7 +18,7 @@ btMenu.forEach(elem => {
     
 });
 
-// le menu est fermé quand on agrandit la fenêtre au delà de 800px
+// close window when width than 800px
 
 window.onresize = () =>{
     if(window.innerWidth >= 800 && menu.className !== ""){

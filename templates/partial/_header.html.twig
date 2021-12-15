@@ -17,17 +17,21 @@
                 <svg class="bt-menu"><title>Conexion</title><use xlink:href="/img/icons.svg#menu"></use></svg>
         </nav>
         <nav class="log">
-            {% if is_granted("ROLE_USER") == true %}
-            <a href="{{ path("user_show", {'id': app.user.id}) }}">
-                <svg><title>Conexion</title><use xlink:href="/img/icons.svg#user"></use></svg>
-                <span class="nom-log">{{ app.user.firstname }}</span>
-            </a>
+            {% if is_granted("ROLE_STUDENT") == true %}
+                <a href="{{ path("lesson_index") }}" title="Accès au backstage">
+                    <svg><title>Conexion</title><use xlink:href="/img/icons.svg#user"></use></svg>
+                    <span class="nom-log">{{ app.user.firstname }}</span>
+                </a>
+            {% elseif is_granted("ROLE_USER") == true %}
+                <a href="{{ path("user_show", {'id': app.user.id}) }}" title="Accès au backstage">
+                    <svg><title>Conexion</title><use xlink:href="/img/icons.svg#user"></use></svg>
+                    <span class="nom-log">{{ app.user.firstname }}</span>
+                </a>
             {% else %}
-            <a href="{{ path("app_login") }}">
-                <svg><title>Conexion</title><use xlink:href="/img/icons.svg#user"></use></svg>
-                <span class="nom-log">Se connecter</span>
-            </a>
-
+                <a href="{{ path("app_login") }}">
+                    <svg><title>Conexion</title><use xlink:href="/img/icons.svg#user"></use></svg>
+                    <span class="nom-log">Se connecter</span>
+                </a>
             {% endif %}
         </nav>
     </div>

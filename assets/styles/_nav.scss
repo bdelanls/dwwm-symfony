@@ -154,15 +154,16 @@ nav.log{
 nav.admin-nav{
     ul{
         display: flex;
-        flex-flow: row wrap;
-        justify-content: space-between;
+        justify-content: space-around;
+        background-color: rgba($color: $shadow, $alpha: 1);
 
         @include desktop{
             flex-flow: column wrap;
+            background-color:inherit;
         }
     }
     li{
-        width: 32%;
+        width: calc(100% / 7);
         text-align: center;
         background-color: rgba($color: $shadow, $alpha: 1);
         padding: em(8);
@@ -196,7 +197,7 @@ nav.admin-nav{
                 }
             }
             svg{
-                width: em(50);height: em(50);
+                width: em(30);height: em(30);
 
                 @include desktop{
                     width: em(20); height: em(20);
@@ -212,18 +213,20 @@ nav.admin-nav{
                 align-items: center;
             }
 
-            &.active{
-                background-color: $blanc;
-    
-                svg{
-                    color: $shadow;
-                    @include desktop{color: inherit;}
-                }
-                
-                @include desktop{
-                    background-color: inherit;
-                    color: $marron;
-                }
+            
+        }
+
+        &.active{
+            background-color: $blanc;
+
+            svg{
+                color: $shadow;
+                @include desktop{color: inherit;}
+            }
+            
+            @include desktop{
+                background-color: inherit;
+                a{color: $marron;}
             }
         }
 
