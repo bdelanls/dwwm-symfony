@@ -5,7 +5,7 @@
         {{ form_widget(form.date, {'attr': {'value': arrLesson.date}}) }}
         {{ form_errors(form.date) }}
     </div> #}
-    <div class="row">
+    <div class="form-day">
         <fieldset {{ arrLesson.h8 == true ? 'class="disabled"' }}>
             {% if arrLesson.h8 == true %}
                 {{ form_widget(form.h8, {'attr': {'checked': '', 'disabled': ''}}) }}

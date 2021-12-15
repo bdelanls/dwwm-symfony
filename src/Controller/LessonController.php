@@ -64,35 +64,26 @@ class LessonController extends AbstractController
      * Agenda du mois
      */
     #[Route('/agenda/{month}/{year}', name: 'lesson_agenda_index', methods: ['GET']), IsGranted('ROLE_STUDENT')]
-    public function index_month(int $month=null, int $year=null, LessonRepository $lessonRepository, UserRepository $userRepository): Response
+    public function index_month(int $month=null, int $year=null, LessonRepository $lessonRepository): Response
     {
         $calendar = new CalendarService($month, $year);
         $mois = $calendar->toString();
 
         $month = $calendar->month;
         $year = $calendar->year;
-        
-        
 
         $jours = cal_days_in_month(CAL_GREGORIAN, $calendar->month, $calendar->year);
 
-
-
-        // préparation repository
+        // repository
         $dateDebut = date("$year-$month-01");
         $dateFin = date("$year-$month-$jours".' 23:59:59.9');
-
         $lessons = $lessonRepository->findByMonth($dateDebut, $dateFin);
-        $users = $userRepository->findAll();
-
 
         setlocale(LC_TIME, "fr_FR");
         $firstDay = strftime('%w', strtotime($dateDebut));
         $daysOfWeek = $calendar->days;
 
-        $curentUser = $this->getUser();
-
-        
+        $curentUser = $this->getUser();        
 
         return $this->render('lesson/index_agenda.html.twig', [
             'lessons' => $lessons,
@@ -102,9 +93,7 @@ class LessonController extends AbstractController
             'jours' => $jours,
             'firstDay' => $firstDay,
             'daysOfWeek' => $daysOfWeek,
-            'users' => $users,
             'curentUser' => $curentUser,
-
         ]);
     }
 

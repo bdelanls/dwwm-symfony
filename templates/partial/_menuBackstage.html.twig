@@ -67,38 +67,42 @@
 		</li>
 	{% endif %}
 
-	{% if is_granted("ROLE_TEACHER") != true %}
-		{# documents for students #}
-		<li {% if app.request.attributes.get('_route') == 'file_index_student' %} class="active" {% endif %}>
-			<a href="{{ path('file_index_student') }}">
+	{% if app.request.attributes.get('_route') != 'app_reset_password' %}
+
+		{% if is_granted("ROLE_TEACHER") != true and is_granted("ROLE_STUDENT") == true %}
+			{# documents for students #}
+			<li {% if app.request.attributes.get('_route') == 'file_index_student' %} class="active" {% endif %}>
+				<a href="{{ path('file_index_student') }}">
+					<svg>
+						<title>Documents</title>
+						<use xlink:href="/img/icons.svg#doc"></use>
+					</svg>
+					<span>Documents</span>
+				</a>
+			</li>
+		{% endif %}
+
+		{# For all #}
+		<li {% if app.request.attributes.get('_route') == 'user_show' 
+			or app.request.attributes.get('_route') == 'user_edit' 
+			%} class="active" {% endif %}>
+			<a href="{{ path('user_show', {'id': app.user.id}) }}">
 				<svg>
-					<title>Documents</title>
-					<use xlink:href="/img/icons.svg#doc"></use>
+					<title>Profil</title>
+					<use xlink:href="/img/icons.svg#user"></use>
 				</svg>
-				<span>Documents</span>
+				<span>Profil</span>
 			</a>
 		</li>
-	{% endif %}
+		<li>
+			<a href="{{ path("app_logout") }}">
+				<svg>
+					<title>Se déconnecter</title>
+					<use xlink:href="/img/icons.svg#power-off"></use>
+				</svg>
+				<span>Se déconnecter</span>
+			</a>
+		</li>
 
-	{# For all #}
-	<li {% if app.request.attributes.get('_route') == 'user_show' 
-		or app.request.attributes.get('_route') == 'user_edit' 
-		%} class="active" {% endif %}>
-		<a href="{{ path('user_show', {'id': app.user.id}) }}">
-			<svg>
-				<title>Profil</title>
-				<use xlink:href="/img/icons.svg#user"></use>
-			</svg>
-			<span>Profil</span>
-		</a>
-	</li>
-	<li>
-		<a href="{{ path("app_logout") }}">
-			<svg>
-				<title>Se déconnecter</title>
-				<use xlink:href="/img/icons.svg#power-off"></use>
-			</svg>
-			<span>Se déconnecter</span>
-		</a>
-	</li>
+	{% endif %}
 </ul>

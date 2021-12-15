@@ -18,7 +18,7 @@ class Mailer
     public function envoiEmail(string $to, string $subject, object $date, object $student, string $tmp) {
 
         if ($to == ''){
-            $to = "guy@taracoustik.fr";
+            $to = "project@bdelanls.fr";
         }
 
 
@@ -41,7 +41,7 @@ class Mailer
     public function envoiEmailDelete(string $to, string $subject, array $lessonsDelete, array $lessonsNoDelete, object $student, string $tmp) {
 
         if ($to == ''){
-            $to = "guy@taracoustik.fr";
+            $to = "project@bdelanls.fr";
         }
 
 
