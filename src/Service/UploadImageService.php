@@ -22,6 +22,10 @@ class UploadImageService
         $finalFilename = "$safeFilename-" . uniqid() . "." . $newFile->guessExtension();
         $newFile->move($this->imagedirectory, $finalFilename);
         $this->delete($oldPath);
+
+        // le nom de l'image avec l'extension webp pour la bdd
+        $finalFilename = substr($finalFilename, 0, strpos($finalFilename, '.'));
+        $finalFilename = $finalFilename . ".webp";
         
         return $finalFilename;
     }
