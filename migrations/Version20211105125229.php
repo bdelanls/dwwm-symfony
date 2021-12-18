@@ -28,4 +28,9 @@ final class Version20211105125229 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE file DROP published_at');
     }
+    public function isTransactional(): bool
+    {
+        return false;
+    }
+
 }

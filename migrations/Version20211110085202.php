@@ -28,4 +28,9 @@ final class Version20211110085202 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE article DROP meta_title, DROP slug');
     }
+    public function isTransactional(): bool
+    {
+        return false;
+    }
+
 }

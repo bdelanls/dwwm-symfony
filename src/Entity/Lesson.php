@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\User;
 use App\Repository\LessonRepository;
 use Doctrine\ORM\Mapping as ORM;
 
