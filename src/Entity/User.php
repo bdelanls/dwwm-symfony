@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Article;
 use App\Entity\File;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;

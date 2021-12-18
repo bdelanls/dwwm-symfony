@@ -30,4 +30,9 @@ final class Version20211115075108 extends AbstractMigration
         $this->addSql('DROP INDEX UNIQ_23A0E66989D9B62 ON article');
         $this->addSql('ALTER TABLE article DROP promote');
     }
+    public function isTransactional(): bool
+    {
+        return false;
+    }
+
 }

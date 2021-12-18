@@ -33,4 +33,9 @@ final class Version20211105105006 extends AbstractMigration
         $this->addSql('DROP TABLE file');
         $this->addSql('DROP TABLE file_user');
     }
+    public function isTransactional(): bool
+    {
+        return false;
+    }
+
 }
