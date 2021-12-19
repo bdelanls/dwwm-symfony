@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -14,9 +15,10 @@ class BackstageController extends AbstractController
     #[Route('/', name: 'backstage_index')]
     public function index(): Response
     {
+        $user = $this->getUser();
+        
         return $this->render('backstage/index.html.twig', [
-            // 'user' => $user,
-            'user' => 'Bertrand',
+            'user' => $user,
         ]);
     }
 

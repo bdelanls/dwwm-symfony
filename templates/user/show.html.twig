@@ -11,15 +11,15 @@
                 </nav>
                 <div class="info">
                     {% if is_granted("ROLE_ADMIN") == true %}
-                        <p class="readmore">Bienvenue administrateur du site !</p>
+                        <p>Bienvenue administrateur du site !</p>
                     {% elseif is_granted("ROLE_TEACHER") == true %}
-                        <p class="readmore">Bienvenue professeur !</p>
+                        <p>Bienvenue professeur !</p>
                      {% elseif is_granted("ROLE_STUDENT") == true %}
-                        <p class="readmore">Bienvenue {{ user.firstname }} sur votre espace d'administration, vous êtes enregistré comme élève.</p>    
+                        <p>Bienvenue {{ user.firstname }} sur votre espace d'administration, vous êtes enregistré comme élève.</p>    
                     {% elseif is_granted("ROLE_USER") == true %}
-                        <p class="readmore">Merci {{ user.firstname }} de vous être enregistré.</p>
-                        <p class="readmore">Mais pour avoir accès à toutes les fonctions et notamment réserver des cours vous devez confirmer votre adresse mail.</p>
-                        <p class="readmore">Si vous n'avez pas reçu le mail lors de votre inscription vous pouvez renvoyer la demande avec le bouton ci-dessous.</p>
+                        <p>Merci {{ user.firstname }} de vous être enregistré.</p>
+                        <p>Mais pour avoir accès à toutes les fonctions et notamment réserver des cours vous devez confirmer votre adresse mail.</p>
+                        <p>Si vous n'avez pas reçu le mail lors de votre inscription vous pouvez renvoyer la demande avec le bouton ci-dessous.</p>
                         <a class="bt" href="{{ path('app_emailvalid', {'user': user.id}) }}">Envoyer un mail</a>
                     {% endif %}
                     

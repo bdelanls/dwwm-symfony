@@ -1,13 +1,52 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello !{% endblock %}
+{% block title %}Backstage
+{% endblock %}
 
 {% block main %}
 
+	<section class="admin">
+		<div class="col1">
+			<nav class="admin-nav">
+				{% include "partial/_menuBackstage.html.twig" %}
+			</nav>
+		</div>
+		<div class="col2">
+			<div class="title">
+				<h3>
+					Backstage
+				</h3>
+			</div>
+			<div class="admin-panel">
+				<div>
+                    <p>Bonjour <b>{{ user.firstname }} {{ user.lastname }}</b></p>
+                    <p>et bienvenue dans la partie backstage du site.</p>
+                </div>
+                <div>
+                    {% if is_granted("ROLE_ADMIN") == true %}
+                        <p>Vous êtes enregistré comme administrateur du site !</p>
+                    {% elseif is_granted("ROLE_TEACHER") == true %}
+                        <p>Vous êtes enregistré comme professeur !</p>
+                     {% elseif is_granted("ROLE_STUDENT") == true %}
+                        <p>Vous êtes enregistré comme élève.</p>    
+                    {% elseif is_granted("ROLE_USER") == true %}
+                        <p>Merci de vous être enregistré.</p>
+                        <p >Mais pour avoir accès à toutes les fonctions et notamment réserver des cours vous devez confirmer votre adresse mail.
+                        Si vous n'avez pas reçu le mail lors de votre inscription vous pouvez renvoyer la demande avec le bouton ci-dessous.</p>
+                        <a class="bt-form" href="{{ path('app_emailvalid', {'user': user.id}) }}">Envoyer un mail</a>
+                    {% endif %}
+                </div>
+                <div style="margin-top:2em; padding-top: 1em; border-top: 1px solid #666;">
+                	<p>Etiam maximus sed lectus id consectetur. Donec lorem arcu, convallis egestas venenatis congue, tristique ut est. Praesent non mattis justo. Morbi posuere imperdiet vehicula. Sed at nisl sit amet est laoreet ultricies vitae in enim. Suspendisse potenti. Maecenas vel maximus nibh. Aliquam ut mi finibus, eleifend felis quis, gravida enim. Nunc ex nunc, auctor non nunc eu, pretium tempor neque. Nulla non mi et turpis sodales pretium tincidunt vel orci.</p>
+                </div>
+                <div style="margin-top:1em;">
+                	<p>Aenean iaculis orci eget suscipit egestas. Proin eu neque fringilla, accumsan nibh quis, laoreet libero. Phasellus elementum eros quis varius euismod. Nunc interdum convallis odio, non rhoncus turpis lobortis quis. Duis ultricies auctor tristique. Integer aliquam leo sed turpis egestas, eget venenatis felis facilisis.</p>
+                </div>
+			</div>
+		</div>
 
-<div class="example-wrapper">
-    <h1>Bonjour {{ user }} !</h1>
 
-    
-</div>
+	</section>
+
+
 {% endblock %}
