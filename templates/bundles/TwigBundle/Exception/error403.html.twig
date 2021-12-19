@@ -1,0 +1,19 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Page non trouvée{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        main{height: 100%}
+    </style>
+{% endblock %}
+
+{% block main %}
+<section class="error">
+    <h3>403</h3>
+    <h1>Vous n'avez pas les autorisations pour voir cette page !</h1>
+    <a href="{{ path('home') }}">Retour à l'accueil</a>
+</section>
+
+
+{% endblock %}

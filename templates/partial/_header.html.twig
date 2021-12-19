@@ -23,7 +23,7 @@
                     <span class="nom-log">{{ app.user.firstname }}</span>
                 </a>
             {% elseif is_granted("ROLE_USER") == true %}
-                <a href="{{ path("user_show", {'id': app.user.id}) }}" title="Accès au backstage">
+                <a href="{{ path("backstage_index") }}" title="Accès au backstage">
                     <svg><title>Conexion</title><use xlink:href="/img/icons.svg#user"></use></svg>
                     <span class="nom-log">{{ app.user.firstname }}</span>
                 </a>
