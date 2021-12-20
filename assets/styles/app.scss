@@ -33,7 +33,16 @@ main, footer{
     padding: 0;
 }
 
+h1{
+    font-family: $anton;
+    font-size: rem(50);
+    line-height: rem(60);
+    color: $onyx;
+}
 
+h3{
+    font-size: rem(24);
+}
 
 
 .header-content, .footer-content, section{

@@ -110,7 +110,7 @@ class HomeController extends AbstractController
     {
 
         return $this->render('home/pol-conf.html.twig', [
-            'class_body' => 'pol-conf',
+            'class_body' => 'mentions',
         ]);
     }
 
@@ -123,7 +123,7 @@ class HomeController extends AbstractController
     {
 
         return $this->render('home/cgv-cgu.html.twig', [
-            'class_body' => 'cgv-cgu',
+            'class_body' => 'mentions',
         ]);
     }
 

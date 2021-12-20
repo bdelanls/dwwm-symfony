@@ -36,7 +36,11 @@
 {% block main %}
     {% for article in articles %}
     <section class="article">
-        <img src="/img/article/wide/{{ article.photoPath }}" alt="{{ article.photoTitle }}">
+        <picture>
+            <source srcset="/img/article/thumbnail/{{ article.photoPath }}.webp" type="image/webp">
+            <source srcset="/img/article/thumbnail/{{ article.photoPath }}.jpg" type="image/jpeg"> 
+            <img src="/img/article/thumbnail/{{ article.photoPath }}.jpg" alt="{{ article.photoTitle }}">
+        </picture>
         <h3>{{ article.title }}</h3>
         <div class="txt-article">
             <div class="body-article">

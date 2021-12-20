@@ -12,6 +12,7 @@
 // 7 - Cours
 // 8 - Inscription
 // 9 - Error
+// 10 - Mentions
 
 .bt{
     @include button();
@@ -447,9 +448,11 @@ section.article{
         justify-content: space-between;
     }
 }
-.contact main p, .contact main form{
+.contact main section div, .contact main section form{
     width: 100%;
     margin: 0 0 em(20) 0;
+
+    h1{margin-bottom: em(4);}
 
     @include desktop{
         width: col(6);
@@ -634,7 +637,8 @@ section.admin{
 
         &.tab2col{
             tr td:last-child, tr th:last-child{
-                width: 100%;
+                // width: 100%;
+                width: max-content;
                 padding-right: 0;
                 text-align: right;
             }
@@ -1037,9 +1041,24 @@ nav.mois{
         margin-bottom: em(16);
     }
 
+    .col-1{
+        margin-bottom: em(32);
+        border-bottom: 1px solid $onyx;
+        padding-bottom: em(25);
+
+        @include desktop{
+            margin-bottom: 0;
+            border-bottom: none;
+        }
+    }
+
     @include desktop{
         flex-flow: row wrap;
         justify-content: space-between;
+
+        h1{
+            margin-bottom: em(4);
+        }
     }
 }
 .inscription .col{
@@ -1058,7 +1077,7 @@ nav.mois{
 section.error {
 
     height: 100%;
-    background-image: url('/public/img/error.webp');
+    background-image: url('/public/img/error.jpg');
     background-position: center bottom;
     background-repeat: no-repeat;
     background-size: cover;
@@ -1090,6 +1109,77 @@ section.error {
         &:hover{
             text-decoration: underline;
         }
+    }
+
+}
+
+
+// X - Mentions (mentions légles, politique de confidentialité, cgv/vgu
+
+body.mentions main{
+
+    h1{
+        font-family: $anton;
+        font-size: rem(50);
+        color: $onyx;
+    }
+    h3{
+        font-size: rem(24);
+        color: $onyx;
+        margin: em(24) 0 0 0;
+    }
+
+    p{
+        margin: em(16) 0;
+    }
+    a{
+        color: $marron;
+        text-decoration: none;
+
+        &:hover{
+            text-decoration: underline;
+        }
+    }
+
+    ul{
+        li{
+            margin: em(8) 0 0 em(32);
+            list-style: disc;
+        }
+    }
+
+    .cgv-cgu{
+        h3{
+            margin: 0;
+        }
+    }
+
+    .col{
+        columns: 18em;
+        column-gap: 3em;
+        margin-top: em(24);
+
+        p{
+            margin-top: 0;
+            text-align: justify;
+            font-size: rem(14);
+        }
+    }
+}
+
+// XI - Bio
+
+body.bio main{
+
+    h1{
+        color: $shadow;
+    }
+    h3{
+        color: $onyx;
+        margin-bottom: em(16);
+    }
+    p{
+        margin-bottom: em(16);
     }
 
 }
