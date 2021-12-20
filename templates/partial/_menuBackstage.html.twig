@@ -46,8 +46,12 @@
 
 	{% if is_granted("ROLE_TEACHER") == true %}
 		{# documents for teacher #}
-		<li>
-			<a href="{{ path('file_index') }}" {% if app.request.attributes.get('_route') == 'file_index' or app.request.attributes.get('_route') == 'file_new' %} class="active" {% endif %}>
+		<li {% if app.request.attributes.get('_route') == 'file_index' 
+				or app.request.attributes.get('_route') == 'file_new' 
+			%} 
+				class="active" 
+			{% endif %}>
+			<a href="{{ path('file_index') }}">
 				<svg>
 					<title>Documents</title>
 					<use xlink:href="/img/icons.svg#doc"></use>
@@ -56,8 +60,13 @@
 			</a>
 		</li>
 		{# articles #}
-		<li>
-			<a href="{{ path('article_index') }}" {% if app.request.attributes.get('_route') == 'article_index' or app.request.attributes.get('_route') == 'article_new' or app.request.attributes.get('_route') == 'article_edit'%} class="active" {% endif %}>
+		<li {% if app.request.attributes.get('_route') == 'article_index' 
+			or app.request.attributes.get('_route') == 'article_new' 
+			or app.request.attributes.get('_route') == 'article_edit'
+			%} 
+			class="active" 
+			{% endif %}>
+			<a href="{{ path('article_index') }}" >
 				<svg>
 					<title>Articles</title>
 					<use xlink:href="/img/icons.svg#article"></use>

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}User
+{% block title %}Fiche élève
 {% endblock %}
 
 {% block javascripts %}
@@ -49,22 +49,7 @@
 			<nav class="admin-nav">
 				{% include "partial/_menuBackstage.html.twig" %}
 			</nav>
-			<div class="info">
-				{% if is_granted("ROLE_ADMIN") == true %}
-					<p class="readmore">Je suis admin</p>
-				{% elseif is_granted("ROLE_TEACHER") == true %}
-					<p class="readmore">Je suis le professeur</p>
-				{% elseif is_granted("ROLE_STUDENT") == true %}
-					<p class="readmore">Bienvenue sur votre espace d'administration, vous êtes enregistré comme élève.</p>
-				{% elseif is_granted("ROLE_USER") == true %}
-					<p class="readmore">Merci de vous être enregistré.</p>
-					<p class="readmore">Mais pour avoir accès à toutes les fonctions et notamment réserver des cours vous devez confirmer votre adresse mail.</p>
-					<p class="readmore">Si vous n'avez pas reçu le mail lors de votre inscription vous pouvez renvoyer la demande avec le bouton ci-dessous.</p>
-					<a class="bt" href="{{ path('app_emailvalid', {'user': user.id}) }}">Envoyer un mail</a>
-				{% endif %}
-
-
-			</div>
+			
 		</div>
 		<div class="col2">
 			<div class="title">
@@ -92,7 +77,7 @@
 						</tr>
 						<tr>
 							<td class="ws">Téléphone :</td>
-							<td>{{ user.phone }}</td>
+							<td class="w100">{{ user.phone }}</td>
 							<td></td>
 						</tr>
 						<tr>

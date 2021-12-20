@@ -23,26 +23,38 @@ class ImageService
         $imgWide = new ImageManager();
         $imgThumbnail = new ImageManager();
 
-        // le nom de l'image sans l'extension
-        $image = substr($image, 0, strpos($image, '.'));
-
-
         $imageOrigin = $this->directoryOrigin . $image . '.jpg';
 
-        $imageWide = $this->directoryWide . $image . '.webp';
-        $imageThumbnail = $this->directoryThumbnail . $image . '.webp';
+        $imageWide = $this->directoryWide . $image;
+        $imageThumbnail = $this->directoryThumbnail . $image;
 
+        // version jpg
         $imgWide
-            ->make($imageOrigin)
+            ->make($imageOrigin )
             ->fit(800, 480)
-            ->encode('webp', 80)
-            ->save($imageWide);
+            ->encode('jpg', 75)
+            ->save($imageWide. '.jpg');
 
         $imgThumbnail
             ->make($imageOrigin)
             ->fit(365, 220)
-            ->encode('webp', 80)
-            ->save($imageThumbnail);    
+            ->encode('jpg', 75)
+            ->save($imageThumbnail. '.jpg'); 
+            
+        // version webp
+        $imgWide
+        ->make($imageOrigin)
+        ->fit(800, 480)
+        ->encode('webp', 75)
+        ->save($imageWide . '.webp');
+
+        $imgThumbnail
+            ->make($imageOrigin)
+            ->fit(365, 220)
+            ->encode('webp', 75)
+            ->save($imageThumbnail . '.webp');
+            
+        
 
     }
 
