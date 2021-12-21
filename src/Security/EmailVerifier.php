@@ -2,6 +2,7 @@
 
 namespace App\Security;
 
+use Symfony\Component\Mime\Email;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
@@ -40,6 +41,21 @@ class EmailVerifier
         $email->context($context);
 
         $this->mailer->send($email);
+
+        // Envoi d'un mail au professeur
+        $emailToTeacher = (new Email())
+            ->from('no-reply@bdelanls.fr')
+            ->to('project@bdelanls.fr')
+            ->subject('Un nouvel utilisateur vient de s\'inscrire')
+            ->text('Un nouvel utilisateur vient de s\'inscrire')
+            ->html('<div style="font-family: Arial;">
+                    <p>Bonjour,</p>
+                    <p>'. $user->getFirstname() . ' ' . $user->getLastname() . ' vient de s\'inscrire sur le site dwwm.bdelanls.fr</p>
+                    </div>')
+            ;
+
+        $this->mailer->send($emailToTeacher);
+        
     }
 
     /**

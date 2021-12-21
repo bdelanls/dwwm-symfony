@@ -139,9 +139,14 @@ class ResetPasswordController extends AbstractController
             'email' => $emailFormData,
         ]);
 
+        
+
         // Do not reveal whether a user account was found or not.
         if (!$user) {
-            return $this->redirectToRoute('app_check_email');
+            
+            $this->addFlash('danger', 'L\'adresse mail n\'est pas reconnue');
+            return $this->redirectToRoute('app_forgot_password_request');
+
         }
 
         try {
@@ -152,7 +157,7 @@ class ResetPasswordController extends AbstractController
             // Caution: This may reveal if a user is registered or not.
             //
             // $this->addFlash('reset_password_error', sprintf(
-            //     'There was a problem handling your password reset request - %s',
+            //     'Un problème est survenu lors du traitement de votre demande de réinitialisation de mot de passe - %s',
             //     $e->getReason()
             // ));
 
