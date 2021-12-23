@@ -9,6 +9,9 @@
 			<nav class="admin-nav">
 				{% include "partial/_menuBackstage.html.twig" %}
 			</nav>
+            <div class="info">
+                <p>Pour réserver un cours allez sur l'<a href="{{ path('lesson_agenda_index') }}">agenda</a>.</p> 
+            </div>
 			
 		</div>
 		<div class="col2">
@@ -105,6 +108,7 @@
                         {% else %}
                             <tr>
                                 <td colspan="6">Aucun cours !</td>
+                                <td></td>
                             </tr>
                         {% endfor %}
                     </table>

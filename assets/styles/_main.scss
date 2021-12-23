@@ -137,6 +137,14 @@ section.liste-articles{
     ul{
         display: flex;
         flex-flow: column wrap;
+
+        .hinclude-articles{
+            justify-content: inherit;
+            display: inherit;
+            flex-flow: inherit;
+            gap: inherit;
+        }
+
         @include tablet{
             flex-flow: row wrap;
             justify-content: space-between;
@@ -202,9 +210,14 @@ section.liste-articles{
         margin: 0 auto;
         z-index: 1000;
         position: relative;
+        display: none;
 
         &:hover{
             cursor: pointer;
+        }
+
+        &.active{
+            display: block;
         }
         
     }
@@ -510,10 +523,35 @@ section.admin{
     .info{
         display: none;
         margin: em(16) 0;
+        color: $onyx;
+
+        li{
+            text-indent: em(-17);
+            margin: 0 0 em(10) em(17);
+        }
+
+        li div{
+            width: em(14); height: em(14);
+            display: inline-block;
+            border-radius: em(3);
+
+            &.gris{background-color: $gris;}
+            &.vert{background-color: $vert;}
+            &.rouge{background-color: $rouge;}
+            
+        }
+
 
         
         a{
-            height: em(20);
+            color: inherit;
+            text-decoration: none;
+
+            &:hover{
+                text-decoration: underline;
+
+            }
+
         }
         
         @include desktop{ 
@@ -788,6 +826,19 @@ section.admin{
 
             &.fond-we{
                 background-color: #eee;
+            }
+            &.fond-dday{
+                background-color: $beige;
+
+                td{color: $blanc;}
+
+                li{
+                    border-color: $blanc;
+
+                    a{
+                        color: $blanc;
+                    }
+                }
             }
         }
         ul{

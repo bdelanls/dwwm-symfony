@@ -13,6 +13,13 @@
 			<nav class="admin-nav">
 				{% include "partial/_menuBackstage.html.twig" %}
 			</nav>
+            <div class="info">
+                <ul>
+                    <li><div class="gris"></div> Heures de cours disponiles, cliquez dessus pour réserver.</li>
+                    <li><div class="rouge"></div> Cours réservés.</li>
+                    <li><div class="vert"></div> Cours validés par le professeur.</li>
+                </ul>
+            </div>
 			
 		</div>
 		<div class="col2">
@@ -55,7 +62,8 @@
 				<section>
                     <table class="tab2col agenda">
                     {% for i in range(1, jours) %}
-                        <tr {% if firstDay == 0 or firstDay == 6 %}class="fond-we" {% endif %}>
+                        <tr {% if "now"|date("d") == i and "now"|date("m") == month and "now"|date("Y") ==  year %}class="fond-dday"
+                            {% elseif firstDay == 0 or firstDay == 6 %}class="fond-we" {% endif %}>
                             <td class="ws">
                                 {{ daysOfWeek[firstDay] }}
 

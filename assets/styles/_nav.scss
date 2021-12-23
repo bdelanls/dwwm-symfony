@@ -234,7 +234,7 @@ nav.admin-nav{
     }
 
     @include desktop{
-        width: 70%;
+        max-width: em(180);
         margin: em(59) 0;
     }    
 }

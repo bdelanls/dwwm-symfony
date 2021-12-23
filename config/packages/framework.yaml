@@ -20,6 +20,9 @@ framework:
     php_errors:
         log: true
 
+    fragments:
+        # hinclude_default_template: hinclude.html.twig    
+
 when@test:
     framework:
         test: true

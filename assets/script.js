@@ -29,39 +29,6 @@ window.onresize = () =>{
 
 };
 
-// lire la suite
-
-if (window.innerWidth < 800){
-    lirePlusTxt();
-}
-
-
-function lirePlusTxt() {
-    var numCaractere = 40;
-    lirePlus = document.querySelectorAll('.readmore');
-
-    for(let i=0; i < lirePlus.length; i++){
-        
-        let txt = lirePlus[i].textContent;
-        
-        let txtVisible = txt.substring(0, numCaractere);
-        let txtCache = txt.substring(numCaractere, txt.length);
-
-        let txtAfficher = txtVisible + '... ' + '<a class="voirPlus">Voir plus</a>';
-        lirePlus[i].innerHTML = txtAfficher;
-
-        let btVoirPlus = lirePlus[i].querySelector('.voirPlus');
-        btVoirPlus.addEventListener('click', e => {
-            lirePlus[i].innerHTML = txtVisible + txtCache;
-        });
-        
-    }
-}
-
-// message alert
-function closeMessage(){
-    
-}
 
 
 

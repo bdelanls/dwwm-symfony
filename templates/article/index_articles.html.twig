@@ -3,40 +3,72 @@
 {% block title %}Articles
 {% endblock %}
 
-{% block javascripts %}
+{% block javascripts %}    
     <script>
-        const btLoadmore = document.querySelector('#loadmore');
-        const items = document.querySelectorAll('.item');
-        const nbItems = items.length;
+
+        const btArticles = document.getElementById("load-articles");
+        const list = document.getElementById("list");
+        var page = 1;
+        var totalArticles = {{ totalArticles }} ;
+        var limit = {{ limit }} ;
+
+        var nbPages = Math.ceil(totalArticles / limit) ;
 
 
-        for (i=6; i<nbItems; i++){
-            items[i].style = 'opacity: 0; height: 0; ';
+        function get(url) {
+            return new Promise((resolve, reject) => {
+                const req = new XMLHttpRequest();
+                req.open('GET', url);
+                req.onload = () => req.status === 200 ? resolve(req.response) : reject(Error(req.statusText));
+                req.onerror = (e) => reject(Error(`Network Error: ${e}`));
+                req.send();
+            });
         }
 
-        var artDepart= 6;
-    
+        btArticles.addEventListener('click', e => {
 
-        btLoadmore.onclick = (e) => {
-            if (artDepart + 6 >= nbItems){
-                artFin = nbItems;
-                btLoadmore.style.display = 'none';
-            }else{
-                artFin = artDepart + 6;
+            page++ ;
+            get("/articles/ajax?page=" + page)
+
+            .then((data) => {
+
+                data = JSON.parse(data);
+
+                for(i = 0; i < data.length; i++) { 
+                    
+                    let article = data[i];
+
+                    list.innerHTML += '<li class="item">'
+                    + '<a href="/article/' + article['slug'] + '">'
+                    + '<picture>'
+                    + '<source srcset="/img/article/thumbnail/'+ article['photoPath'] +'.webp" type="image/webp">'
+                    + '<source srcset="/img/article/thumbnail/'+ article['photoPath'] +'.jpg" type="image/jpeg">'
+                    + '<img src="/img/article/thumbnail/'+ article['photoPath'] +'.jpg" alt="'+ article['photoTitle'] +'">'
+                    + '</picture>'
+                    + '<h3>'+ article['title'] +'</h3>'
+                    + '</a>'
+                    + '<p>'+ article['body']
+                    + '</li>';
+               }
+            
+            })
+            .catch((err) => {
+                alert('Une erreur est survenue !');
+            });
+
+            if (page === nbPages ) {
+                btArticles.classList.remove("active");
             }
 
- 			for (i=artDepart; i<artFin; i++){
-                items[i].style = 'opacity: 1; height: auto; transition: opacity 1s ease-out;';
-            }
-            artDepart = artFin;
-		}
-
+        });
+        
     </script>
 {% endblock %}
 
 {% block main %}
 <section class="liste-articles">
-            <ul>
+
+            <ul id="list">
 
 			{% for article in articles %}
                 <li class="item">
@@ -51,10 +83,11 @@
                     <p>{{ article.body|u.truncate(150, '...', false)|striptags }}</p>
                 </li>
 
-			{% endfor %}	
-                            
+            {% endfor %}	
+                           
             </ul>
-            <a id="loadmore" class="bt">Plus d'articles</a>
+             <a class="bt active" id = "load-articles" >Plus d'articles</a>  
+
         </section>	
 
 

@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Articles
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        const btLoadmore = document.querySelector('#loadmore');
+        const items = document.querySelectorAll('.item');
+        const nbItems = items.length;
+
+
+        for (i=6; i<nbItems; i++){
+            items[i].style = 'opacity: 0; height: 0; ';
+        }
+
+        var artDepart= 6;
+    
+
+        btLoadmore.onclick = (e) => {
+            if (artDepart + 6 >= nbItems){
+                artFin = nbItems;
+                btLoadmore.style.display = 'none';
+            }else{
+                artFin = artDepart + 6;
+            }
+
+ 			for (i=artDepart; i<artFin; i++){
+                items[i].style = 'opacity: 1; height: auto; transition: opacity 1s ease-out;';
+            }
+            artDepart = artFin;
+		}
+
+    </script>
+{% endblock %}
+
+{% block main %}
+<section class="liste-articles">
+            <ul>
+
+			{% for article in articles %}
+                <li class="item">
+                    <a href="{{ path("article_show", {'slug': article.slug}) }}">
+                        <picture>
+                            <source srcset="/img/article/thumbnail/{{ article.photoPath }}.webp" type="image/webp">
+                            <source srcset="/img/article/thumbnail/{{ article.photoPath }}.jpg" type="image/jpeg"> 
+                            <img src="/img/article/thumbnail/{{ article.photoPath }}.jpg" alt="{{ article.photoTitle }}">
+                        </picture>
+                        <h3>{{ article.title }}</h3>
+                    </a>
+                    <p>{{ article.body|u.truncate(150, '...', false)|striptags }}</p>
+                </li>
+
+			{% endfor %}	
+                            
+            </ul>
+            <a id="loadmore" class="bt">Plus d'articles</a>
+        </section>	
+
+
+{% endblock %}
