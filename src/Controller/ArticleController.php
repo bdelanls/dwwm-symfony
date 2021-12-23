@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 #[Route('/')]
 class ArticleController extends AbstractController
@@ -27,13 +28,66 @@ class ArticleController extends AbstractController
         ]);
     }
 
+
     #[Route('articles', name: 'articles_front', methods: ['GET'])]
-    public function index_articles(ArticleRepository $articleRepository): Response
+    public function index_articles(ArticleRepository $articleRepository, PaginatorInterface $paginator, Request $request): Response
     {
-        return $this->render('article/index_articles.html.twig', [
-            'articles' => $articleRepository->findAllFront(true, 100),
-        ]);
+
+        // le nombre d'éléments par page
+        $limit = 6;
+        $page = (int)$request->query->get("page", 1);
+
+        $articles = $articleRepository->getPaginateArticles($page, $limit) ;
+
+        $totalArticles = (int)$articleRepository->getTotalArticles();
+
+            return $this->render('article/index_articles.html.twig', [
+                'articles' => $articles,
+                'totalArticles' => $totalArticles,
+                'limit' => $limit,
+            ]);
     }
+
+    #[Route('articles/ajax', name: 'liste_articles', methods: ['GET'])]
+    public function liste_articles(ArticleRepository $articleRepository, PaginatorInterface $paginator, Request $request): Response
+    {
+        // le nombre d'éléments par page
+        $limit = 6;
+        $page = (int)$request->query->get("page", 1);
+
+        $articles = $articleRepository->getPaginateArticles($page, $limit) ;
+
+        $jsonData = array();  
+        $idx = 0;  
+        foreach($articles as $article) {  
+
+            $item = $article->getBody();
+            $item = strip_tags($item);
+            $item = mb_strimwidth($item, 0, 150, '...');
+
+            $temp = array(
+                'title' => $article->getTitle(),  
+                'slug' => $article->getSlug(),
+                'photoPath' => $article->getPhotoPath(),
+                'photoTitle' => $article->getPhotoTitle(), 
+                'body' => $item, 
+            );   
+            $jsonData[$idx++] = $temp;  
+        } 
+        return new JsonResponse($jsonData);
+
+        
+    }
+
+
+
+    // #[Route('articles', name: 'articles_front', methods: ['GET'])]
+    // public function index_articles(ArticleRepository $articleRepository): Response
+    // {
+    //     return $this->render('article/index_articles.html.twig', [
+    //         'articles' => $articleRepository->findAllFront(true, 100),
+    //     ]);
+    // }
 
 
 

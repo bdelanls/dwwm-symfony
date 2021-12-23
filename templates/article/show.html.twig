@@ -37,9 +37,9 @@
     {% for article in articles %}
     <section class="article">
         <picture>
-            <source srcset="/img/article/thumbnail/{{ article.photoPath }}.webp" type="image/webp">
-            <source srcset="/img/article/thumbnail/{{ article.photoPath }}.jpg" type="image/jpeg"> 
-            <img src="/img/article/thumbnail/{{ article.photoPath }}.jpg" alt="{{ article.photoTitle }}">
+            <source srcset="/img/article/wide/{{ article.photoPath }}.webp" type="image/webp">
+            <source srcset="/img/article/wide/{{ article.photoPath }}.jpg" type="image/jpeg"> 
+            <img src="/img/article/wide/{{ article.photoPath }}.jpg" alt="{{ article.photoTitle }}">
         </picture>
         <h3>{{ article.title }}</h3>
         <div class="txt-article">

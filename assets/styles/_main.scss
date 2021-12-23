@@ -137,6 +137,14 @@ section.liste-articles{
     ul{
         display: flex;
         flex-flow: column wrap;
+
+        .hinclude-articles{
+            justify-content: inherit;
+            display: inherit;
+            flex-flow: inherit;
+            gap: inherit;
+        }
+
         @include tablet{
             flex-flow: row wrap;
             justify-content: space-between;
@@ -202,9 +210,14 @@ section.liste-articles{
         margin: 0 auto;
         z-index: 1000;
         position: relative;
+        display: none;
 
         &:hover{
             cursor: pointer;
+        }
+
+        &.active{
+            display: block;
         }
         
     }

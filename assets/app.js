@@ -9,7 +9,10 @@
 import './styles/app.scss';
 
 // JS perso
-import './script.js';
+import './script';
 
 // start the Stimulus application
 // import './bootstrap';
+
+// import hinclude
+import './hinclude-1.2.0/hinclude';

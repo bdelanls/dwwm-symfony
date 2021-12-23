@@ -34,6 +34,34 @@ class ArticleRepository extends ServiceEntityRepository
         ;
     }
 
+    
+    /**
+     * Method getPaginateArticles
+     * Returns all articles per page
+     */
+    public function getPaginateArticles($page, $limit)
+    {
+        return $this->createQueryBuilder('a')
+            ->where('a.is_active = 1')
+            ->orderBy('a.promote DESC, a.published_at',  'DESC')
+            ->setFirstResult(($page * $limit) - $limit)
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function getTotalArticles()
+    {
+        return $this->createQueryBuilder('a')
+            ->select('COUNT(a)')
+            ->where('a.is_active = 1')
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+    }
+
+
     // /**
     //  * @return Article[] Returns an array of Article objects
     //  */
