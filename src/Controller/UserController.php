@@ -2,25 +2,26 @@
 
 namespace App\Controller;
 
+use DateTime;
+use DateInterval;
 use DateTimeZone;
 use App\Entity\File;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Form\FilesType;
+use App\Service\Mailer;
 use App\Form\UserNoteType;
 use App\Form\UserRoleType;
 use App\Form\FilesUserType;
 use App\Service\UploadService;
 use App\Repository\FileRepository;
-use App\Repository\LessonRepository;
 use App\Repository\UserRepository;
-use App\Service\Mailer;
-use DateInterval;
-use DateTime;
+use App\Repository\LessonRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -279,12 +280,16 @@ class UserController extends AbstractController
                 // mail au prof
                 $mailer->envoiEmailDelete('' , $subject, $lessonsDelete, $lessonsNoDelete, $student, 'email_delete_teacher.html.twig');
 
-                //message
-                $message = "Votre compte a été supprimé ainsi que toutes les données vous concernant.";
-
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->remove($user);
                 $entityManager->flush();
+
+                // Exit
+                $this->container->get('security.token_storage')->setToken(null);
+                $message = 'Votre compte a été supprimé ainsi que toutes les données vous concernant.';
+                $this->addFlash('success', $message);
+                return $this->redirectToRoute('home');
+
 
             }
 
