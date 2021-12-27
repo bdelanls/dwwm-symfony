@@ -920,7 +920,15 @@ section.admin{
         
     }
 
+    .filet-top{
+        margin-top: em(32); 
+        padding-top: em(10); 
+        border-top: 1px solid #666;
 
+        p{
+            margin: em(20) 0;
+        }
+    }
 
 }  
 
@@ -1234,6 +1242,7 @@ body.bio main{
     }
 
 }
+
 
 
 // ################################

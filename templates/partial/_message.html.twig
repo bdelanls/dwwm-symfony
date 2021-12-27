@@ -2,7 +2,7 @@
     {% for classStyle, messages in app.flashes %}
         {% for message in messages %}
         <div class="alert alert-{{ classStyle }}">
-            <svg class="bt-message" onClick="this.parentNode.classList.add('close')"><title>Fermer</title><use xlink:href="/img/icons.svg#cross"></use></svg>
+            <svg class="bt-message"><title>Fermer</title><use xlink:href="/img/icons.svg#cross"></use></svg>
 
             <p>{{ message }}</p>
         </div>

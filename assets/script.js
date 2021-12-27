@@ -29,6 +29,16 @@ window.onresize = () =>{
 
 };
 
+// close message
+var btMsg = document.querySelector('.bt-message');
+
+if (btMsg){
+    btMsg.addEventListener('click', e => {
+        btMsg.parentNode.classList.add('close')
+    })
+}
+
+
 
 // articles
 if (document.querySelector('section').className === 'article'){
