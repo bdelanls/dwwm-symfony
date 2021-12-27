@@ -80,8 +80,14 @@ class UserController extends AbstractController
     }
 
     #[Route('backstage/profil/{id}', name: 'user_show', methods: ['GET']), IsGranted('ROLE_USER')]
-    public function show(User $user): Response
+    public function show(User $user): Response 
     {
+        // test User
+        if ($this->getUser()->getRoles() != "ROLE_ADMIN") {
+            $user = $this->getUser();
+        }
+
+
         return $this->render('user/show.html.twig', [
             'user' => $user,
         ]);
@@ -156,9 +162,15 @@ class UserController extends AbstractController
 
 
 
-    #[Route('user/{id}/edit', name: 'user_edit', methods: ['GET','POST']), IsGranted('ROLE_STUDENT')]
+    #[Route('user/{id}/edit', name: 'user_edit', methods: ['GET','POST']), IsGranted('ROLE_USER')]
     public function edit(Request $request, User $user): Response
     {
+        // test User
+        if ($this->getUser()->getRoles() != "ROLE_ADMIN") {
+            $user = $this->getUser();
+        }
+
+        
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
