@@ -40,7 +40,7 @@ class RegistrationController extends AbstractController
                 ->htmlTemplate('registration/confirmation_email.html.twig')
         );
         // do anything else you need here, like send an email
-        $this->addFlash('success', 'Vous allez recevevoir un mail pour confirmer votre adresse.');
+        $this->addFlash('success', 'Vous allez recevoir un mail pour confirmer votre adresse. Patience, ça peut prendre un peu de temps pour arriver...');
         return $this->redirectToRoute('user_show', ['id' => $user->getId()], Response::HTTP_SEE_OTHER);
     }
 

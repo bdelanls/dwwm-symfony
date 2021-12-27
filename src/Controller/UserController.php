@@ -91,8 +91,7 @@ class UserController extends AbstractController
     /**
      * Method student_show
      */
-    #[Route('backstage/student/{id}', name: 'student_show', methods: ['GET', 'POST']), 
-    Security("is_granted('ROLE_ADMIN') and is_granted('ROLE_TEACHER')")]    
+    #[Route('backstage/student/{id}', name: 'student_show', methods: ['GET', 'POST']), IsGranted('ROLE_TEACHER')]    
     public function student_show(int $id, User $user, Request $request, FileRepository $fileRepository, UploadService $uploader, LessonRepository $lessonRepository): Response
     {
 
@@ -157,7 +156,7 @@ class UserController extends AbstractController
 
 
 
-    #[Route('user/{id}/edit', name: 'user_edit', methods: ['GET','POST'])]
+    #[Route('user/{id}/edit', name: 'user_edit', methods: ['GET','POST']), IsGranted('ROLE_STUDENT')]
     public function edit(Request $request, User $user): Response
     {
         $form = $this->createForm(UserType::class, $user);
