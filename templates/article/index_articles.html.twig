@@ -4,71 +4,12 @@
 {% endblock %}
 
 {% block javascripts %}    
-    <script>
-
-        const btArticles = document.getElementById("load-articles");
-        const list = document.getElementById("list");
-        var page = 1;
-        var totalArticles = {{ totalArticles }} ;
-        var limit = {{ limit }} ;
-
-        var nbPages = Math.ceil(totalArticles / limit) ;
-
-
-        function get(url) {
-            return new Promise((resolve, reject) => {
-                const req = new XMLHttpRequest();
-                req.open('GET', url);
-                req.onload = () => req.status === 200 ? resolve(req.response) : reject(Error(req.statusText));
-                req.onerror = (e) => reject(Error(`Network Error: ${e}`));
-                req.send();
-            });
-        }
-
-        btArticles.addEventListener('click', e => {
-
-            page++ ;
-            get("/articles/ajax?page=" + page)
-
-            .then((data) => {
-
-                data = JSON.parse(data);
-
-                for(i = 0; i < data.length; i++) { 
-                    
-                    let article = data[i];
-
-                    list.innerHTML += '<li class="item">'
-                    + '<a href="/article/' + article['slug'] + '">'
-                    + '<picture>'
-                    + '<source srcset="/img/article/thumbnail/'+ article['photoPath'] +'.webp" type="image/webp">'
-                    + '<source srcset="/img/article/thumbnail/'+ article['photoPath'] +'.jpg" type="image/jpeg">'
-                    + '<img src="/img/article/thumbnail/'+ article['photoPath'] +'.jpg" alt="'+ article['photoTitle'] +'">'
-                    + '</picture>'
-                    + '<h3>'+ article['title'] +'</h3>'
-                    + '</a>'
-                    + '<p>'+ article['body']
-                    + '</li>';
-               }
-            
-            })
-            .catch((err) => {
-                alert('Une erreur est survenue !');
-            });
-
-            if (page === nbPages ) {
-                btArticles.classList.remove("active");
-            }
-
-        });
-        
-    </script>
 {% endblock %}
 
 {% block main %}
 <section class="liste-articles">
 
-            <ul id="list">
+            <ul id="list" data-total-articles="{{ totalArticles }}" data-limit="{{ limit }}">
 
 			{% for article in articles %}
                 <li class="item">
