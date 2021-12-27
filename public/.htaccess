@@ -5,6 +5,36 @@
 # to each configured DirectoryIndex file (e.g. index.php, index.html, index.pl).
 DirectoryIndex index.php
 
+
+# Redirect to HTTPS
+RewriteCond %{SERVER_PORT} ^80$ [OR]
+RewriteCond %{HTTPS} =off
+RewriteRule ^(.*)$ https://dwwm.bdelanls.fr/$1 [R=301,L]
+
+<IfModule mod_headers.c>
+    # HTTP Strict Transport Security
+    # Only connect to this site via HTTPS for the two years
+    Header always set Strict-Transport-Security "max-age=63072000;"
+    
+    # Content Security Policy
+    Header set Content-Security-Policy "default-src 'none'; object-src 'none'; frame-src 'self'; img-src 'self'; script-src 'self'; style-src 'self'; font-src 'self';"
+
+    # x-Content-Type-Options
+    # Prevent browsers from incorrectly detecting non-scripts as scripts
+    Header set X-Content-Type-Options nosniff
+
+    # X-Frame-Options
+    # disallow allow attempts to iframe site
+    Header always append X-Frame-Options DENY
+
+    # X-XSS-Protection
+    # Block pages from loading when they detect reflected XSS attacks
+    Header set X-XSS-Protection "1; mode=block"
+
+</IfModule>
+
+
+
 # By default, Apache does not evaluate symbolic links if you did not enable this
 # feature in your server configuration. Uncomment the following line if you
 # install assets as symlinks or if you experience problems related to symlinks
