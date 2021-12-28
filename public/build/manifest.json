@@ -1,8 +1,8 @@
 {
-  "build/app.js": "/build/app.js",
-  "build/runtime.js": "/build/runtime.js",
-  "build/vendors-node_modules_core-js_modules_es_array_filter_js-node_modules_core-js_modules_es_array-4af10b.js": "/build/vendors-node_modules_core-js_modules_es_array_filter_js-node_modules_core-js_modules_es_array-4af10b.js",
-  "build/app.css": "/build/app.css",
+  "build/app.css": "/build/app.8191984e.css",
+  "build/app.js": "/build/app.c5e9c1b1.js",
+  "build/runtime.js": "/build/runtime.48992d8b.js",
+  "build/100.b6062353.js": "/build/100.b6062353.js",
   "build/images/error.jpg": "/build/images/error.05109da6.jpg",
   "build/images/guitariste-intro.jpg": "/build/images/guitariste-intro.6d9be8ec.jpg",
   "build/fonts/roboto-lightitalic-webfont.woff": "/build/fonts/roboto-lightitalic-webfont.6f398e42.woff",
@@ -23,7 +23,6 @@
   "build/fonts/roboto-medium-webfont.woff2": "/build/fonts/roboto-medium-webfont.897a0588.woff2",
   "build/fonts/roboto-regular-webfont.woff2": "/build/fonts/roboto-regular-webfont.3b59f4fa.woff2",
   "build/fonts/anton-regular-webfont.woff2": "/build/fonts/anton-regular-webfont.d0e5f9e3.woff2",
-  "build/images/bulet.svg": "/build/images/bulet.ae66368d.svg",
   "build/images/bulet-off.svg": "/build/images/bulet-off.eebd4997.svg",
   "build/images/bulet-on.svg": "/build/images/bulet-on.e26e4582.svg"
 }
