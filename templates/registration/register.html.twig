@@ -37,11 +37,21 @@
                     {{ form_widget(registrationForm.phone) }}
                     {{ form_errors(registrationForm.phone) }}
                 </div>
-
-                <div class="row">
+                {# <div class="row">
                     {{ form_label(registrationForm.plainPassword) }}
                     {{ form_widget(registrationForm.plainPassword) }}
                     {{ form_errors(registrationForm.plainPassword) }}
+                </div> #}
+
+                <div class="row">
+                    {{ form_label(registrationForm.plainPassword.first) }}
+                    {{ form_widget(registrationForm.plainPassword.first) }}
+                    {{ form_errors(registrationForm.plainPassword.first) }}
+                </div>
+                <div class="row">
+                    {{ form_label(registrationForm.plainPassword.second) }}
+                    {{ form_widget(registrationForm.plainPassword.second) }}
+                    {{ form_errors(registrationForm.plainPassword.second) }}
                 </div>
                 
 
@@ -79,8 +89,11 @@
 
                 <div class="row">
                     <fieldset>
+                        <label for="{{ registrationForm.agreeTerms.vars.id }}">
                         {{ form_widget(registrationForm.agreeTerms) }}
-                        {{ form_label(registrationForm.agreeTerms) }}
+                            J'accepte la <a href="{{ path("pol-conf") }}" target="_blank">politique de confidentialité</a>.
+                            {# {{ form_label(registrationForm.agreeTerms) }} #}
+                        </label>
                         {{ form_errors(registrationForm.agreeTerms) }}
                         
                     </fieldset>

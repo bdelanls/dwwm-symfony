@@ -38,8 +38,11 @@
             {{ form_errors(form.message) }}
 
             <fieldset>
+                <label for="{{ form.agreeTerms.vars.id }}">
                 {{ form_widget(form.agreeTerms) }}
-                {{ form_label(form.agreeTerms) }}
+                J'accepte la <a href="{{ path("pol-conf") }}" target="_blank">politique de confidentialité</a>.
+                {# {{ form_label(form.agreeTerms) }} #}
+                </label>
                 {{ form_errors(form.agreeTerms) }}
             </fieldset>
         

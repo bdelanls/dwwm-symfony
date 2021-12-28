@@ -4,47 +4,11 @@
 {% endblock %}
 
 {% block javascripts %}
-	<script>
-		function animNote($n) {
-			let btPencil = document.querySelector('.bt-note-pencil');
-			let btClose = document.querySelector('.bt-note-close');
-			let noteTxt = document.querySelector('.note-txt');
-			let noteForm = document.querySelector('.note-form');
-
-			if ($n == 'pencil') {
-				btClose.classList.add("active");
-				noteForm.classList.add("active");
-				btPencil.classList.remove("active");
-				noteTxt.classList.remove("active");
-			} else {
-				btClose.classList.remove("active");
-				noteForm.classList.remove("active");
-				btPencil.classList.add("active");
-				noteTxt.classList.add("active");
-			}
-		}
-		function btFile() {
-			let btPlus = document.querySelector('#bt-plus');
-			let fileList = document.querySelector('#file-list'); 
-			let fileForm = document.querySelector('#form-file-user'); 
-
-			
-			if (btPlus.className == "active"){
-				btPlus.classList.remove("active");
-				fileList.classList.add("active");
-				fileForm.classList.remove("active");
-			}else{
-				btPlus.classList.add("active");
-				fileList.classList.remove("active");
-				fileForm.classList.add("active");
-			}
-		}
-	</script>
 {% endblock %}
 
 {% block main %}
 
-	<section class="admin">
+	<section class="admin student-file">
 		<div class="col1">
 			<nav class="admin-nav">
 				{% include "partial/_menuBackstage.html.twig" %}
@@ -110,13 +74,13 @@
 
 				<section class="block-option">
 					<h4>Note</h4>
-					<a onclick="animNote('pencil')" class="bt-note-pencil active">
+					<a class="bt-note-pencil active">
 						<svg class="">
 							<title>Éditer</title>
 							<use xlink:href="/img/icons.svg#pencil"></use>
 						</svg>
 					</a>
-					<a onclick="animNote('close')" class="bt-note-close">
+					<a class="bt-note-close">
 						<svg class="">
 							<title>Éditer</title>
 							<use xlink:href="/img/icons.svg#cross"></use>
@@ -205,7 +169,7 @@
 
 				<section class="block-option">
 					<h4>Documents</h4>
-					<a onclick="btFile()" class="" id="bt-plus">
+					<a class="" id="bt-plus">
 						<svg class="">
 							<title>Ajouter un document</title>
 							<use xlink:href="/img/icons.svg#plus"></use>
