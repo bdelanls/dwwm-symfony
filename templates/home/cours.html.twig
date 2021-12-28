@@ -49,8 +49,14 @@
                     voluptates at quam sequi fugiat soluta ullam doloremque dolorem perferendis blanditiis
                     voluptatem mollitia similique a exercitationem itaque minima.</p>
                 <div>
-                    <a href="{{ path('app_login') }}" class="bt">Se connecter</a>
-                    <a href="{{ path('app_register') }}" class="bt">S'inscrire</a>
+                    
+                    {% if is_granted("ROLE_STUDENT") != true %}
+                        <a href="{{ path('app_login') }}" class="bt">Se connecter</a>
+                        <a href="{{ path('app_register') }}" class="bt">S'inscrire</a>
+                    {% else %}
+                        <a href="{{ path('app_logout') }}" class="bt">Se déconnecter</a>
+                        <a href="{{ path("backstage_index") }}" class="bt">Backstage</a>
+                    {% endif %}
                 </div>
             </div>
         </div>

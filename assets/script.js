@@ -115,8 +115,52 @@ if (document.querySelector('section').className === 'liste-articles'){
 
 }
 
+// student file
+if (document.querySelector('section').className == 'admin student-file'){
 
 
+
+    const btNoteOpen = document.querySelector('.bt-note-pencil');
+    const btNoteClose = document.querySelector('.bt-note-close');
+    const noteTxt = document.querySelector('.note-txt');
+    const noteForm = document.querySelector('.note-form');
+
+    const btDoc = document.querySelector('#bt-plus');
+    const fileList = document.querySelector('#file-list'); 
+    const fileForm = document.querySelector('#form-file-user');
+
+    if (btNoteOpen){
+        btNoteOpen.addEventListener('click', e => {
+            btNoteClose.classList.add("active");
+            noteForm.classList.add("active");
+            btNoteOpen.classList.remove("active");
+            noteTxt.classList.remove("active");
+        })
+    }
+    if (btNoteClose){
+        btNoteClose.addEventListener('click', e => {
+            btNoteClose.classList.remove("active");
+            noteForm.classList.remove("active");
+            btNoteOpen.classList.add("active");
+            noteTxt.classList.add("active");
+        })
+    }
+
+    if (btDoc){
+        btDoc.addEventListener('click', e => {
+            if (btDoc.className == "active"){
+                btDoc.classList.remove("active");
+                fileList.classList.add("active");
+                fileForm.classList.remove("active");
+            }else{
+                btDoc.classList.add("active");
+                fileList.classList.remove("active");
+                fileForm.classList.add("active");
+            }
+        })
+    }
+    
+}
 
 
 

@@ -13,6 +13,8 @@ form{
         color: $onyx;
         
         &:first-child{margin-top: 0;}
+
+        a{color: $onyx;}
     }
 
     input, textarea, select{
