@@ -241,7 +241,7 @@ class LessonController extends AbstractController
             $mailer->envoiEmail($to , $subject, $date, $student, $tmp);
             
 
-            $this->addFlash('success', 'La réservation a été enregistré');
+            $this->addFlash('success', 'La réservation a été enregistrée');
             return $this->redirectToRoute('lesson_agenda_index', [
                 'month' => date_format($date, 'm'), 
                 'year' => date_format($date, 'Y')

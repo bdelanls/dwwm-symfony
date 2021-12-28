@@ -1,5 +1,5 @@
 {
-  "build/app.css": "/build/app.80b6039c.css",
+  "build/app.css": "/build/app.8191984e.css",
   "build/app.js": "/build/app.c5e9c1b1.js",
   "build/runtime.js": "/build/runtime.48992d8b.js",
   "build/100.b6062353.js": "/build/100.b6062353.js",
@@ -22,5 +22,7 @@
   "build/fonts/roboto-bold-webfont.woff2": "/build/fonts/roboto-bold-webfont.746e4b5d.woff2",
   "build/fonts/roboto-medium-webfont.woff2": "/build/fonts/roboto-medium-webfont.897a0588.woff2",
   "build/fonts/roboto-regular-webfont.woff2": "/build/fonts/roboto-regular-webfont.3b59f4fa.woff2",
-  "build/fonts/anton-regular-webfont.woff2": "/build/fonts/anton-regular-webfont.d0e5f9e3.woff2"
+  "build/fonts/anton-regular-webfont.woff2": "/build/fonts/anton-regular-webfont.d0e5f9e3.woff2",
+  "build/images/bulet-off.svg": "/build/images/bulet-off.eebd4997.svg",
+  "build/images/bulet-on.svg": "/build/images/bulet-on.e26e4582.svg"
 }
