@@ -31,7 +31,9 @@
         {{ form_label(form.body) }}
         {{ form_errors(form.body) }}
         {{ form_widget(form.body) }}
+        <div id="editor"></div>
     </div>
+
     <fieldset class="fieldset">
         <legend>PHOTO</legend>
         <div class="row">
@@ -63,6 +65,7 @@
         </div>
     </fieldset>
     
-    <button class="bt-form">{{ button_label|default('Enregistrer') }}</button>
+    {# <button class="bt-form">{{ button_label|default('Enregistrer') }}</button> #}
+    <input type="submit" class="bt-form" value="Enregistrer">
 
 {{ form_end(form) }}

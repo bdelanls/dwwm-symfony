@@ -18,9 +18,7 @@ RewriteRule ^(.*)$ https://dwwm.bdelanls.fr/$1 [R=301,L]
     
     # Content Security Policy
     # Header set Content-Security-Policy "default-src 'none'; connect-src 'self'; object-src 'self'; frame-src 'self'; img-src 'self'; script-src 'self'; style-src 'self'; font-src 'self';"
-    Header set Content-Security-Policy "default-src 'self'; connect-src 'self'; 
-        script-src https://dwwm.bdelanls.fr 'sha256-wKUjLL7aSx8EKrEeb1f6w5W0BD/9DHlkPRhM7PGjWJ4=' 'sha256-y0FGupdgpN9LQAj1l5kqL/7oRO0StUttq1GbTqNCtls=' 'sha256-rUcyeNGaCu6KMpC6A+PoN0IXSYu5bEd5O494jWnhL6c=' 'sha256-6R6hd1KfulqwSsmtqxMzHUdzoSPhchPwe4TRfgqPQI4='; 
-        img-src * data:; style-src 'self' 'unsafe-inline'; frame-src *; font-src 'self';"
+    Header set Content-Security-Policy "default-src 'none'; connect-src 'self'; script-src 'self'; img-src * data:; style-src 'self' 'unsafe-inline'; frame-src *; font-src 'self';"
 
 
     # x-Content-Type-Options

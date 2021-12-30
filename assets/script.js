@@ -162,6 +162,58 @@ if (document.querySelector('section').className == 'admin student-file'){
     
 }
 
+// article
+if (document.querySelector('section').className == 'admin form-article'){
 
+    var article = '#' + document.querySelector('form').name;
+    var fieldBody = document.querySelector(article + '_body');
 
+    // init CKeditor
+    ClassicEditor
+    .create(document.querySelector('#editor'), {
+        toolbar: [ 'bold', 'italic', 'underline', 'blockQuote', '|', 'alignment', '|', 'bulletedList', 'numberedList', '|', 'link', '|', 'insertTable', '|', 'undo', 'redo' ],
+        language: 'fr',
+    } )
+    .then(editor => {
+        editor.setData(fieldBody.value);
+        document.querySelector('form').addEventListener('submit', function(e){
+            e.preventDefault();
+            fieldBody.value = editor.getData();
+            this.submit();
+        })
+    })
+    .catch( error => {
+        console.log( error );
+    } );
+
+    // test chars number in meta
+    var metaTitle = document.querySelector(article + '_meta_title');
+    var pCharTitle = document.querySelector('.nbCharTitle');
+    var metaDescription = document.querySelector(article + '_meta');
+    var pCharDescription = document.querySelector('.nbCharDescription');
+
+    function show(champ, p, nb){
+        nbChar =  champ.value.length;
+        p.innerHTML = nbChar + " caractères / " + nb;
+        if (nbChar > nb){
+            p.style.color = 'red';
+        }else{
+            p.style = '';
+        }
+    }	
   
+    const eventTitle = (event) => {
+        show(metaTitle, pCharTitle, 60);
+    }
+    const eventDescription = (event) => {
+        show(metaDescription, pCharDescription, 160);
+    }
+
+    show(metaTitle, pCharTitle, 60);
+    show(metaDescription, pCharDescription, 160);
+
+    metaTitle.onkeyup = eventTitle;
+    metaDescription.onkeyup = eventDescription;
+
+
+}
