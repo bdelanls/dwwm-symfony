@@ -4,7 +4,6 @@ namespace App\Form;
 
 use App\Entity\Article;
 use Symfony\Component\Form\AbstractType;
-use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\IsTrue;
@@ -12,6 +11,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
@@ -29,17 +29,8 @@ class ArticleEditType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('body', CKEditorType::class, [
+            ->add('body', HiddenType::class, [
                 'label' => "Corps de l'article :",
-                'required' => false,
-                'attr' => [
-                    'rows' => 5,
-                ],
-                'constraints' => [
-                    new NotBlank([
-                        'message' => "ce champs ne doit pas être vide",
-                    ]),
-                ],
             ])
             // ->add('published_at')
             // ->add('update_at')

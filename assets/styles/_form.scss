@@ -210,14 +210,20 @@ form fieldset.check {
 
 
 // Quill
-.ql-toolbar{
-  display: block !important;
-  margin-bottom: 0 !important;
-}
-.ql-editor{
-  background-color:rgba($color: $beige, $alpha: .2);
-  margin-bottom: 0 !important;
-  //border: 1px solid $shadow;
-  height: em(250) !important;
-  display: block;
+// .ql-toolbar{
+//   display: block !important;
+//   margin-bottom: 0 !important;
+// }
+// .ql-editor{
+//   background-color:rgba($color: $beige, $alpha: .2);
+//   margin-bottom: 0 !important;
+//   //border: 1px solid $shadow;
+//   height: em(250) !important;
+//   display: block;
+// }
+
+
+// CKeditor
+.ck-editor__editable_inline {
+  min-height: em(150);
 }

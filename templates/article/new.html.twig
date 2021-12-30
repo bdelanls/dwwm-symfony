@@ -3,43 +3,13 @@
 {% block title %}Nouvel article{% endblock %}
 
 {% block javascripts %}
-	<script>
-
-		// init
-		var metaTitle = document.querySelector('#article_meta_title');
-		var pCharTitle = document.querySelector('.nbCharTitle');
-		var metaDescription = document.querySelector('#article_meta');
-		var pCharDescription = document.querySelector('.nbCharDescription');
-
-		show(metaTitle, pCharTitle, 60);
-		show(metaDescription, pCharDescription, 160);
-
-		const eventTitle = (event) => {
- 			show(metaTitle, pCharTitle, 60);
-		}
-		const eventDescription = (event) => {
- 			show(metaDescription, pCharDescription, 160);
-		}
-
-		function show(champ, p, nb){
-			nbChar =  champ.value.length;
-			p.innerHTML = nbChar + " caractères / " + nb;
-			if (nbChar > nb){
-				p.style.color = 'red';
-			}else{
-				p.style = '';
-			}
-		}		
-
-		metaTitle.onkeyup = eventTitle;
-		metaDescription.onkeyup = eventDescription;
-
-	</script>
+	<script src="{{ asset('ckeditor5/ckeditor.js') }}"></script>
+	<script src="{{ asset('ckeditor5/translations/fr.js') }}"></script>
 
 {% endblock %}
 
 {% block main %}
-	<section class="admin">
+	<section class="admin form-article">
 		<div class="col1">
 			<nav class="admin-nav">
 				{% include "partial/_menuBackstage.html.twig" %}
