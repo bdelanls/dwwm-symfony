@@ -118,6 +118,26 @@ if (document.querySelector('section').className === 'liste-articles'){
 // student file
 if (document.querySelector('section').className == 'admin student-file'){
 
+    var fieldNote = document.querySelector('#user_note_note');
+
+   // init CKeditor
+   ClassicEditor
+   .create(document.querySelector('#editor'), {
+       toolbar: [ 'bold', 'italic', 'underline', 'blockQuote', '|', 'alignment', '|', 'bulletedList', 'numberedList', '|', 'link', '|', 'insertTable', '|', 'undo', 'redo' ],
+       language: 'fr',
+   } )
+   .then(editor => {
+       editor.setData(fieldNote.value);
+       document.querySelector('form').addEventListener('submit', function(e){
+           e.preventDefault();
+           fieldNote.value = editor.getData();
+           this.submit();
+       })
+   })
+   .catch( error => {
+       console.log( error );
+   } ); 
+
 
 
     const btNoteOpen = document.querySelector('.bt-note-pencil');

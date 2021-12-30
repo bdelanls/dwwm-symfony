@@ -224,6 +224,16 @@ form fieldset.check {
 
 
 // CKeditor
-.ck-editor__editable_inline {
+form .ck-editor__editable_inline {
   min-height: em(150);
+
+  ul li{list-style-type: disc; }
+  ol li{list-style-type: decimal; }
+
+  li{
+    color: inherit;
+    list-style-position: inside;
+    padding-left: em(16);
+  }
+  
 }
