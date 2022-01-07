@@ -15,4 +15,4 @@ import './script';
 // import './bootstrap';
 
 // import hinclude
-import './hinclude-1.2.0/hinclude';
+// import './hinclude-1.2.0/hinclude';
