@@ -13,6 +13,8 @@
 // 8 - Inscription
 // 9 - Error
 // 10 - Mentions
+// 11 - bio
+
 
 .bt{
     @include button();
@@ -207,6 +209,7 @@ section.liste-articles{
 
     .bt{
         @include button($blanc, $shadow);
+        border: none;
         margin: 0 auto;
         z-index: 1000;
         position: relative;
@@ -1068,6 +1071,7 @@ nav.mois{
         .bt{
             @include button();
             margin-right: em(16);
+            border: none;
         }
 
         div{
@@ -1094,6 +1098,9 @@ nav.mois{
 .inscription section {
     display: flex;
     flex-flow: column wrap;
+
+    img{width: 100%;}
+    p{margin: em(16) 0;}
 
     .row{
         display: flex;
@@ -1229,20 +1236,70 @@ body.mentions main{
 
 // XI - Bio
 
-body.bio main{
 
-    h1{
-        color: $shadow;
+
+html.bio{
+    background-color: #171717;
+    
+    body{
+        background-color: #171717;
     }
-    h3{
-        color: $onyx;
-        margin-bottom: em(16);
+
+    nav#menu a, nav.log a, nav.mobile{color: #fff;}
+    @include desktop{
+        nav#menu a, nav.log a{color: $shadow;}
     }
-    p{
-        margin-bottom: em(16);
+
+    main{
+
+        h1{
+            color: $shadow;
+        }
+        h3{
+            color: $onyx;
+            margin-bottom: rem(16);
+        }
+        p{
+            margin-bottom: rem(16);
+            color: #ccc;
+        }
+
+        img{width: 100%;}
+
+        section.img-bio{
+            padding: 0;
+        }
+        p.frame{
+            border: 1px solid #999;
+            padding: em(12);
+            color: #999;
+        }
+
+        @include tablet{
+            h1{font-size: rem(32);}
+            img{display: inline-block;}
+        }
+
+        @include desktop{
+            h1{font-size: rem(60);}
+            img{width: auto;}
+            section.img-bio img{width: 100%;} 
+            section.intro-bio{
+                display: flex;
+                align-items: flex-end;
+
+                div{height: min-content;}
+            }
+
+
+        }
+    
     }
+
 
 }
+
+
 
 
 

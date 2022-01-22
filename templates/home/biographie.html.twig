@@ -1,55 +1,74 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Guy Taracoustik - Guitariste{% endblock %}
+{% block title %}Guy Taracoustik - Guitariste
+{% endblock %}
 {% block meta_description %}
-    Guitariste et professeur de guitare classique au conservatoire de Paris. 
-    Donne des cours particulier à des amateurs avancés ou professionnels.
+	Guitariste et professeur de guitare classique au conservatoire de Paris. 
+		    Donne des cours particulier à des amateurs avancés ou professionnels.
 {% endblock %}
 
 {% block main %}
 
 
-    <section>
+	<section class="intro-bio">
+        <picture>
+            <source srcset="/img/bio.webp" type="image/webp">
+            <source srcset="/img/bio.jpg" type="image/jpeg"> 
+            <img src="/img/bio.jpg" alt="Guy Taracoustik">
+        </picture>
+		<div>
+			<h1>Guy Taracoustik</h1>
+			<h3>La guitare avant tout</h3>
+			<p>
+				<b>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem commodi optio quas enim blanditiis
+										            sit fugit necessitatibus labore, consectetur qui iste impedit modi tempora dignissimos? Asperiores
+										            officia dolore minus est unde itaque quasi corporis aliquid. Nulla nihil perspiciatis odio nostrum
+										            provident vel, enim error ut eaque saepe suscipit, illum at.</b>
+			</p>
+			<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fuga impedit magni ratione sapiente praesentium a voluptatem deserunt repellat iure! Aliquam iusto nihil quasi necessitatibus ipsa hic totam nulla quam in?</p>
+		</div>
+	</section>
+	<section class="txt-bio">
+		<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae porro vero iure similique libero
+							            minima corporis vel incidunt recusandae consequuntur. Vero molestias aperiam repellendus at
+							            voluptatum unde fugiat, veniam similique modi itaque ab velit impedit qui magnam quibusdam! Vel
+							            praesentium, temporibus earum eum eveniet magnam blanditiis modi sunt accusantium a ipsum mollitia
+							            est, illo numquam repudiandae et. Eum ullam, magni reprehenderit assumenda odio neque! Laborum
+							            minima beatae ex praesentium exercitationem officia iste quae. Quaerat totam nobis quo, laboriosam
+							            facilis ea earum exercitationem voluptas eum aut assumenda aliquid, tempore ullam eaque doloremque
+							            ipsa accusamus alias quas quis dicta dolor in? In!</p>
 
-    <h1>Guy Taracoustik</h1>
-    <h3>La guitare avant tout</h3>
-    <p><b>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem commodi optio quas enim blanditiis
-        sit fugit necessitatibus labore, consectetur qui iste impedit modi tempora dignissimos? Asperiores
-        officia dolore minus est unde itaque quasi corporis aliquid. Nulla nihil perspiciatis odio nostrum
-        provident vel, enim error ut eaque saepe suscipit, illum at.</b></p>
-    
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae porro vero iure similique libero
-        minima corporis vel incidunt recusandae consequuntur. Vero molestias aperiam repellendus at
-        voluptatum unde fugiat, veniam similique modi itaque ab velit impedit qui magnam quibusdam! Vel
-        praesentium, temporibus earum eum eveniet magnam blanditiis modi sunt accusantium a ipsum mollitia
-        est, illo numquam repudiandae et. Eum ullam, magni reprehenderit assumenda odio neque! Laborum
-        minima beatae ex praesentium exercitationem officia iste quae. Quaerat totam nobis quo, laboriosam
-        facilis ea earum exercitationem voluptas eum aut assumenda aliquid, tempore ullam eaque doloremque
-        ipsa accusamus alias quas quis dicta dolor in? In!</p>
 
-    <p>Aliquam sed fermentum odio. Duis eleifend, nunc eget consectetur tempor, purus massa aliquet dolor, eu
-        elementum sapien libero sit amet nibh. Donec porttitor sapien in arcu sollicitudin, sit amet mattis
-        felis sodales. Ut rutrum dui quam, eu dignissim lacus posuere et. Class aptent taciti sociosqu ad litora
-        torquent per conubia nostra, per inceptos himenaeos. Suspendisse potenti. Morbi aliquet pretium metus,
-        ut dapibus ligula ullamcorper ut. Quisque sed dolor sed quam varius posuere a vitae leo. Praesent
-        interdum, sapien eu porta dictum, velit neque dapibus nisl, in finibus nunc metus sed neque.</p>
-    <p>Nullam ornare egestas leo sed tempus. In eget dolor ante. Suspendisse potenti. Fusce et pretium turpis.
-        Curabitur vel fringilla ligula. Sed placerat est dignissim ornare imperdiet. Curabitur efficitur orci
-        quis fermentum aliquam. Nunc ut rhoncus augue.</p>
-    <p>Vestibulum vulputate nulla quis velit pretium fermentum. Proin non aliquam neque, eu tincidunt lectus.
-        Phasellus elementum id neque at tempus. Duis consectetur neque et purus sodales sodales. Nunc feugiat,
-        risus at volutpat bibendum, sem mauris dignissim enim, vitae bibendum sapien diam ac odio. Ut convallis
-        congue viverra. Proin purus nisi, ornare auctor imperdiet eu, tristique sed ipsum. Quisque faucibus
-        lorem in odio aliquam, non vulputate nulla hendrerit. Vivamus luctus consequat mi.</p>
-    <p>Nulla at lectus sit amet nisi pharetra vestibulum. Cras elit lectus, tempus ac magna nec, lacinia egestas
-        magna. Morbi dapibus nisl nec est auctor eleifend. Nam auctor urna at diam mattis, ut accumsan orci
-        ultricies. Maecenas rutrum lorem eu purus congue ullamcorper. Sed luctus sit amet nulla placerat
-        volutpat. Mauris quis felis mattis, lobortis magna pulvinar, malesuada tortor. Fusce nec lacus accumsan,
-        iaculis lacus aliquet, porta eros. Mauris at sodales elit, in laoreet libero. Mauris et sagittis dui.
-        Vestibulum at libero dictum, viverra augue auctor, lobortis mi. Sed a elit dui. Vestibulum fringilla
-        nibh id tempus ullamcorper. Donec id gravida eros, nec volutpat diam.</p>    
-        
-    </section>   
+		<p>Aliquam sed fermentum odio. Duis eleifend, nunc eget consectetur tempor, purus massa aliquet dolor, eu
+						        elementum sapien libero sit amet nibh. Donec porttitor sapien in arcu sollicitudin, sit amet mattis
+						        felis sodales. Ut rutrum dui quam, eu dignissim lacus posuere et. Class aptent taciti sociosqu ad litora
+						        torquent per conubia nostra, per inceptos himenaeos. Suspendisse potenti. Morbi aliquet pretium metus,
+						        ut dapibus ligula ullamcorper ut. Quisque sed dolor sed quam varius posuere a vitae leo. Praesent
+						        interdum, sapien eu porta dictum, velit neque dapibus nisl, in finibus nunc metus sed neque.</p>
+		<p>Nullam ornare egestas leo sed tempus. In eget dolor ante. Suspendisse potenti. Fusce et pretium turpis.
+						        Curabitur vel fringilla ligula. Sed placerat est dignissim ornare imperdiet. Curabitur efficitur orci
+						        quis fermentum aliquam. Nunc ut rhoncus augue.</p>
+		<p>Vestibulum vulputate nulla quis velit pretium fermentum. Proin non aliquam neque, eu tincidunt lectus.
+						        Phasellus elementum id neque at tempus. Duis consectetur neque et purus sodales sodales. Nunc feugiat,
+						        risus at volutpat bibendum, sem mauris dignissim enim, vitae bibendum sapien diam ac odio. Ut convallis
+						        congue viverra. Proin purus nisi, ornare auctor imperdiet eu, tristique sed ipsum. Quisque faucibus
+						        lorem in odio aliquam, non vulputate nulla hendrerit. Vivamus luctus consequat mi.</p>
+		<p class="frame">Nulla at lectus sit amet nisi pharetra vestibulum. Cras elit lectus, tempus ac magna nec, lacinia egestas
+						        magna. Morbi dapibus nisl nec est auctor eleifend. Nam auctor urna at diam mattis, ut accumsan orci
+						        ultricies. Maecenas rutrum lorem eu purus congue ullamcorper. Sed luctus sit amet nulla placerat
+						        volutpat. Mauris quis felis mattis, lobortis magna pulvinar, malesuada tortor. Fusce nec lacus accumsan,
+						        iaculis lacus aliquet, porta eros. Mauris at sodales elit, in laoreet libero. Mauris et sagittis dui.
+						        Vestibulum at libero dictum, viverra augue auctor, lobortis mi. Sed a elit dui. Vestibulum fringilla
+						        nibh id tempus ullamcorper. Donec id gravida eros, nec volutpat diam.</p>
+
+	</section>
+	<section class='img-bio'>
+        <picture>
+            <source srcset="/img/gt.webp" type="image/webp">
+            <source srcset="/img/gt.jpg" type="image/jpeg"> 
+            <img src="/img/gt.jpg" alt="Guy Taracoustik">
+        </picture>
+	</section>
 
 
 {% endblock %}

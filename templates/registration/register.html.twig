@@ -1,118 +1,122 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Inscription{% endblock %}
+{% block title %}Inscription
+{% endblock %}
 
 {% block main %}
 
-<section>
-        <div class="col col-1">
-            <h1>Inscription</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab at ipsum voluptates quaerat molestias
-                obcaecati tempora consectetur quisquam omnis harum. Nemo non autem at ab aperiam officiis minus
-                earum
-                ipsum, voluptates accusantium eius quae esse corrupti accusamus dolorum magni, atque iure ullam,
-                cupiditate dignissimos inventore odio repellendus. Adipisci, quisquam.</p>
+	<section>
+		<div class="col col-1">
+			<h1>Inscription</h1>
+			<picture>
+				<source srcset="/img/inscription.webp" type="image/webp">
+				<source srcset="/img/inscription.png" type="image/jpeg">
+				<img src="/img/inscription.png" alt="Inscription au cours de Guy Taracoustik">
+			</picture>
+			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab at ipsum voluptates quaerat molestias
+				                obcaecati tempora consectetur quisquam omnis harum. Nemo non autem at ab aperiam officiis minus
+				                earum
+				                ipsum, voluptates accusantium eius quae esse corrupti accusamus dolorum magni, atque iure ullam,
+				                cupiditate dignissimos inventore odio repellendus. Adipisci, quisquam.</p>
+			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum incidunt, distinctio corrupti repellat vel perferendis debitis temporibus omnis aspernatur cupiditate recusandae, quos explicabo? Dignissimos officiis ut doloremque placeat asperiores hic.</p>
 
-        </div>
-        <div class="col">
-            {{ form_start(registrationForm) }}
+		</div>
+		<div class="col">
+			{{ form_start(registrationForm) }}
 
-                <div class="row">
-                    {{ form_label(registrationForm.firstname) }}
-                    {{ form_widget(registrationForm.firstname) }}
-                    {{ form_errors(registrationForm.firstname) }}
-                </div>
-                <div class="row">
-                    {{ form_label(registrationForm.lastname) }}
-                    {{ form_widget(registrationForm.lastname) }}
-                    {{ form_errors(registrationForm.lastname) }}
-                </div>
-                <div class="row">
-                    {{ form_label(registrationForm.email) }}
-                    {{ form_widget(registrationForm.email) }}
-                    {{ form_errors(registrationForm.email) }}
-                </div>
-                <div class="row">
-                    {{ form_label(registrationForm.phone) }}
-                    {{ form_widget(registrationForm.phone) }}
-                    {{ form_errors(registrationForm.phone) }}
-                </div>
-                {# <div class="row">
-                    {{ form_label(registrationForm.plainPassword) }}
-                    {{ form_widget(registrationForm.plainPassword) }}
-                    {{ form_errors(registrationForm.plainPassword) }}
-                </div> #}
+			<div class="row">
+				{{ form_label(registrationForm.firstname) }}
+				{{ form_widget(registrationForm.firstname) }}
+				{{ form_errors(registrationForm.firstname) }}
+			</div>
+			<div class="row">
+				{{ form_label(registrationForm.lastname) }}
+				{{ form_widget(registrationForm.lastname) }}
+				{{ form_errors(registrationForm.lastname) }}
+			</div>
+			<div class="row">
+				{{ form_label(registrationForm.email) }}
+				{{ form_widget(registrationForm.email) }}
+				{{ form_errors(registrationForm.email) }}
+			</div>
+			<div class="row">
+				{{ form_label(registrationForm.phone) }}
+				{{ form_widget(registrationForm.phone) }}
+				{{ form_errors(registrationForm.phone) }}
+			</div>
+			{# <div class="row">
+			                    {{ form_label(registrationForm.plainPassword) }}
+			                    {{ form_widget(registrationForm.plainPassword) }}
+			                    {{ form_errors(registrationForm.plainPassword) }}
+			                </div> #}
 
-                <div class="row">
-                    {{ form_label(registrationForm.plainPassword.first) }}
-                    {{ form_widget(registrationForm.plainPassword.first) }}
-                    {{ form_errors(registrationForm.plainPassword.first) }}
-                </div>
-                <div class="row">
-                    {{ form_label(registrationForm.plainPassword.second) }}
-                    {{ form_widget(registrationForm.plainPassword.second) }}
-                    {{ form_errors(registrationForm.plainPassword.second) }}
-                </div>
-                
-
-                <h4>Informations supplémentaires afin de mieux vous connaître :</h4>
-
-                <div class="row">
-                    {{ form_label(registrationForm.birthday) }}
-                    {{ form_widget(registrationForm.birthday) }}
-                    {{ form_errors(registrationForm.birthday) }}
-                </div>
-
-                <div class="row">
-                    {{ form_label(registrationForm.level) }}
-                    {{ form_widget(registrationForm.level) }}
-                    {{ form_errors(registrationForm.level) }}
-                </div>
-
-                <div class="row">
-                    {{ form_label(registrationForm.years_playing) }}
-                    {{ form_widget(registrationForm.years_playing) }}
-                    {{ form_errors(registrationForm.years_playing) }}
-                </div>
-
-                <div class="row">
-                    {{ form_label(registrationForm.other_instrument) }}
-                    {{ form_widget(registrationForm.other_instrument) }}
-                    {{ form_errors(registrationForm.other_instrument) }}
-                </div>
-
-                <div class="row">
-                    {{ form_label(registrationForm.comment) }}
-                    {{ form_widget(registrationForm.comment) }}
-                    {{ form_errors(registrationForm.comment) }}
-                </div>
-
-                <div class="row">
-                    <fieldset>
-                        <label for="{{ registrationForm.agreeTerms.vars.id }}">
-                        {{ form_widget(registrationForm.agreeTerms) }}
-                            J'accepte la <a href="{{ path("pol-conf") }}" target="_blank">politique de confidentialité</a>.
-                            {# {{ form_label(registrationForm.agreeTerms) }} #}
-                        </label>
-                        {{ form_errors(registrationForm.agreeTerms) }}
-                        
-                    </fieldset>
-                </div>
+			<div class="row">
+				{{ form_label(registrationForm.plainPassword.first) }}
+				{{ form_widget(registrationForm.plainPassword.first) }}
+				{{ form_errors(registrationForm.plainPassword.first) }}
+			</div>
+			<div class="row">
+				{{ form_label(registrationForm.plainPassword.second) }}
+				{{ form_widget(registrationForm.plainPassword.second) }}
+				{{ form_errors(registrationForm.plainPassword.second) }}
+			</div>
 
 
-                <input type="submit" value="S'inscrire">
-            {{ form_end(registrationForm) }}
-        </div>
-    </section>
+			<h4>Informations supplémentaires afin de mieux vous connaître :</h4>
+
+			<div class="row">
+				{{ form_label(registrationForm.birthday) }}
+				{{ form_widget(registrationForm.birthday) }}
+				{{ form_errors(registrationForm.birthday) }}
+			</div>
+
+			<div class="row">
+				{{ form_label(registrationForm.level) }}
+				{{ form_widget(registrationForm.level) }}
+				{{ form_errors(registrationForm.level) }}
+			</div>
+
+			<div class="row">
+				{{ form_label(registrationForm.years_playing) }}
+				{{ form_widget(registrationForm.years_playing) }}
+				{{ form_errors(registrationForm.years_playing) }}
+			</div>
+
+			<div class="row">
+				{{ form_label(registrationForm.other_instrument) }}
+				{{ form_widget(registrationForm.other_instrument) }}
+				{{ form_errors(registrationForm.other_instrument) }}
+			</div>
+
+			<div class="row">
+				{{ form_label(registrationForm.comment) }}
+				{{ form_widget(registrationForm.comment) }}
+				{{ form_errors(registrationForm.comment) }}
+			</div>
+
+			<div class="row">
+				<fieldset>
+					<label for="{{ registrationForm.agreeTerms.vars.id }}">
+						{{ form_widget(registrationForm.agreeTerms) }}
+						J'accepte la
+						<a href="{{ path("pol-conf") }}" target="_blank">politique de confidentialité</a>.
+						{# {{ form_label(registrationForm.agreeTerms) }} #}
+					</label>
+					{{ form_errors(registrationForm.agreeTerms) }}
+
+				</fieldset>
+			</div>
 
 
-    
+			<input type="submit" value="S'inscrire">
+			{{ form_end(registrationForm) }}
+		</div>
+	</section>
 
 
-    
-        {# {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword) }}
-        {{ form_row(registrationForm.agreeTerms) }} #}
+	{# {{ form_row(registrationForm.email) }}
+	        {{ form_row(registrationForm.plainPassword) }}
+	        {{ form_row(registrationForm.agreeTerms) }} #}
 
-    
+
 {% endblock %}

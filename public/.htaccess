@@ -17,7 +17,7 @@ RewriteRule ^(.*)$ https://dwwm.bdelanls.fr/$1 [R=301,L]
     Header always set Strict-Transport-Security "max-age=63072000;"
     
     # Content Security Policy
-    Header set Content-Security-Policy "default-src 'none'; connect-src 'self'; script-src 'self'; img-src * data:; style-src 'self' 'unsafe-inline'; frame-src *; font-src 'self';"
+    Header set Content-Security-Policy "default-src 'self'; connect-src 'self'; script-src 'self'; img-src * data:; frame-ancestors 'none'; style-src 'self' 'unsafe-inline'; frame-src *; font-src 'self';"
 
     # x-Content-Type-Options
     # Prevent browsers from incorrectly detecting non-scripts as scripts

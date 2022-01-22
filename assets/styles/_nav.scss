@@ -80,7 +80,7 @@ nav#menu{
     // menu mobile
     &.active{
         display: block;
-        height: em(200);
+        height: min-content;
         padding: em(20);
         
         ul{
