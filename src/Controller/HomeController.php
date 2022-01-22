@@ -74,7 +74,7 @@ class HomeController extends AbstractController
     {
 
         return $this->render('home/biographie.html.twig', [
-            'class_body' => 'bio',
+            'class_html' => 'bio',
         ]);
     }
 
